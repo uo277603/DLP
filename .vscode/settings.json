@@ -1,0 +1,16 @@
+{
+  "files.exclude": {
+    "__error": false,
+    "antlr.src": false,
+    ".classpath": false,
+    ".project": false,
+    "antlr": false,
+    "antlr.bat": false,
+    "gui.bat": false,
+    "lex.bat": false,
+    "tokens.bat": false,
+    "trace.bat": false,
+    ".vscode": false,
+    "bin": false
+}
+}

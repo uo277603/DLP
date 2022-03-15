@@ -1,0 +1,26 @@
+package main;
+
+import java.io.*;
+
+import org.antlr.v4.runtime.*;
+
+import ast.*;
+import visitor.*;
+
+import parser.*;
+import semantic.*;
+import codegeneration.*;
+
+public class TestLexer {
+    public static void main(String[] args) throws Exception {
+        CharStream input = CharStreams.fromFileName("source.txt");
+        GrammarLexer textLexer = new GrammarLexer(input);
+        Token token;
+        while ((token = textLexer.nextToken()).getType() != GrammarLexer.EOF) {
+            System.out.printf("Line: %d \tcolumn: %d \tlexeme: '%s' \ttype: %d, \ttoken: %s\n", token.getLine(), token.getCharPositionInLine() + 1, token.getText(), 
+token.getType(), textLexer.getVocabulary().getDisplayName(token.getType())); 
+
+        }
+        System.out.println("Traza lexer finalizada");
+    }
+}

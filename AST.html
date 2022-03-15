@@ -1,0 +1,304 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
+.value { font-weight: bold; }
+.dots { color: #bebdbd; }
+.type { color: #BBBBBB; }
+.pos { color: #CCCCCC; }
+.sourceText { color: #BBBBBB; }
+.posText {
+	color: #BBBBBB;
+	text-decoration: underline; font-weight: bold;
+}
+.null {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body><pre>
+[ASTPrinter] -------------------------------- line:col  line:col
+
+<span class="dots"></span>Program &rarr;                                                   <span class="pos">12:5  82:20  </span><span class="sourceText"></span><span class="posText">a: INTEGER;</span><span class="sourceText"> ... </span><span class="posText">inicio(2, 3, 4+5</span><span class="sourceText">); /* como solo puede estar activo un inicio sólo llamaría a éste</span>
+<span class="dots">.  </span>ClassNode &rarr;                                              <span class="pos">12:5  75:62  </span><span class="sourceText"></span><span class="posText">a: INTEGER;</span><span class="sourceText"> ... </span><span class="posText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o', '!'</span><span class="sourceText">;</span>
+<span class="dots">.  .  </span>"<span class="value">EJEMPLO</span>"  
+<span class="dots">.  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  </span>TupleDefinition &rarr;                                  <span class="pos">12:5  14:5   </span><span class="sourceText"></span><span class="posText">a: INTEGER;</span><span class="sourceText"> ... </span><span class="posText">d</span><span class="sourceText">: DOUBLE;</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">tuple1</span>"  
+<span class="dots">.  .  |  .  </span>vardefinition  <span class="type">List&lt;VarDefinition&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">12:5  12:5   </span><span class="sourceText"></span><span class="posText">a</span><span class="sourceText">: INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">a</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">13:5  13:5   </span><span class="sourceText"></span><span class="posText">c</span><span class="sourceText">: CHARACTER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">c</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">CharType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">14:5  14:5   </span><span class="sourceText"></span><span class="posText">d</span><span class="sourceText">: DOUBLE;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">d</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">RealType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>TupleDefinition &rarr;                                  <span class="pos">17:5  18:6   </span><span class="sourceText"></span><span class="posText">aa: INTEGER;</span><span class="sourceText"> ... </span><span class="posText">tt</span><span class="sourceText">: tuple1;</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">tuple2</span>"  
+<span class="dots">.  .  |  .  </span>vardefinition  <span class="type">List&lt;VarDefinition&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">17:5  17:6   </span><span class="sourceText"></span><span class="posText">aa</span><span class="sourceText">: INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">aa</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">18:5  18:6   </span><span class="sourceText"></span><span class="posText">tt</span><span class="sourceText">: tuple1;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">tt</span>"
+<span class="dots">.  .  |  .  |  .  </span>"tuple1"  <span class="type">StructType.name</span>                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>VarDefinition &rarr;                                    <span class="pos">21:4  21:4   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> : INTEGER; /*esto estaría bien</span>
+<span class="dots">.  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>"<span class="value">i</span>"
+<span class="dots">.  .  |  .  </span><span class="value">IntType</span> &rarr;                                       <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>VarDefinition &rarr;                                    <span class="pos">23:4  23:4   </span><span class="sourceText"></span><span class="posText">j</span><span class="sourceText"> : INTEGER;</span>
+<span class="dots">.  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>"<span class="value">j</span>"
+<span class="dots">.  .  |  .  </span><span class="value">IntType</span> &rarr;                                       <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>VarDefinition &rarr;                                    <span class="pos">24:4  24:10  </span><span class="sourceText"></span><span class="posText">ai : [2</span><span class="sourceText">] INTEGER; /*array de una dimensión</span>
+<span class="dots">.  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>"<span class="value">ai</span>"
+<span class="dots">.  .  |  .  </span>ArrayType &rarr;                                     <span class="pos">24:10  24:10 </span><span class="sourceText">ai : [</span><span class="posText">2</span><span class="sourceText">] INTEGER; /*array de una dimensión</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">2</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>VarDefinition &rarr;                                    <span class="pos">25:4  25:13  </span><span class="sourceText"></span><span class="posText">bi : [2][2</span><span class="sourceText">] INTEGER; /*array de dos dimensiones</span>
+<span class="dots">.  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>"<span class="value">bi</span>"
+<span class="dots">.  .  |  .  </span>ArrayType &rarr;                                     <span class="pos">25:10  25:13 </span><span class="sourceText">bi : [</span><span class="posText">2][2</span><span class="sourceText">] INTEGER; /*array de dos dimensiones</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">2</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>ArrayType &rarr;                                  <span class="pos">25:13  25:13 </span><span class="sourceText">bi : [2][</span><span class="posText">2</span><span class="sourceText">] INTEGER; /*array de dos dimensiones</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">2</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>VarDefinition &rarr;                                    <span class="pos">26:4  26:4   </span><span class="sourceText"></span><span class="posText">t</span><span class="sourceText"> : tuple1; /*estructura</span>
+<span class="dots">.  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>"<span class="value">t</span>"
+<span class="dots">.  .  |  .  </span>"tuple1"  <span class="type">StructType.name</span>                       <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  </span>createMethod  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  </span>"<span class="value">inicio</span>"
+<span class="dots">.  .  |  </span>"<span class="value">otroInicio</span>"
+<span class="dots">.  .  </span>method  <span class="type">List&lt;Method&gt;</span> = 
+<span class="dots">.  .  |  </span>Method &rarr;                                           <span class="pos">32:21  44:11 </span><span class="sourceText">feature factorial (</span><span class="posText">i : INTEGER) : INTEGER is /* declaración con valor de retorno INTEGER y parámetro INTEGER</span><span class="sourceText"> ... </span><span class="posText">return j</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">factorial</span>"  
+<span class="dots">.  .  |  .  </span>parameter  <span class="type">List&lt;Parameter&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">32:21  32:21 </span><span class="sourceText">feature factorial (</span><span class="posText">i</span><span class="sourceText"> : INTEGER) : INTEGER is /* declaración con valor de retorno INTEGER y parámetro INTEGER</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">i</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span><span class="value">IntType</span> &rarr;                                       <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">34:4  34:7   </span><span class="sourceText"></span><span class="posText">j, k</span><span class="sourceText"> : INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">j</span>"
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">k</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Loop &rarr;                                       <span class="pos">37:5  42:14  </span><span class="sourceText"></span><span class="posText">j:= 1;</span><span class="sourceText"> ... </span><span class="posText">i := i - 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>init  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">37:5  37:9   </span><span class="sourceText"></span><span class="posText">j:= 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"j"  <span class="type">Variable.string</span>                <span class="pos">37:5  37:5   </span><span class="sourceText"></span><span class="posText">j</span><span class="sourceText">:= 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"1"  <span class="type">LitEnt.string</span>                  <span class="pos">37:9  37:9   </span><span class="sourceText">j:= </span><span class="posText">1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">38:5  38:9   </span><span class="sourceText"></span><span class="posText">k:= 0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"k"  <span class="type">Variable.string</span>                <span class="pos">38:5  38:5   </span><span class="sourceText"></span><span class="posText">k</span><span class="sourceText">:= 0;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"0"  <span class="type">LitEnt.string</span>                  <span class="pos">38:9  38:9   </span><span class="sourceText">k:= </span><span class="posText">0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                       <span class="pos">39:10  39:14 </span><span class="sourceText">until </span><span class="posText">i = 0</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>                   <span class="pos">39:10  39:10 </span><span class="sourceText">until </span><span class="posText">i</span><span class="sourceText"> = 0 loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">=</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"0"  <span class="type">LitEnt.string</span>                     <span class="pos">39:14  39:14 </span><span class="sourceText">until i = </span><span class="posText">0</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">40:5  40:14  </span><span class="sourceText"></span><span class="posText">j := j * i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"j"  <span class="type">Variable.string</span>                <span class="pos">40:5  40:5   </span><span class="sourceText"></span><span class="posText">j</span><span class="sourceText"> := j * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">40:10  40:14 </span><span class="sourceText">j := </span><span class="posText">j * i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"j"  <span class="type">Variable.string</span>             <span class="pos">40:10  40:10 </span><span class="sourceText">j := </span><span class="posText">j</span><span class="sourceText"> * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">*</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">40:14  40:14 </span><span class="sourceText">j := j * </span><span class="posText">i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">41:5  41:14  </span><span class="sourceText"></span><span class="posText">k := k + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"k"  <span class="type">Variable.string</span>                <span class="pos">41:5  41:5   </span><span class="sourceText"></span><span class="posText">k</span><span class="sourceText"> := k + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">41:10  41:14 </span><span class="sourceText">k := </span><span class="posText">k + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"k"  <span class="type">Variable.string</span>             <span class="pos">41:10  41:10 </span><span class="sourceText">k := </span><span class="posText">k</span><span class="sourceText"> + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"1"  <span class="type">LitEnt.string</span>               <span class="pos">41:14  41:14 </span><span class="sourceText">k := k + </span><span class="posText">1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">42:5  42:14  </span><span class="sourceText"></span><span class="posText">i := i - 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">42:5  42:5   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> := i - 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">42:10  42:14 </span><span class="sourceText">i := </span><span class="posText">i - 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">42:10  42:10 </span><span class="sourceText">i := </span><span class="posText">i</span><span class="sourceText"> - 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">-</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"1"  <span class="type">LitEnt.string</span>               <span class="pos">42:14  42:14 </span><span class="sourceText">i := i - </span><span class="posText">1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>ReturnNode &rarr;                                 <span class="pos">44:11  44:11 </span><span class="sourceText">return </span><span class="posText">j</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>"j"  <span class="type">Variable.string</span>                      <span class="pos">44:11  44:11 </span><span class="sourceText">return </span><span class="posText">j</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>Method &rarr;                                           <span class="pos">47:18  68:14 </span><span class="sourceText">feature inicio (</span><span class="posText">ii : INTEGER, ij : INTEGER, ik : INTEGER) is</span><span class="sourceText"> ... </span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">inicio</span>"  
+<span class="dots">.  .  |  .  </span>parameter  <span class="type">List&lt;Parameter&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">47:18  47:19 </span><span class="sourceText">feature inicio (</span><span class="posText">ii</span><span class="sourceText"> : INTEGER, ij : INTEGER, ik : INTEGER) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">ii</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">47:32  47:33 </span><span class="sourceText">feature inicio (ii : INTEGER, </span><span class="posText">ij</span><span class="sourceText"> : INTEGER, ik : INTEGER) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">ij</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">47:46  47:47 </span><span class="sourceText">feature inicio (ii : INTEGER, ij : INTEGER, </span><span class="posText">ik</span><span class="sourceText"> : INTEGER) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">ik</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span><span class="value">VoidType</span> &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">49:4  49:4   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> : INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">i</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">50:4  50:10  </span><span class="sourceText"></span><span class="posText">ai : [5</span><span class="sourceText">] INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">ai</span>"
+<span class="dots">.  .  |  .  |  .  </span>ArrayType &rarr;                               <span class="pos">50:10  50:10 </span><span class="sourceText">ai : [</span><span class="posText">5</span><span class="sourceText">] INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  |  </span><span class="value">5</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  .  |  </span><span class="value">IntType</span> &rarr;                              <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">51:4  51:5   </span><span class="sourceText"></span><span class="posText">t2</span><span class="sourceText"> : tuple2; /*estructura	</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">t2</span>"
+<span class="dots">.  .  |  .  |  .  </span>"tuple2"  <span class="type">StructType.name</span>                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Read &rarr;                                       <span class="pos">53:9  53:11  </span><span class="sourceText">read(</span><span class="posText">t.a</span><span class="sourceText">);</span>
+<span class="dots">.  .  |  .  |  .  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Acces &rarr;                                <span class="pos">53:9  53:11  </span><span class="sourceText">read(</span><span class="posText">t.a</span><span class="sourceText">);</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"t"  <span class="type">Variable.string</span>                <span class="pos">53:9  53:9   </span><span class="sourceText">read(</span><span class="posText">t</span><span class="sourceText">.a);</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>"a"  <span class="type">Variable.string</span>                <span class="pos">53:11  53:11 </span><span class="sourceText">read(t.</span><span class="posText">a</span><span class="sourceText">);</span>
+<span class="dots">.  .  |  .  |  </span>Conditional &rarr;                                <span class="pos">54:8  60:16  </span><span class="sourceText">if (</span><span class="posText">t.a < 5) and not (t.a = 0) then</span><span class="sourceText"> ... </span><span class="posText">t.a := -t.a</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                       <span class="pos">54:8  54:32  </span><span class="sourceText">if (</span><span class="posText">t.a < 5) and not (t.a = 0</span><span class="sourceText">) then</span>
+<span class="dots">.  .  |  .  |  .  |  </span>ExprBinariaLogica &rarr;                    <span class="pos">54:8  54:14  </span><span class="sourceText">if (</span><span class="posText">t.a < 5</span><span class="sourceText">) and not (t.a = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>Acces &rarr;                             <span class="pos">54:8  54:10  </span><span class="sourceText">if (</span><span class="posText">t.a</span><span class="sourceText"> < 5) and not (t.a = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"t"  <span class="type">Variable.string</span>             <span class="pos">54:8  54:8   </span><span class="sourceText">if (</span><span class="posText">t</span><span class="sourceText">.a < 5) and not (t.a = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"a"  <span class="type">Variable.string</span>             <span class="pos">54:10  54:10 </span><span class="sourceText">if (t.</span><span class="posText">a</span><span class="sourceText"> < 5) and not (t.a = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value"><</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>"5"  <span class="type">LitEnt.string</span>                  <span class="pos">54:14  54:14 </span><span class="sourceText">if (t.a < </span><span class="posText">5</span><span class="sourceText">) and not (t.a = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">and</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>ExprUnariaLogica &rarr;                     <span class="pos">54:26  54:32 </span><span class="sourceText">if (t.a < 5) and not (</span><span class="posText">t.a = 0</span><span class="sourceText">) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">not</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                 <span class="pos">54:26  54:32 </span><span class="sourceText">if (t.a < 5) and not (</span><span class="posText">t.a = 0</span><span class="sourceText">) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Acces &rarr;                          <span class="pos">54:26  54:28 </span><span class="sourceText">if (t.a < 5) and not (</span><span class="posText">t.a</span><span class="sourceText"> = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"t"  <span class="type">Variable.string</span>          <span class="pos">54:26  54:26 </span><span class="sourceText">if (t.a < 5) and not (</span><span class="posText">t</span><span class="sourceText">.a = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"a"  <span class="type">Variable.string</span>          <span class="pos">54:28  54:28 </span><span class="sourceText">if (t.a < 5) and not (t.</span><span class="posText">a</span><span class="sourceText"> = 0) then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">=</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"0"  <span class="type">LitEnt.string</span>               <span class="pos">54:32  54:32 </span><span class="sourceText">if (t.a < 5) and not (t.a = </span><span class="posText">0</span><span class="sourceText">) then</span>
+<span class="dots">.  .  |  .  |  .  </span>iftrue  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">55:5  55:18  </span><span class="sourceText"></span><span class="posText">t.a := t.a * 2</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>Acces &rarr;                             <span class="pos">55:5  55:7   </span><span class="sourceText"></span><span class="posText">t.a</span><span class="sourceText"> := t.a * 2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"t"  <span class="type">Variable.string</span>             <span class="pos">55:5  55:5   </span><span class="sourceText"></span><span class="posText">t</span><span class="sourceText">.a := t.a * 2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"a"  <span class="type">Variable.string</span>             <span class="pos">55:7  55:7   </span><span class="sourceText">t.</span><span class="posText">a</span><span class="sourceText"> := t.a * 2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">55:12  55:18 </span><span class="sourceText">t.a := </span><span class="posText">t.a * 2</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Acces &rarr;                          <span class="pos">55:12  55:14 </span><span class="sourceText">t.a := </span><span class="posText">t.a</span><span class="sourceText"> * 2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"t"  <span class="type">Variable.string</span>          <span class="pos">55:12  55:12 </span><span class="sourceText">t.a := </span><span class="posText">t</span><span class="sourceText">.a * 2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"a"  <span class="type">Variable.string</span>          <span class="pos">55:14  55:14 </span><span class="sourceText">t.a := t.</span><span class="posText">a</span><span class="sourceText"> * 2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">*</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"2"  <span class="type">LitEnt.string</span>               <span class="pos">55:18  55:18 </span><span class="sourceText">t.a := t.a * </span><span class="posText">2</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>iffalse  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Conditional &rarr;                          <span class="pos">56:12  60:16 </span><span class="sourceText">else if </span><span class="posText">t.a = 0 then</span><span class="sourceText"> ... </span><span class="posText">t.a := -t.a</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                 <span class="pos">56:12  56:18 </span><span class="sourceText">else if </span><span class="posText">t.a = 0</span><span class="sourceText"> then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Acces &rarr;                          <span class="pos">56:12  56:14 </span><span class="sourceText">else if </span><span class="posText">t.a</span><span class="sourceText"> = 0 then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"t"  <span class="type">Variable.string</span>          <span class="pos">56:12  56:12 </span><span class="sourceText">else if </span><span class="posText">t</span><span class="sourceText">.a = 0 then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"a"  <span class="type">Variable.string</span>          <span class="pos">56:14  56:14 </span><span class="sourceText">else if t.</span><span class="posText">a</span><span class="sourceText"> = 0 then</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">=</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"0"  <span class="type">LitEnt.string</span>               <span class="pos">56:18  56:18 </span><span class="sourceText">else if t.a = </span><span class="posText">0</span><span class="sourceText"> then</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>iftrue  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Assignment &rarr;                     <span class="pos">57:5  57:14  </span><span class="sourceText"></span><span class="posText">t.a := 100</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>Acces &rarr;                       <span class="pos">57:5  57:7   </span><span class="sourceText"></span><span class="posText">t.a</span><span class="sourceText"> := 100;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"t"  <span class="type">Variable.string</span>       <span class="pos">57:5  57:5   </span><span class="sourceText"></span><span class="posText">t</span><span class="sourceText">.a := 100;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"a"  <span class="type">Variable.string</span>       <span class="pos">57:7  57:7   </span><span class="sourceText">t.</span><span class="posText">a</span><span class="sourceText"> := 100;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"100"  <span class="type">LitEnt.string</span>          <span class="pos">57:12  57:14 </span><span class="sourceText">t.a := </span><span class="posText">100</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>iffalse  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Assignment &rarr;                     <span class="pos">59:6  59:34  </span><span class="sourceText"></span><span class="posText">t.a := t.a + to<INTEGER>(10.0</span><span class="sourceText">);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>Acces &rarr;                       <span class="pos">59:6  59:8   </span><span class="sourceText"></span><span class="posText">t.a</span><span class="sourceText"> := t.a + to<INTEGER>(10.0);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"t"  <span class="type">Variable.string</span>       <span class="pos">59:6  59:6   </span><span class="sourceText"></span><span class="posText">t</span><span class="sourceText">.a := t.a + to<INTEGER>(10.0);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"a"  <span class="type">Variable.string</span>       <span class="pos">59:8  59:8   </span><span class="sourceText">t.</span><span class="posText">a</span><span class="sourceText"> := t.a + to<INTEGER>(10.0);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;       <span class="pos">59:13  59:34 </span><span class="sourceText">t.a := </span><span class="posText">t.a + to<INTEGER>(10.0</span><span class="sourceText">);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>Acces &rarr;                    <span class="pos">59:13  59:15 </span><span class="sourceText">t.a := </span><span class="posText">t.a</span><span class="sourceText"> + to<INTEGER>(10.0);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"t"  <span class="type">Variable.string</span>    <span class="pos">59:13  59:13 </span><span class="sourceText">t.a := </span><span class="posText">t</span><span class="sourceText">.a + to<INTEGER>(10.0);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"a"  <span class="type">Variable.string</span>    <span class="pos">59:15  59:15 </span><span class="sourceText">t.a := t.</span><span class="posText">a</span><span class="sourceText"> + to<INTEGER>(10.0);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>Cast &rarr;                     <span class="pos">59:31  59:34 </span><span class="sourceText">t.a := t.a + to<INTEGER>(</span><span class="posText">10.0</span><span class="sourceText">);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;               <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"10.0"  <span class="type">LitReal.string</span>  <span class="pos">59:31  59:34 </span><span class="sourceText">t.a := t.a + to<INTEGER>(</span><span class="posText">10.0</span><span class="sourceText">);</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Assignment &rarr;                     <span class="pos">60:6  60:16  </span><span class="sourceText"></span><span class="posText">t.a := -t.a</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>Acces &rarr;                       <span class="pos">60:6  60:8   </span><span class="sourceText"></span><span class="posText">t.a</span><span class="sourceText"> := -t.a;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"t"  <span class="type">Variable.string</span>       <span class="pos">60:6  60:6   </span><span class="sourceText"></span><span class="posText">t</span><span class="sourceText">.a := -t.a;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"a"  <span class="type">Variable.string</span>       <span class="pos">60:8  60:8   </span><span class="sourceText">t.</span><span class="posText">a</span><span class="sourceText"> := -t.a;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>ExprUnariaAritmetica &rarr;        <span class="pos">60:14  60:16 </span><span class="sourceText">t.a := -</span><span class="posText">t.a</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"<span class="value">-</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>Acces &rarr;                    <span class="pos">60:14  60:16 </span><span class="sourceText">t.a := -</span><span class="posText">t.a</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"t"  <span class="type">Variable.string</span>    <span class="pos">60:14  60:14 </span><span class="sourceText">t.a := -</span><span class="posText">t</span><span class="sourceText">.a;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"a"  <span class="type">Variable.string</span>    <span class="pos">60:16  60:16 </span><span class="sourceText">t.a := -t.</span><span class="posText">a</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>Loop &rarr;                                       <span class="pos">65:5  68:14  </span><span class="sourceText"></span><span class="posText">i:= 0;</span><span class="sourceText"> ... </span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>init  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">65:5  65:9   </span><span class="sourceText"></span><span class="posText">i:= 0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">65:5  65:5   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText">:= 0;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"0"  <span class="type">LitEnt.string</span>                  <span class="pos">65:9  65:9   </span><span class="sourceText">i:= </span><span class="posText">0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                       <span class="pos">66:10  66:14 </span><span class="sourceText">until </span><span class="posText">i = 5</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>                   <span class="pos">66:10  66:10 </span><span class="sourceText">until </span><span class="posText">i</span><span class="sourceText"> = 5 loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">=</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"5"  <span class="type">LitEnt.string</span>                     <span class="pos">66:14  66:14 </span><span class="sourceText">until i = </span><span class="posText">5</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">67:5  67:20  </span><span class="sourceText"></span><span class="posText">ai[i] := t.a * i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ArrayAcces &rarr;                        <span class="pos">67:5  67:8   </span><span class="sourceText"></span><span class="posText">ai[i</span><span class="sourceText">] := t.a * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"ai"  <span class="type">Variable.string</span>            <span class="pos">67:5  67:6   </span><span class="sourceText"></span><span class="posText">ai</span><span class="sourceText">[i] := t.a * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">67:8  67:8   </span><span class="sourceText">ai[</span><span class="posText">i</span><span class="sourceText">] := t.a * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">67:14  67:20 </span><span class="sourceText">ai[i] := </span><span class="posText">t.a * i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Acces &rarr;                          <span class="pos">67:14  67:16 </span><span class="sourceText">ai[i] := </span><span class="posText">t.a</span><span class="sourceText"> * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"t"  <span class="type">Variable.string</span>          <span class="pos">67:14  67:14 </span><span class="sourceText">ai[i] := </span><span class="posText">t</span><span class="sourceText">.a * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"a"  <span class="type">Variable.string</span>          <span class="pos">67:16  67:16 </span><span class="sourceText">ai[i] := t.</span><span class="posText">a</span><span class="sourceText"> * i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">*</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">67:20  67:20 </span><span class="sourceText">ai[i] := t.a * </span><span class="posText">i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">68:5  68:14  </span><span class="sourceText"></span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">68:5  68:5   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> := i + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">68:10  68:14 </span><span class="sourceText">i := </span><span class="posText">i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">68:10  68:10 </span><span class="sourceText">i := </span><span class="posText">i</span><span class="sourceText"> + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"1"  <span class="type">LitEnt.string</span>               <span class="pos">68:14  68:14 </span><span class="sourceText">i := i + </span><span class="posText">1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>Method &rarr;                                           <span class="pos">75:10  75:62 </span><span class="sourceText">print </span><span class="posText">'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o', '!'</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">otroInicio</span>"  
+<span class="dots">.  .  |  .  </span>parameter  <span class="type">List&lt;Parameter&gt;</span> = 
+<span class="dots">.  .  |  .  </span><span class="value">VoidType</span> &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Print &rarr;                                      <span class="pos">75:10  75:62 </span><span class="sourceText">print </span><span class="posText">'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o', '!'</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">print</span>"  
+<span class="dots">.  .  |  .  |  .  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"'H'"  <span class="type">LitChar.string</span>                  <span class="pos">75:10  75:12 </span><span class="sourceText">print </span><span class="posText">'H'</span><span class="sourceText">, 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'o'"  <span class="type">LitChar.string</span>                  <span class="pos">75:15  75:17 </span><span class="sourceText">print 'H', </span><span class="posText">'o'</span><span class="sourceText">, 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'l'"  <span class="type">LitChar.string</span>                  <span class="pos">75:20  75:22 </span><span class="sourceText">print 'H', 'o', </span><span class="posText">'l'</span><span class="sourceText">, 'a', ' ', 'M', 'u', 'n', 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'a'"  <span class="type">LitChar.string</span>                  <span class="pos">75:25  75:27 </span><span class="sourceText">print 'H', 'o', 'l', </span><span class="posText">'a'</span><span class="sourceText">, ' ', 'M', 'u', 'n', 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"' '"  <span class="type">LitChar.string</span>                  <span class="pos">75:30  75:32 </span><span class="sourceText">print 'H', 'o', 'l', 'a', </span><span class="posText">' '</span><span class="sourceText">, 'M', 'u', 'n', 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'M'"  <span class="type">LitChar.string</span>                  <span class="pos">75:35  75:37 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', </span><span class="posText">'M'</span><span class="sourceText">, 'u', 'n', 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'u'"  <span class="type">LitChar.string</span>                  <span class="pos">75:40  75:42 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', </span><span class="posText">'u'</span><span class="sourceText">, 'n', 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'n'"  <span class="type">LitChar.string</span>                  <span class="pos">75:45  75:47 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', </span><span class="posText">'n'</span><span class="sourceText">, 'd', 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'d'"  <span class="type">LitChar.string</span>                  <span class="pos">75:50  75:52 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', </span><span class="posText">'d'</span><span class="sourceText">, 'o', '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'o'"  <span class="type">LitChar.string</span>                  <span class="pos">75:55  75:57 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', </span><span class="posText">'o'</span><span class="sourceText">, '!';</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'!'"  <span class="type">LitChar.string</span>                  <span class="pos">75:60  75:62 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o', </span><span class="posText">'!'</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>Print &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">println</span>"  
+<span class="dots">.  .  |  .  |  .  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  </span>MethodCall &rarr;                                             <span class="pos">82:5  82:20  </span><span class="sourceText"></span><span class="posText">inicio(2, 3, 4+5</span><span class="sourceText">); /* como solo puede estar activo un inicio sólo llamaría a éste</span>
+<span class="dots">.  .  </span>"<span class="value">inicio</span>"  
+<span class="dots">.  .  </span>args  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  </span>"2"  <span class="type">LitEnt.string</span>                                 <span class="pos">82:12  82:12 </span><span class="sourceText">inicio(</span><span class="posText">2</span><span class="sourceText">, 3, 4+5); /* como solo puede estar activo un inicio sólo llamaría a éste</span>
+<span class="dots">.  .  |  </span>"3"  <span class="type">LitEnt.string</span>                                 <span class="pos">82:15  82:15 </span><span class="sourceText">inicio(2, </span><span class="posText">3</span><span class="sourceText">, 4+5); /* como solo puede estar activo un inicio sólo llamaría a éste</span>
+<span class="dots">.  .  |  </span>ExprBinariaAritmetica &rarr;                            <span class="pos">82:18  82:20 </span><span class="sourceText">inicio(2, 3, </span><span class="posText">4+5</span><span class="sourceText">); /* como solo puede estar activo un inicio sólo llamaría a éste</span>
+<span class="dots">.  .  |  .  </span>"4"  <span class="type">LitEnt.string</span>                              <span class="pos">82:18  82:18 </span><span class="sourceText">inicio(2, 3, </span><span class="posText">4</span><span class="sourceText">+5); /* como solo puede estar activo un inicio sólo llamaría a éste</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  </span>"5"  <span class="type">LitEnt.string</span>                              <span class="pos">82:20  82:20 </span><span class="sourceText">inicio(2, 3, 4+</span><span class="posText">5</span><span class="sourceText">); /* como solo puede estar activo un inicio sólo llamaría a éste</span>
+
+[ASTPrinter] --------------------------------
+</pre>
+</body>
+</html>
