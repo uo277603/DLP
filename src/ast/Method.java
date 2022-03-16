@@ -86,4 +86,16 @@ public class Method extends AbstractAST  {
 	public String toString() {
        return "{name:" + getName() + ", parameter:" + getParameter() + ", retorno:" + getRetorno() + ", definition:" + getDefinition() + ", sentence:" + getSentence() + "}";
    }
+
+   // Modificaciones
+
+   private boolean isConstructor = false;
+
+   public void setConstructor(){
+	   this.isConstructor = true;
+   }
+
+   public boolean isConstructor(){
+	   return isConstructor;
+   }
 }

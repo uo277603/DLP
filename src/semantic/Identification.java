@@ -26,6 +26,23 @@ public class Identification extends DefaultVisitor {
         this.errorManager = errorManager;
     }
 
+    //	class Program { ClassNode classnode;  MethodCallSentence methodcallsentence; }
+	public Object visit(Program program, Object param) {
+
+		// super.visit(node, param);
+
+		if (program.getClassnode() != null)
+			program.getClassnode().accept(this, param);
+
+		if (program.getMethodcallsentence() != null)
+			program.getMethodcallsentence().accept(this, param);
+
+        Method main = tabSimbFeature.get(program.getMethodcallsentence().getName());
+        predicado(main.isConstructor(), "El método " + main.getName() + " definido en el main no es un constructor", program);
+
+		return null;
+	}
+
     // class ClassNode { String name; List<Definition> definition; List<String>
     // createMethod; List<Method> method; }
     public Object visit(ClassNode classNode, Object param) {
@@ -41,6 +58,8 @@ public class Identification extends DefaultVisitor {
             Method definition = tabSimbFeature.get(name);
             predicado(definition != null, "Método no definido: " + name, classNode);
             // methodCallSentence.definition = tabSimbFeature[name]
+            if(definition != null)
+                definition.setConstructor();
             classNode.setCreateDefinitions(name);
         }
 
