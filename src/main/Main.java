@@ -40,8 +40,8 @@ public class Main {
             System.out.println("El programa se ha compilado correctamente.");
 
         ASTPrinter.toHtml(INPUT_FILE, ast, "AST"); // Utilidad generada por VGen (opcional)
-        SourceVisitor visitor = new SourceVisitor();
-        ast.accept(visitor, null);
+        //SourceVisitor visitor = new SourceVisitor();
+        //ast.accept(visitor, null);
     }
 
     /**

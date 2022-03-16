@@ -55,4 +55,16 @@ public class Parameter extends AbstractAST  {
 	public String toString() {
        return "{name:" + getName() + ", type:" + getType() + "}";
    }
+
+   // Modificaciones
+
+   private VarDefinition definition;
+
+   public VarDefinition getDefinition(){
+	   return definition;
+   }
+
+   public void setDefinition(VarDefinition definition){
+	   this.definition = definition;
+   }
 }

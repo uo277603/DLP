@@ -41,4 +41,16 @@ public class StructType extends AbstractType {
 	public String toString() {
        return "{name:" + getName() + "}";
    }
+
+   // Modificaciones
+
+   private TupleDefinition definition;
+
+   public TupleDefinition getDefinition(){
+	   return definition;
+   }
+
+   public void setDefinition(TupleDefinition definition){
+	   this.definition = definition;
+   }
 }

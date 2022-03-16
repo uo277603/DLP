@@ -8,24 +8,24 @@ import org.antlr.v4.runtime.*;
 
 import visitor.*;
 
-//	acces:expr -> left:expr  op:String  right:expr
+//	acces:expr -> left:expr  op:String  right:String
 
 public class Acces extends AbstractExpr {
 
-	public Acces(Expr left, String op, Expr right) {
+	public Acces(Expr left, String op, String right) {
 		this.left = left;
 		this.op = op;
 		this.right = right;
 
        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
        // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(left, right);
+       setPositions(left);
 	}
 
 	public Acces(Object left, Object op, Object right) {
 		this.left = (Expr) getAST(left);
 		this.op = (op instanceof Token) ? ((Token)op).getText() : (String) op;
-		this.right = (Expr) getAST(right);
+		this.right = (right instanceof Token) ? ((Token)right).getText() : (String) right;
 
        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
        // Obtiene la linea/columna a partir de las de los hijos.
@@ -46,10 +46,10 @@ public class Acces extends AbstractExpr {
 		this.op = op;
 	}
 
-	public Expr getRight() {
+	public String getRight() {
 		return right;
 	}
-	public void setRight(Expr right) {
+	public void setRight(String right) {
 		this.right = right;
 	}
 
@@ -60,7 +60,7 @@ public class Acces extends AbstractExpr {
 
 	private Expr left;
 	private String op;
-	private Expr right;
+	private String right;
 
 	public String toString() {
        return "{left:" + getLeft() + ", op:" + getOp() + ", right:" + getRight() + "}";

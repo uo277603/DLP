@@ -21,7 +21,7 @@ atributosOpt returns[List<Definition> list = new ArrayList<Definition>()]
 	: (atributos {$list = $atributos.list;})?
 	;
 atributos returns[List<Definition> list = new ArrayList<Definition>()]
-	: 'global' ('types' (deftuple {$list.add($deftuple.ast);})+ ('vars' (multiDef {$list.add($multiDef.ast);})+)?)?
+	: 'global' ('types' (deftuple {$list.add($deftuple.ast);})*)? ('vars' (multiDef {$list.add($multiDef.ast);})*)?
 	;
 deftuple returns[Definition ast]
 	: 'deftuple' name=IDENT 'as' ls+=simpleDef* 'end' {$ast = new TupleDefinition($name.text, $ls);}
@@ -76,7 +76,11 @@ sentencia returns[Sentence ast]
 	| 'if' expr 'then' ls+=sentencia+ elseOpt 'end' {$ast = new Conditional($expr.ast, $ls, $elseOpt.list);}
 	| fromOpt 'until' expr 'loop' ls+=sentencia+ 'end' {$ast = new Loop($fromOpt.list, $expr.ast, $ls);}
 	| IDENT '(' listaexpresionOpt ')' ';' {$ast = new MethodCallSentence($IDENT, $listaexpresionOpt.list);}
-	| 'return' expr? ';' {$ast = new ReturnNode($expr.ast);}
+	| 'return' exprOpt ';' {$ast = new ReturnNode($exprOpt.ast);}
+	;
+
+exprOpt returns[Expr ast]
+	:	(expr {$ast = $expr.ast; })?
 	;
 
 asignacion returns[Sentence ast]
@@ -100,7 +104,7 @@ expr returns[Expr ast]
 	| IDENT {$ast = new Variable($IDENT);}
 	| IDENT '(' listaexpresionOpt ')' {$ast = new MethodCallExpr($IDENT, $listaexpresionOpt.list);}
 	| left=expr '[' right=expr ']' {$ast = new ArrayAcces($left.ast, $right.ast);}
-	| left=expr op='.' right=expr {$ast = new Acces($left.ast, $op.text, $right.ast);}
+	| left=expr op='.' IDENT {$ast = new Acces($left.ast, $op.text, $IDENT);}
 	| op='-' expr {$ast = new ExprUnariaAritmetica($op.text, $expr.ast);}	
 	| '(' expr ')' {$ast = $expr.ast ;}
 	| op='not' expr {$ast = new ExprUnariaLogica($op.text, $expr.ast);}

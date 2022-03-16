@@ -4,17 +4,17 @@ import ast.*;
 
 public class SourceVisitor extends DefaultVisitor {
 
-	//	class Program { ClassNode classnode;  MethodCallSentence methodcallsentence; }
+	// class Program { ClassNode classnode; MethodCallSentence methodcallsentence; }
 	public Object visit(Program program, Object param) {
 
 		// super.visit(node, param);
 
 		if (program.getClassnode() != null)
 			program.getClassnode().accept(this, param);
-		woutln(0,"main");
+		woutln(0, "main");
 		if (program.getMethodcallsentence() != null)
 			program.getMethodcallsentence().accept(this, param);
-		wout(0,"end");
+		wout(0, "end");
 		return null;
 	}
 
@@ -23,22 +23,22 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(ClassNode classNode, Object param) {
 
 		// super.visit(node, param);
-		woutln(0,"class " + classNode.getName() + ";");
+		woutln(0, "class " + classNode.getName() + ";");
 		woutln(1, "");
 		if (classNode.getDefinition() != null)
-			woutln(1,"global");
-		woutln(2,"types");
+			woutln(1, "global");
+		woutln(2, "types");
 		Definition lastChild = null;
-		for (Definition child : classNode.getDefinition()){
-			if(lastChild != null && lastChild instanceof TupleDefinition && child instanceof VarDefinition)
-				woutln(2,"vars");
+		for (Definition child : classNode.getDefinition()) {
+			if (lastChild != null && lastChild instanceof TupleDefinition && child instanceof VarDefinition)
+				woutln(2, "vars");
 			child.accept(this, param);
 			lastChild = child;
 		}
 
-		woutln(1,"create");
+		woutln(1, "create");
 		for (String s : classNode.getCreateMethod()) {
-			woutln(0,s + ';');
+			woutln(0, s + ';');
 		}
 
 		if (classNode.getMethod() != null)
@@ -53,12 +53,12 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(Method method, Object param) {
 
 		// super.visit(node, param);
-		wout(1,"feature " + method.getName());
+		wout(1, "feature " + method.getName());
 		if (method.getParameter() != null) {
-			wout(0,"(");
+			wout(0, "(");
 			for (Parameter child : method.getParameter())
 				child.accept(this, param);
-			wout(0,")");
+			wout(0, ")");
 
 		}
 
@@ -66,15 +66,15 @@ public class SourceVisitor extends DefaultVisitor {
 			wout(0, " : " + method.getRetorno().getName());
 			method.getRetorno().accept(this, param);
 		}
-		woutln(0," is");
+		woutln(0, " is");
 		if (method.getDefinition() != null) {
-			woutln(2,"local");
+			woutln(2, "local");
 			for (Definition child : method.getDefinition()) {
 				child.accept(this, param);
 				woutln(0, "");
 			}
 		}
-		woutln(2,"do");
+		woutln(2, "do");
 		if (method.getSentence() != null)
 			for (Sentence child : method.getSentence())
 				child.accept(this, param);
@@ -86,7 +86,7 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(Parameter parameter, Object param) {
 
 		// super.visit(node, param);
-		wout(0,parameter.getName() + " : " + parameter.getType().getName());
+		wout(0, parameter.getName() + " : " + parameter.getType().getName());
 		if (parameter.getType() != null)
 			parameter.getType().accept(this, param);
 
@@ -97,12 +97,12 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(Print print, Object param) {
 
 		// super.visit(node, param);
-		wout(3,print.getString() + " ");
+		wout(3, print.getString() + " ");
 		if (print.getExpr() != null)
 			for (Expr child : print.getExpr()) {
 				child.accept(this, param);
 			}
-		woutln(0,";");
+		woutln(0, ";");
 		return null;
 	}
 
@@ -110,11 +110,11 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(Read read, Object param) {
 
 		// super.visit(node, param);
-		wout(3,"read ");
+		wout(3, "read ");
 		if (read.getExpr() != null)
 			for (Expr child : read.getExpr())
 				child.accept(this, param);
-		woutln(0,";");
+		woutln(0, ";");
 		return null;
 	}
 
@@ -125,11 +125,11 @@ public class SourceVisitor extends DefaultVisitor {
 
 		if (assignment.getLeft() != null)
 			assignment.getLeft().accept(this, param);
-		wout(0," := ");
+		wout(0, " := ");
 		if (assignment.getRight() != null)
 			assignment.getRight().accept(this, param);
 
-		woutln(0,";");
+		woutln(0, ";");
 		return null;
 	}
 
@@ -138,24 +138,24 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(Conditional conditional, Object param) {
 
 		// super.visit(node, param);
-		wout(3,"if ");
+		wout(3, "if ");
 		if (conditional.getCondition() != null)
 			conditional.getCondition().accept(this, param);
-		woutln(0," then");
+		woutln(0, " then");
 		if (conditional.getIftrue() != null)
-			for (Sentence child : conditional.getIftrue()){
+			for (Sentence child : conditional.getIftrue()) {
 				wout(4, "");
 				child.accept(this, param);
 			}
 
 		if (conditional.getIffalse() != null) {
-			woutln(3,"else");
-			for (Sentence child : conditional.getIffalse()){
+			woutln(3, "else");
+			for (Sentence child : conditional.getIffalse()) {
 				wout(4, "");
 				child.accept(this, param);
 			}
 		}
-		woutln(3,"end");
+		woutln(3, "end");
 
 		return null;
 	}
@@ -166,22 +166,22 @@ public class SourceVisitor extends DefaultVisitor {
 		// super.visit(node, param);
 
 		if (loop.getInit() != null) {
-			woutln(3,"from");
-			for (Sentence child : loop.getInit()){
+			woutln(3, "from");
+			for (Sentence child : loop.getInit()) {
 				wout(4, "");
 				child.accept(this, param);
 			}
 		}
-		wout(3,"until ");
+		wout(3, "until ");
 		if (loop.getCondition() != null)
 			loop.getCondition().accept(this, param);
 		woutln(0, " loop");
 		if (loop.getSentence() != null)
-			for (Sentence child : loop.getSentence()){
+			for (Sentence child : loop.getSentence()) {
 				wout(4, "");
 				child.accept(this, param);
 			}
-		woutln(3,"end");
+		woutln(3, "end");
 		return null;
 	}
 
@@ -189,66 +189,66 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(ReturnNode returnNode, Object param) {
 
 		// super.visit(node, param);
-		wout(3,"return ");
+		wout(3, "return ");
 		if (returnNode.getExpr() != null)
 			returnNode.getExpr().accept(this, param);
 
-		woutln(0,";");
+		woutln(0, ";");
 		return null;
 	}
 
-	//	class ExprBinariaAritmetica { Expr left;  String op;  Expr right; }
+	// class ExprBinariaAritmetica { Expr left; String op; Expr right; }
 	public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
 
 		// super.visit(node, param);
-		wout(0,"(");
+		wout(0, "(");
 		if (exprBinariaAritmetica.getLeft() != null)
 			exprBinariaAritmetica.getLeft().accept(this, param);
-		wout(0," " + exprBinariaAritmetica.getOp() + " ");
+		wout(0, " " + exprBinariaAritmetica.getOp() + " ");
 		if (exprBinariaAritmetica.getRight() != null)
 			exprBinariaAritmetica.getRight().accept(this, param);
-		wout(0,")");
+		wout(0, ")");
 		return null;
 	}
 
-	//	class ExprUnariaAritmetica { String op;  Expr expr; }
+	// class ExprUnariaAritmetica { String op; Expr expr; }
 	public Object visit(ExprUnariaAritmetica exprUnariaAritmetica, Object param) {
 
 		// super.visit(node, param);
-		wout(0,exprUnariaAritmetica.getOp() + " ");
+		wout(0, exprUnariaAritmetica.getOp() + " ");
 		if (exprUnariaAritmetica.getExpr() != null)
 			exprUnariaAritmetica.getExpr().accept(this, param);
 
 		return null;
 	}
 
-	//	class ExprBinariaLogica { Expr left;  String op;  Expr right; }
+	// class ExprBinariaLogica { Expr left; String op; Expr right; }
 	public Object visit(ExprBinariaLogica exprBinariaLogica, Object param) {
 
 		// super.visit(node, param);
-		wout(0,"(");
+		wout(0, "(");
 		if (exprBinariaLogica.getLeft() != null)
 			exprBinariaLogica.getLeft().accept(this, param);
 
-		wout(0," " + exprBinariaLogica.getOp() + " ");
+		wout(0, " " + exprBinariaLogica.getOp() + " ");
 		if (exprBinariaLogica.getRight() != null)
 			exprBinariaLogica.getRight().accept(this, param);
-		wout(0,")");
+		wout(0, ")");
 		return null;
 	}
 
-	//	class ExprUnariaLogica { String op;  Expr expr; }
+	// class ExprUnariaLogica { String op; Expr expr; }
 	public Object visit(ExprUnariaLogica exprUnariaLogica, Object param) {
 
 		// super.visit(node, param);
-		wout(0,exprUnariaLogica.getOp() + " ");
+		wout(0, exprUnariaLogica.getOp() + " ");
 		if (exprUnariaLogica.getExpr() != null)
 			exprUnariaLogica.getExpr().accept(this, param);
 
 		return null;
 	}
 
-	//	class Acces { Expr left;  String op;  Expr right; }
+	// class Acces { Expr left; String op; String right; }
 	public Object visit(Acces acces, Object param) {
 
 		// super.visit(node, param);
@@ -256,12 +256,10 @@ public class SourceVisitor extends DefaultVisitor {
 		if (acces.getLeft() != null)
 			acces.getLeft().accept(this, param);
 
-		wout(0,acces.getOp());	
-		if (acces.getRight() != null)
-			acces.getRight().accept(this, param);
-
+		wout(0, acces.getOp());
 		return null;
 	}
+
 	// class ArrayAcces { Expr left; Expr right; }
 	public Object visit(ArrayAcces arrayAcces, Object param) {
 
@@ -280,7 +278,7 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(Cast cast, Object param) {
 
 		// super.visit(node, param);
-		wout(0,"to<" + cast.getTypeToConvert().getName() + ">(");
+		wout(0, "to<" + cast.getTypeToConvert().getName() + ">(");
 		if (cast.getTypeToConvert() != null)
 			cast.getTypeToConvert().accept(this, param);
 
@@ -292,25 +290,25 @@ public class SourceVisitor extends DefaultVisitor {
 
 	// class LitEnt { String string; }
 	public Object visit(LitEnt litEnt, Object param) {
-		wout(0,litEnt.getString());
+		wout(0, litEnt.getString());
 		return null;
 	}
 
 	// class LitReal { String string; }
 	public Object visit(LitReal litReal, Object param) {
-		wout(0,litReal.getString());
+		wout(0, litReal.getString());
 		return null;
 	}
 
 	// class LitChar { String string; }
 	public Object visit(LitChar litChar, Object param) {
-		wout(0,litChar.getString());
+		wout(0, litChar.getString());
 		return null;
 	}
 
 	// class Variable { String string; }
 	public Object visit(Variable variable, Object param) {
-		wout(0,variable.getString());
+		wout(0, variable.getString());
 		return null;
 	}
 
@@ -348,11 +346,11 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(TupleDefinition tupleDefinition, Object param) {
 
 		// super.visit(node, param);
-		woutln(3,"deftuple " + tupleDefinition.getName() + " as");
+		woutln(3, "deftuple " + tupleDefinition.getName() + " as");
 		if (tupleDefinition.getVardefinition() != null)
 			for (VarDefinition child : tupleDefinition.getVardefinition())
 				child.accept(this, param);
-		woutln(3,"end");
+		woutln(3, "end");
 		return null;
 	}
 
@@ -360,64 +358,65 @@ public class SourceVisitor extends DefaultVisitor {
 	public Object visit(VarDefinition varDefinition, Object param) {
 
 		// super.visit(node, param);
-		woutln(3,varDefinition.getNames() + " : " + varDefinition.getType().getName());
+		woutln(3, varDefinition.getNames() + " : " + varDefinition.getType().getName());
 		if (varDefinition.getType() != null)
 			varDefinition.getType().accept(this, param);
 
 		return null;
 	}
 
-	//	class MethodCallSentence { String name;  List<Expr> args; }
+	// class MethodCallSentence { String name; List<Expr> args; }
 	public Object visit(MethodCallSentence methodCallSentence, Object param) {
 
 		// super.visit(node, param);
-		wout(3,methodCallSentence.getName() + "(");
-		if (methodCallSentence.getArgs() != null){
+		wout(3, methodCallSentence.getName() + "(");
+		if (methodCallSentence.getArgs() != null) {
 			int count = 0;
-			for (Expr child : methodCallSentence.getArgs()){
+			for (Expr child : methodCallSentence.getArgs()) {
 				child.accept(this, param);
-				if(count != methodCallSentence.getArgs().size() - 1)
+				if (count != methodCallSentence.getArgs().size() - 1)
 					System.out.print(", ");
 				count++;
 			}
 		}
-		woutln(0,");");
+		woutln(0, ");");
 		return null;
 	}
 
-	//	class MethodCallExpr { String name;  List<Expr> args; }
+	// class MethodCallExpr { String name; List<Expr> args; }
 	public Object visit(MethodCallExpr methodCallExpr, Object param) {
 
 		// super.visit(node, param);
-		wout(0,methodCallExpr.getName() + "(");
-		if (methodCallExpr.getArgs() != null){
+		wout(0, methodCallExpr.getName() + "(");
+		if (methodCallExpr.getArgs() != null) {
 			int count = 0;
-			for (Expr child : methodCallExpr.getArgs()){
+			for (Expr child : methodCallExpr.getArgs()) {
 				child.accept(this, param);
-				if(count != methodCallExpr.getArgs().size() - 1)
+				if (count != methodCallExpr.getArgs().size() - 1)
 					System.out.print(", ");
 				count++;
 			}
 		}
-		wout(0,")");
+		wout(0, ")");
 		return null;
 	}
 
 	/*
-	 *  Auxiliares
+	 * Auxiliares
 	 */
-	
+
 	// Método auxiliar de impresión. Se puede cambiar para enviarlo a un fichero
-	private void wout (int indent, String s) {
+	private void wout(int indent, String s) {
 		System.out.print(getIndent(indent) + s);
 	}
-	
-	private void woutln (int indent, String s) {
+
+	private void woutln(int indent, String s) {
 		System.out.println(getIndent(indent) + s);
 	}
-	
-	// Método auxiliar para convertir posiciones de tabulación en cadena de tabuladores
-	private String getIndent (int indent) {
+
+	// Método auxiliar para convertir posiciones de tabulación en cadena de
+	// tabuladores
+	private String getIndent(int indent) {
 		String sindent = "";
 		for (; indent > 0; indent--)
 			sindent += "\t";

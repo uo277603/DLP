@@ -56,16 +56,4 @@ public class MethodCallExpr extends AbstractExpr {
 	public String toString() {
        return "{name:" + getName() + ", args:" + getArgs() + "}";
    }
-
-   // Modificaciones
-
-   private Method definition;
-
-   public Method getDefinition(){
-	   return definition;
-   }
-
-   public void setDefinition(Method definition){
-		this.definition = definition;
-   }
 }

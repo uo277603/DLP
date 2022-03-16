@@ -9,11 +9,11 @@ import org.antlr.v4.runtime.*;
 
 import visitor.*;
 
-//	methodCallExpr:expr -> name:String  args:expr*
+//	methodCallSentence:sentence -> name:String  args:expr*
 
-public class MethodCallExpr extends AbstractExpr {
+public class MethodCallSentence extends AbstractSentence {
 
-	public MethodCallExpr(String name, List<Expr> args) {
+	public MethodCallSentence(String name, List<Expr> args) {
 		this.name = name;
 		this.args = args;
 
@@ -22,7 +22,7 @@ public class MethodCallExpr extends AbstractExpr {
        setPositions(args);
 	}
 
-	public MethodCallExpr(Object name, Object args) {
+	public MethodCallSentence(Object name, Object args) {
 		this.name = (name instanceof Token) ? ((Token)name).getText() : (String) name;
 		this.args = this.<Expr>getNodesFromContexts(args);
 
@@ -55,17 +55,5 @@ public class MethodCallExpr extends AbstractExpr {
 
 	public String toString() {
        return "{name:" + getName() + ", args:" + getArgs() + "}";
-   }
-
-   // Modificaciones
-
-   private Method definition;
-
-   public Method getDefinition(){
-	   return definition;
-   }
-
-   public void setDefinition(Method definition){
-		this.definition = definition;
    }
 }

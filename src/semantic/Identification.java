@@ -5,42 +5,194 @@
 
 package semantic;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import ast.*;
 import main.*;
 import visitor.*;
 
 public class Identification extends DefaultVisitor {
 
+    // private Map<String, VarDefinition> tabSimbVar = new HashMap<String,
+    // VarDefinition>();
+    private ContextMap<String, VarDefinition> tabSimbVar = new ContextMap<>();
+    private Map<String, TupleDefinition> tabSimbTuple = new HashMap<>();
+    private Map<String, Method> tabSimbFeature = new HashMap<>();
+
     public Identification(ErrorManager errorManager) {
         this.errorManager = errorManager;
     }
 
-    // # ----------------------------------------------------------
-    /*
-    * Poner aquí los visit.
-    *
-    * Si se ha usado VGen, solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-    */
+    // class ClassNode { String name; List<Definition> definition; List<String>
+    // createMethod; List<Method> method; }
+    public Object visit(ClassNode classNode, Object param) {
 
-    // public Object visit(Program prog, Object param) {
-    //      ...
-    // }
+        super.visit(classNode, param);
 
-    // ...
-    // ...
-    // ...
+        // Antes de nada visitar todos los hijos para añadir a la tabla los métodos
+        // que pueden ir en el constructor
+        List<String> names = classNode.getCreateMethod();
 
-    // # --------------------------------------------------------
-    // Métodos auxiliares recomendados (opcionales) -------------
+        for (String name : names) {
+            // tabSimbFeature[name] ≠ ∅
+            Method definition = tabSimbFeature.get(name);
+            predicado(definition != null, "Método no definido: " + name, classNode);
+            // methodCallSentence.definition = tabSimbFeature[name]
+            classNode.setCreateDefinitions(name);
+        }
 
-    private void error(String msg) {
-        error(msg, null);
+        return null;
     }
+
+    // class Method { String name; List<Parameter> parameter; Type retorno;
+    // List<Definition> definition; List<Sentence> sentence; }
+    public Object visit(Method method, Object param) {
+
+        // tabSimbFeature[name] == ∅
+        Method definition = tabSimbFeature.get(method.getName());
+        predicado(definition == null, "Método ya definido: " + method.getName(), method);
+        // tabSimbFeature[name] = method
+        tabSimbFeature.put(method.getName(), method);
+
+        tabSimbVar.set();
+        super.visit(method, param);
+        tabSimbVar.reset();
+
+        return null;
+    }
+
+    // class MethodCallSentence { String name; List<Expr> args; }
+    public Object visit(MethodCallSentence methodCallSentence, Object param) {
+
+        // super.visit(node, param);
+
+        if (methodCallSentence.getArgs() != null)
+            for (Expr child : methodCallSentence.getArgs())
+                child.accept(this, param);
+
+        // tabSimbFeature[name] ≠ ∅
+        Method definition = tabSimbFeature.get(methodCallSentence.getName());
+        predicado(definition != null, "Método no definido: " + methodCallSentence.getName(), methodCallSentence);
+        // methodCallSentence.definition = tabSimbFeature[name]
+        methodCallSentence.setDefinition(definition);
+
+        return null;
+    }
+
+    // class MethodCallExpr { String name; List<Expr> args; }
+    public Object visit(MethodCallExpr methodCallExpr, Object param) {
+
+        // super.visit(node, param);
+
+        if (methodCallExpr.getArgs() != null)
+            for (Expr child : methodCallExpr.getArgs())
+                child.accept(this, param);
+
+        // tabSimbFeature[name] ≠ ∅
+        Method definition = tabSimbFeature.get(methodCallExpr.getName());
+        predicado(definition != null, "Método no definido: " + methodCallExpr.getName(), methodCallExpr);
+        // MethodCallExpr.definition = tabSimbFeature[name]
+        methodCallExpr.setDefinition(definition);
+
+        return null;
+    }
+
+    // class Variable { String string; }
+    public Object visit(Variable variable, Object param) {
+
+        // tabSimbVar[name] ≠ ∅
+        VarDefinition definition = tabSimbVar.getFromAny(variable.getString());
+        predicado(definition != null, "Variable no definida: " + variable.getString(), variable);
+        // Variable.definition = tabSimbVar[name]
+        variable.setDefinition(definition);
+        return null;
+    }
+
+    // class StructType { String name; }
+    public Object visit(StructType structType, Object param) {
+        TupleDefinition definition = tabSimbTuple.get(structType.getName());
+        predicado(definition != null, "Variable no definida: " + structType.getName(), structType);
+        structType.setDefinition(definition);
+        return null;
+    }
+
+    // class TupleDefinition { String name; List<VarDefinition> vardefinition; }
+    public Object visit(TupleDefinition tupleDefinition, Object param) {
+
+        // tabSimbTuple[name] == ∅
+        TupleDefinition definition = tabSimbTuple.get(tupleDefinition.getName());
+        predicado(definition == null, "Estructura ya definida: " + tupleDefinition.getName(), tupleDefinition);
+        // tabSimbTuple[name] = tupleDefinition
+        tabSimbTuple.put(tupleDefinition.getName(), tupleDefinition);
+
+        tabSimbVar.set();
+        super.visit(tupleDefinition, param);
+        tabSimbVar.reset();
+
+        return null;
+    }
+
+    // class Parameter { String name; Type type; }
+    public Object visit(Parameter parameter, Object param) {
+
+        // super.visit(node, param);
+
+        if (parameter.getType() != null)
+            parameter.getType().accept(this, param);
+
+        // Convertimos el parátero a una VarDefinition
+        List<String> names = new ArrayList<>();
+        names.add(parameter.getName());
+        VarDefinition varDefinition = new VarDefinition(names, parameter.getType());
+
+        // tabSimbVar[name] == ∅
+        VarDefinition definition = tabSimbVar.getFromTop(parameter.getName());
+        predicado(definition == null, "Parámetro ya definido: " + parameter.getName(), parameter);
+        // Parameter.definition = tabSimbVar[name]
+        tabSimbVar.put(parameter.getName(), varDefinition);
+
+        return null;
+    }
+
+    // class VarDefinition { List<String> name; Type type; }
+    public Object visit(VarDefinition varDefinition, Object param) {
+
+        // super.visit(node, param);
+
+        if (varDefinition.getType() != null)
+            varDefinition.getType().accept(this, param);
+
+        // Hay que tener en cuenta que puede haber declaración múltiple de variables
+        List<String> vars = varDefinition.getName();
+
+        for (String name : vars) {
+            // tabSimbVar[name] == ∅
+            VarDefinition definition = tabSimbVar.getFromTop(name);
+            predicado(definition == null, "Variable ya definida: " + name, varDefinition);
+            // tabSimbVar[name] = varDefinition
+            tabSimbVar.put(name, varDefinition);
+        }
+
+        return null;
+    }
+
+    private void predicado(boolean condition, String errorMessage, AST node) {
+        if (!condition)
+            error(errorMessage, node.getStart());
+    }
+
+    /*
+     * private void error(String msg) {
+     * error(msg, null);
+     * }
+     */
 
     private void error(String msg, Position position) {
         errorManager.notify("Identification", msg, position);
     }
-
 
     private ErrorManager errorManager;
 }

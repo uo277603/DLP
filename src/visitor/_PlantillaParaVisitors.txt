@@ -251,16 +251,13 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Acces { Expr left;  String op;  Expr right; }
+	//	class Acces { Expr left;  String op;  String right; }
 	public Object visit(Acces acces, Object param) {
 
 		// super.visit(node, param);
 
 		if (acces.getLeft() != null)
 			acces.getLeft().accept(this, param);
-
-		if (acces.getRight() != null)
-			acces.getRight().accept(this, param);
 
 		return null;
 	}

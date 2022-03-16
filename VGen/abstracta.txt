@@ -20,7 +20,7 @@ exprBinariaAritmetica:expr -> left:expr op:string right:expr ;
 exprUnariaAritmetica:expr -> op:string expr ;
 exprBinariaLogica:expr -> left:expr op:string right:expr ;
 exprUnariaLogica:expr -> op:string expr ;
-acces:expr -> left:expr op:string right:expr ;
+acces:expr -> left:expr op:string right:string ;
 arrayAcces:expr -> left:expr right:expr ;
 cast:expr -> typeToConvert:type expr ;
 litEnt:expr -> string ;
