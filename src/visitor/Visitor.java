@@ -17,6 +17,7 @@ public interface Visitor {
 	public Object visit(Conditional conditional, Object param);
 	public Object visit(Loop loop, Object param);
 	public Object visit(ReturnNode returnNode, Object param);
+	public Object visit(MethodCallSentence methodCallSentence, Object param);
 	public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param);
 	public Object visit(ExprUnariaAritmetica exprUnariaAritmetica, Object param);
 	public Object visit(ExprBinariaLogica exprBinariaLogica, Object param);
@@ -28,6 +29,7 @@ public interface Visitor {
 	public Object visit(LitReal litReal, Object param);
 	public Object visit(LitChar litChar, Object param);
 	public Object visit(Variable variable, Object param);
+	public Object visit(MethodCallExpr methodCallExpr, Object param);
 	public Object visit(IntType intType, Object param);
 	public Object visit(RealType realType, Object param);
 	public Object visit(CharType charType, Object param);
@@ -36,5 +38,4 @@ public interface Visitor {
 	public Object visit(StructType structType, Object param);
 	public Object visit(TupleDefinition tupleDefinition, Object param);
 	public Object visit(VarDefinition varDefinition, Object param);
-	public Object visit(MethodCall methodCall, Object param);
 }

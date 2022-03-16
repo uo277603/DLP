@@ -3,18 +3,17 @@ package visitor;
 import ast.*;
 
 public class SourceVisitor extends DefaultVisitor {
-	// class Program { ClassNode classnode; MethodCall methodcall; }
+
+	//	class Program { ClassNode classnode;  MethodCallSentence methodcallsentence; }
 	public Object visit(Program program, Object param) {
 
 		// super.visit(node, param);
 
 		if (program.getClassnode() != null)
 			program.getClassnode().accept(this, param);
-
-		wout(0,"main");
-
-		if (program.getMethodcall() != null)
-			program.getMethodcall().accept(this, param);
+		woutln(0,"main");
+		if (program.getMethodcallsentence() != null)
+			program.getMethodcallsentence().accept(this, param);
 		wout(0,"end");
 		return null;
 	}
@@ -368,23 +367,39 @@ public class SourceVisitor extends DefaultVisitor {
 		return null;
 	}
 
-	// class MethodCall { String name; List<Expr> args; }
-	public Object visit(MethodCall methodCall, Object param) {
+	//	class MethodCallSentence { String name;  List<Expr> args; }
+	public Object visit(MethodCallSentence methodCallSentence, Object param) {
 
 		// super.visit(node, param);
-		wout(3,methodCall.getName() + "(");
-		
-		if (methodCall.getArgs() != null){
-		int count = 0;
-			for (Expr child : methodCall.getArgs()){
+		wout(3,methodCallSentence.getName() + "(");
+		if (methodCallSentence.getArgs() != null){
+			int count = 0;
+			for (Expr child : methodCallSentence.getArgs()){
 				child.accept(this, param);
-				if(count != methodCall.getArgs().size() - 1)
+				if(count != methodCallSentence.getArgs().size() - 1)
 					System.out.print(", ");
 				count++;
 			}
 		}
 		woutln(0,");");
+		return null;
+	}
 
+	//	class MethodCallExpr { String name;  List<Expr> args; }
+	public Object visit(MethodCallExpr methodCallExpr, Object param) {
+
+		// super.visit(node, param);
+		wout(0,methodCallExpr.getName() + "(");
+		if (methodCallExpr.getArgs() != null){
+			int count = 0;
+			for (Expr child : methodCallExpr.getArgs()){
+				child.accept(this, param);
+				if(count != methodCallExpr.getArgs().size() - 1)
+					System.out.print(", ");
+				count++;
+			}
+		}
+		wout(0,")");
 		return null;
 	}
 

@@ -38,7 +38,7 @@ public class <nombre clase> extends DefaultVisitor {
 	//		es la llamada a 'super.visit' la que debería ser borrada.
 	// ---------------------------------------------------------
 
-	//	class Program { ClassNode classnode;  MethodCall methodcall; }
+	//	class Program { ClassNode classnode;  MethodCallSentence methodcallsentence; }
 	public Object visit(Program program, Object param) {
 
 		// super.visit(node, param);
@@ -46,8 +46,8 @@ public class <nombre clase> extends DefaultVisitor {
 		if (program.getClassnode() != null)
 			program.getClassnode().accept(this, param);
 
-		if (program.getMethodcall() != null)
-			program.getMethodcall().accept(this, param);
+		if (program.getMethodcallsentence() != null)
+			program.getMethodcallsentence().accept(this, param);
 
 		return null;
 	}
@@ -189,6 +189,18 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
+	//	class MethodCallSentence { String name;  List<Expr> args; }
+	public Object visit(MethodCallSentence methodCallSentence, Object param) {
+
+		// super.visit(node, param);
+
+		if (methodCallSentence.getArgs() != null)
+			for (Expr child : methodCallSentence.getArgs())
+				child.accept(this, param);
+
+		return null;
+	}
+
 	//	class ExprBinariaAritmetica { Expr left;  String op;  Expr right; }
 	public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
 
@@ -301,6 +313,18 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
+	//	class MethodCallExpr { String name;  List<Expr> args; }
+	public Object visit(MethodCallExpr methodCallExpr, Object param) {
+
+		// super.visit(node, param);
+
+		if (methodCallExpr.getArgs() != null)
+			for (Expr child : methodCallExpr.getArgs())
+				child.accept(this, param);
+
+		return null;
+	}
+
 	//	class IntType {  }
 	public Object visit(IntType intType, Object param) {
 		return null;
@@ -356,18 +380,6 @@ public class <nombre clase> extends DefaultVisitor {
 
 		if (varDefinition.getType() != null)
 			varDefinition.getType().accept(this, param);
-
-		return null;
-	}
-
-	//	class MethodCall { String name;  List<Expr> args; }
-	public Object visit(MethodCall methodCall, Object param) {
-
-		// super.visit(node, param);
-
-		if (methodCall.getArgs() != null)
-			for (Expr child : methodCall.getArgs())
-				child.accept(this, param);
 
 		return null;
 	}

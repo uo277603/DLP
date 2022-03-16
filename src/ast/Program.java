@@ -8,26 +8,26 @@ import org.antlr.v4.runtime.*;
 
 import visitor.*;
 
-//	program -> classnode:classNode  methodcall:methodCall
+//	program -> classnode:classNode  methodcallsentence:methodCallSentence
 
 public class Program extends AbstractAST  {
 
-	public Program(ClassNode classnode, MethodCall methodcall) {
+	public Program(ClassNode classnode, MethodCallSentence methodcallsentence) {
 		this.classnode = classnode;
-		this.methodcall = methodcall;
+		this.methodcallsentence = methodcallsentence;
 
        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
        // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(classnode, methodcall);
+       setPositions(classnode, methodcallsentence);
 	}
 
-	public Program(Object classnode, Object methodcall) {
+	public Program(Object classnode, Object methodcallsentence) {
 		this.classnode = (ClassNode) getAST(classnode);
-		this.methodcall = (MethodCall) getAST(methodcall);
+		this.methodcallsentence = (MethodCallSentence) getAST(methodcallsentence);
 
        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
        // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(classnode, methodcall);
+       setPositions(classnode, methodcallsentence);
 	}
 
 	public ClassNode getClassnode() {
@@ -37,11 +37,11 @@ public class Program extends AbstractAST  {
 		this.classnode = classnode;
 	}
 
-	public MethodCall getMethodcall() {
-		return methodcall;
+	public MethodCallSentence getMethodcallsentence() {
+		return methodcallsentence;
 	}
-	public void setMethodcall(MethodCall methodcall) {
-		this.methodcall = methodcall;
+	public void setMethodcallsentence(MethodCallSentence methodcallsentence) {
+		this.methodcallsentence = methodcallsentence;
 	}
 
 	@Override
@@ -50,9 +50,9 @@ public class Program extends AbstractAST  {
 	}
 
 	private ClassNode classnode;
-	private MethodCall methodcall;
+	private MethodCallSentence methodcallsentence;
 
 	public String toString() {
-       return "{classnode:" + getClassnode() + ", methodcall:" + getMethodcall() + "}";
+       return "{classnode:" + getClassnode() + ", methodcallsentence:" + getMethodcallsentence() + "}";
    }
 }

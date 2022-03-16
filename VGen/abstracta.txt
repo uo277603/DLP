@@ -2,7 +2,7 @@ CATEGORIES
 expr, sentence, type, definition
 
 NODES
-program -> classNode methodCall;
+program -> classNode methodCallSentence;
 classNode -> name:string definition* createMethod:string* method*;
 method -> name:string parameter* retorno:type definition* sentence* ;
 
@@ -14,6 +14,7 @@ assignment:sentence -> left:expr right:expr;
 conditional:sentence -> condition:expr iftrue:sentence* iffalse:sentence*;
 loop:sentence -> init:sentence* condition:expr sentence*;
 returnNode:sentence -> expr;
+methodCallSentence:sentence -> name:string args:expr* ;
 
 exprBinariaAritmetica:expr -> left:expr op:string right:expr ;
 exprUnariaAritmetica:expr -> op:string expr ;
@@ -26,6 +27,7 @@ litEnt:expr -> string ;
 litReal:expr -> string ;
 litChar:expr -> string ;
 variable:expr -> string ;
+methodCallExpr:expr -> name:string args:expr* ;
 
 intType:type -> ;
 realType:type -> ;
@@ -37,5 +39,4 @@ structType:type -> name:string;
 tupleDefinition:definition -> name:string varDefinition* ;
 varDefinition:definition -> name:string* type ;
 
-methodCall:expr,sentence -> name:string args:expr* ;
 

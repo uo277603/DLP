@@ -14,12 +14,12 @@ DefaultVisitor. Implementación base del visitor para ser derivada por nuevos vi
 */
 public class DefaultVisitor implements Visitor {
 
-	//	class Program { ClassNode classnode;  MethodCall methodcall; }
+	//	class Program { ClassNode classnode;  MethodCallSentence methodcallsentence; }
 	public Object visit(Program program, Object param) {
 		if (program.getClassnode() != null)
 			program.getClassnode().accept(this, param);
-		if (program.getMethodcall() != null)
-			program.getMethodcall().accept(this, param);
+		if (program.getMethodcallsentence() != null)
+			program.getMethodcallsentence().accept(this, param);
 		return null;
 	}
 
@@ -90,6 +90,12 @@ public class DefaultVisitor implements Visitor {
 	public Object visit(ReturnNode returnNode, Object param) {
 		if (returnNode.getExpr() != null)
 			returnNode.getExpr().accept(this, param);
+		return null;
+	}
+
+	//	class MethodCallSentence { String name;  List<Expr> args; }
+	public Object visit(MethodCallSentence methodCallSentence, Object param) {
+		visitChildren(methodCallSentence.getArgs(), param);
 		return null;
 	}
 
@@ -172,6 +178,12 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class MethodCallExpr { String name;  List<Expr> args; }
+	public Object visit(MethodCallExpr methodCallExpr, Object param) {
+		visitChildren(methodCallExpr.getArgs(), param);
+		return null;
+	}
+
 	//	class IntType {  }
 	public Object visit(IntType intType, Object param) {
 		return null;
@@ -214,12 +226,6 @@ public class DefaultVisitor implements Visitor {
 	public Object visit(VarDefinition varDefinition, Object param) {
 		if (varDefinition.getType() != null)
 			varDefinition.getType().accept(this, param);
-		return null;
-	}
-
-	//	class MethodCall { String name;  List<Expr> args; }
-	public Object visit(MethodCall methodCall, Object param) {
-		visitChildren(methodCall.getArgs(), param);
 		return null;
 	}
 

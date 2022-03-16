@@ -7,7 +7,7 @@ import Lexicon;
 
 start
 	returns[Program ast]:
-	clase 'main' call ';' 'end' {$ast = new Program($clase.ast, $call.ast);};
+	clase 'main' IDENT '(' listaexpresionOpt ')' ';' 'end' {$ast = new Program($clase.ast, new MethodCallSentence($IDENT, $listaexpresionOpt.list));};
 
 clase returns[ClassNode ast]
 	: 'class' nombreClase=IDENT ';' atributosOpt 'create' constructores  lm+=metodo+ 'end'
@@ -75,7 +75,7 @@ sentencia returns[Sentence ast]
 	| asignacion {$ast = $asignacion.ast;}
 	| 'if' expr 'then' ls+=sentencia+ elseOpt 'end' {$ast = new Conditional($expr.ast, $ls, $elseOpt.list);}
 	| fromOpt 'until' expr 'loop' ls+=sentencia+ 'end' {$ast = new Loop($fromOpt.list, $expr.ast, $ls);}
-	| call ';' {$ast = $call.ast;}
+	| IDENT '(' listaexpresionOpt ')' ';' {$ast = new MethodCallSentence($IDENT, $listaexpresionOpt.list);}
 	| 'return' expr? ';' {$ast = new ReturnNode($expr.ast);}
 	;
 
@@ -98,7 +98,7 @@ expr returns[Expr ast]
 	| REAL_CONSTANT {$ast = new LitReal($REAL_CONSTANT);}
 	| CHAR_CONSTANT {$ast = new LitChar($CHAR_CONSTANT);}
 	| IDENT {$ast = new Variable($IDENT);}
-	| call {$ast = $call.ast;}
+	| IDENT '(' listaexpresionOpt ')' {$ast = new MethodCallExpr($IDENT, $listaexpresionOpt.list);}
 	| left=expr '[' right=expr ']' {$ast = new ArrayAcces($left.ast, $right.ast);}
 	| left=expr op='.' right=expr {$ast = new Acces($left.ast, $op.text, $right.ast);}
 	| op='-' expr {$ast = new ExprUnariaAritmetica($op.text, $expr.ast);}	
@@ -121,6 +121,3 @@ listaexpresion returns[List<Expr> list = new ArrayList<Expr>()]
 	: expr {$list.add($expr.ast);} (',' expr {$list.add($expr.ast);})*
 	;
 
-call returns[MethodCall ast]
-	: IDENT '(' listaexpresionOpt ')' {$ast = new MethodCall($IDENT, $listaexpresionOpt.list);}
-	;

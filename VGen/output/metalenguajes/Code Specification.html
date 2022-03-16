@@ -52,7 +52,7 @@
             <td><strong>&nbsp;Función</strong></td>
             <td><strong>Plantillas de Código</strong></td>
         </tr>
-<tr><td>&fnof;<sub>1</sub>[[<span class="categoria">program</span>]]&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&fnof;<sub>1</sub>[[<span class="nodo">program</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">classnode</span><span class="tipo">:classNode</span> &nbsp;<span class="nombreAtt">methodcall</span><span class="tipo">:methodCall</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
+<tr><td>&fnof;<sub>1</sub>[[<span class="categoria">program</span>]]&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&fnof;<sub>1</sub>[[<span class="nodo">program</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">classnode</span><span class="tipo">:classNode</span> &nbsp;<span class="nombreAtt">methodcallsentence</span><span class="tipo">:methodCallSentence</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
 <tr><td>&nbsp;<br><br></td><td></td></tr>
 
 <tr><td>&fnof;<sub>2</sub>[[<span class="categoria">classNode</span>]]&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&fnof;<sub>2</sub>[[<span class="nodo">classNode</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">name</span><span class="tipo">:String</span> &nbsp;<span class="nombreAtt">definition</span><span class="tipo">:definition*</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -72,7 +72,7 @@
 <tr><td></td><td>&fnof;<sub>5</sub>[[<span class="nodo">conditional</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">condition</span><span class="tipo">:expr</span> &nbsp;<span class="nombreAtt">iftrue</span><span class="tipo">:sentence*</span> &nbsp;<span class="nombreAtt">iffalse</span><span class="tipo">:sentence*</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
 <tr><td></td><td>&fnof;<sub>5</sub>[[<span class="nodo">loop</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">init</span><span class="tipo">:sentence*</span> &nbsp;<span class="nombreAtt">condition</span><span class="tipo">:expr</span> &nbsp;<span class="nombreAtt">sentence</span><span class="tipo">:sentence*</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
 <tr><td></td><td>&fnof;<sub>5</sub>[[<span class="nodo">returnNode</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">expr</span><span class="tipo">:expr</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
-<tr><td></td><td>&fnof;<sub>5</sub>[[<span class="nodo">methodCall</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">name</span><span class="tipo">:String</span> &nbsp;<span class="nombreAtt">args</span><span class="tipo">:expr*</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
+<tr><td></td><td>&fnof;<sub>5</sub>[[<span class="nodo">methodCallSentence</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">name</span><span class="tipo">:String</span> &nbsp;<span class="nombreAtt">args</span><span class="tipo">:expr*</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
 <tr><td>&nbsp;<br><br></td><td></td></tr>
 
 <tr><td>&fnof;<sub>6</sub>[[<span class="categoria">expr</span>]]&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&fnof;<sub>6</sub>[[<span class="nodo">exprBinariaAritmetica</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">left</span><span class="tipo">:expr</span> &nbsp;<span class="nombreAtt">op</span><span class="tipo">:String</span> &nbsp;<span class="nombreAtt">right</span><span class="tipo">:expr</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
@@ -86,7 +86,7 @@
 <tr><td></td><td>&fnof;<sub>6</sub>[[<span class="nodo">litReal</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">string</span><span class="tipo">:String</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
 <tr><td></td><td>&fnof;<sub>6</sub>[[<span class="nodo">litChar</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">string</span><span class="tipo">:String</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
 <tr><td></td><td>&fnof;<sub>6</sub>[[<span class="nodo">variable</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">string</span><span class="tipo">:String</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
-<tr><td></td><td>&fnof;<sub>6</sub>[[<span class="nodo">methodCall</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">name</span><span class="tipo">:String</span> &nbsp;<span class="nombreAtt">args</span><span class="tipo">:expr*</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
+<tr><td></td><td>&fnof;<sub>6</sub>[[<span class="nodo">methodCallExpr</span> &nbsp;&rarr;  &nbsp;<span class="nombreAtt">name</span><span class="tipo">:String</span> &nbsp;<span class="nombreAtt">args</span><span class="tipo">:expr*</span>&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>
 <tr><td>&nbsp;<br><br></td><td></td></tr>
 
 <tr><td>&fnof;<sub>7</sub>[[<span class="categoria">type</span>]]&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&fnof;<sub>7</sub>[[<span class="nodo">intType</span> &nbsp;&rarr; &lambda;&nbsp;]]&nbsp;= <br>&nbsp;</td></tr>

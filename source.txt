@@ -4,7 +4,7 @@ Este ejemplo no hace nada concreto y está puesto a modo de ejemplo de la sitaxi
 Ver especificaciones del lenguaje para tener mas detalles.
 *//
 
-class EJEMPLO;
+class Test_98_NOERRORS;
 	
 	global
 		types
@@ -21,6 +21,7 @@ class EJEMPLO;
 			i : INTEGER; /*esto estaría bien
 			/* j : INTEGER := 2; /*esto estaría mal, no se puede inicializar
 			j : INTEGER;
+			/* factorial : DOUBLE;
 			ai : [2] INTEGER; /*array de una dimensión
 			bi : [2][2] INTEGER; /*array de dos dimensiones
 			t : tuple1; /*estructura
@@ -28,18 +29,19 @@ class EJEMPLO;
 	create
 		inicio; 
 		otroInicio; /*Se podrían definir tantos constructores como se desee
+		/* masinicio;
+		/* inicio;
+		/* tomaya;
 		
 	feature factorial (i : INTEGER) : INTEGER is /* declaración con valor de retorno INTEGER y parámetro INTEGER
 		local
-			j, k : INTEGER;
+			j : INTEGER;
 		do
 			from
-				j:= 1;
-				k:= 0;
+				j:= -1;
 			until i = 0 loop
-				j := j * i;
-				k := k + 1;
-				i := i - 1;
+				j := -(j + i) * i;
+				i := i - -1;  /* Vale así o hau que poner  i - (-1);
 			end
 			return j;
 	end /* factorial
@@ -48,7 +50,7 @@ class EJEMPLO;
 		local
 			i : INTEGER;
 			ai : [5] INTEGER;
-			t2 : tuple2; /*estructura	
+			t2 : [4] tuple2; /*array de estructura	
 		do
 			read(t.a);
 			if (t.a < 5) and not (t.a = 0) then
@@ -59,24 +61,34 @@ class EJEMPLO;
 					t.a := t.a + to<INTEGER>(10.0);
 					t.a := -t.a;
 				end
+			read t2[0].tt.d; /* lectura de elemento complejo. poner ( y ) si hace falta
+			t2[0].tt.a := 1 + to<INTEGER>(t2[0].tt.d); /* Acceso a array de estructuras
 			end
 			
 			from
 				i:= 0;
 			until i = 5 loop
 				ai[i] := t.a * i;
-				i := i + 1;
+				i := i + factorial(4);
 			end
+			factorial(5);
 	end /* inicio
 	
-	feature otroInicio is
-		/*local
+	feature otroInicio : INTEGER is
+		/* local
+		/* local está vacío
 		do
-			print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o', '!';
-			println;
+			read (i);
+			read j;
+			j := i * 7;
+			if (i < 1 and j > 7) or not (i < j) then
+				i := 1;
+				j := 2;
+			end
+			return i - j;
 	end /*otroInicio
 	
-end /*EJEMPLO
+end /*Test_02
 
 main
     inicio(2, 3, 4+5); /* como solo puede estar activo un inicio sólo llamaría a éste

@@ -94,14 +94,14 @@ public class ASTPrinter extends DefaultVisitor {
     }
 
     // ----------------------------------------------
-	//	class Program { ClassNode classnode;  MethodCall methodcall; }
+	//	class Program { ClassNode classnode;  MethodCallSentence methodcallsentence; }
 	public Object visit(Program program, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "Program", program, false);
 
 		visit(indent + 1, "classnode", "ClassNode", program.getClassnode());
-		visit(indent + 1, "methodcall", "MethodCall", program.getMethodcall());
+		visit(indent + 1, "methodcallsentence", "MethodCallSentence", program.getMethodcallsentence());
 		return null;
 	}
 
@@ -206,6 +206,17 @@ public class ASTPrinter extends DefaultVisitor {
 		printName(indent, "ReturnNode", returnNode, false);
 
 		visit(indent + 1, "expr", "Expr", returnNode.getExpr());
+		return null;
+	}
+
+	//	class MethodCallSentence { String name;  List<Expr> args; }
+	public Object visit(MethodCallSentence methodCallSentence, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "MethodCallSentence", methodCallSentence, false);
+
+		print(indent + 1, "name", "String", methodCallSentence.getName());
+		visit(indent + 1, "args", "List<Expr>", methodCallSentence.getArgs());
 		return null;
 	}
 
@@ -321,6 +332,17 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class MethodCallExpr { String name;  List<Expr> args; }
+	public Object visit(MethodCallExpr methodCallExpr, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "MethodCallExpr", methodCallExpr, false);
+
+		print(indent + 1, "name", "String", methodCallExpr.getName());
+		visit(indent + 1, "args", "List<Expr>", methodCallExpr.getArgs());
+		return null;
+	}
+
 	//	class IntType {  }
 	public Object visit(IntType intType, Object param) {
 		int indent = ((Integer)param).intValue();
@@ -395,17 +417,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "name", "List<String>", varDefinition.getName());
 		visit(indent + 1, "type", "Type", varDefinition.getType());
-		return null;
-	}
-
-	//	class MethodCall { String name;  List<Expr> args; }
-	public Object visit(MethodCall methodCall, Object param) {
-		int indent = ((Integer)param).intValue();
-
-		printName(indent, "MethodCall", methodCall, false);
-
-		print(indent + 1, "name", "String", methodCall.getName());
-		visit(indent + 1, "args", "List<Expr>", methodCall.getArgs());
 		return null;
 	}
 

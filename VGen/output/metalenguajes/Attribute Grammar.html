@@ -46,7 +46,7 @@
             <td><strong>&nbsp;Predicados&nbsp;</strong></td>
             <td><strong>&nbsp;Reglas&nbsp;Semánticas&nbsp;</strong></td>
         </tr>
-<tr><td><span class="nodo">program</span>&nbsp;&rarr;  <span class="nombreAtt">classnode</span><span class="tipoAtt">:classNode</span> <span class="nombreAtt">methodcall</span><span class="tipoAtt">:methodCall</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">program</span>&nbsp;&rarr;  <span class="nombreAtt">classnode</span><span class="tipoAtt">:classNode</span> <span class="nombreAtt">methodcallsentence</span><span class="tipoAtt">:methodCallSentence</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">classNode</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">definition</span><span class="tipoAtt">:definition*</span> <span class="nombreAtt">createMethod</span><span class="tipoAtt">:String*</span> <span class="nombreAtt">method</span><span class="tipoAtt">:method*</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">method</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">parameter</span><span class="tipoAtt">:parameter*</span> <span class="nombreAtt">retorno</span><span class="tipoAtt">:type</span> <span class="nombreAtt">definition</span><span class="tipoAtt">:definition*</span> <span class="nombreAtt">sentence</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">parameter</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">type</span><span class="tipoAtt">:type</span></td><td></td><td></td></tr>
@@ -58,7 +58,7 @@
 <tr><td><span class="nodo">conditional</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">condition</span><span class="tipoAtt">:expr</span> <span class="nombreAtt">iftrue</span><span class="tipoAtt">:sentence*</span> <span class="nombreAtt">iffalse</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">loop</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">init</span><span class="tipoAtt">:sentence*</span> <span class="nombreAtt">condition</span><span class="tipoAtt">:expr</span> <span class="nombreAtt">sentence</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">returnNode</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">expr</span><span class="tipoAtt">:expr</span></td><td></td><td></td></tr>
-<tr><td><span class="nodo">methodCall</span>:<span class="categoria">expr, sentence</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">args</span><span class="tipoAtt">:expr*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">methodCallSentence</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">args</span><span class="tipoAtt">:expr*</span></td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
 <tr><td><span class="nodo">exprBinariaAritmetica</span>:<span class="categoria">expr</span>&nbsp;&rarr;  <span class="nombreAtt">left</span><span class="tipoAtt">:expr</span> <span class="nombreAtt">op</span><span class="tipoAtt">:String</span> <span class="nombreAtt">right</span><span class="tipoAtt">:expr</span></td><td></td><td></td></tr>
@@ -72,7 +72,7 @@
 <tr><td><span class="nodo">litReal</span>:<span class="categoria">expr</span>&nbsp;&rarr;  <span class="nombreAtt">string</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">litChar</span>:<span class="categoria">expr</span>&nbsp;&rarr;  <span class="nombreAtt">string</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">variable</span>:<span class="categoria">expr</span>&nbsp;&rarr;  <span class="nombreAtt">string</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
-<tr><td><span class="nodo">methodCall</span>:<span class="categoria">expr, sentence</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">args</span><span class="tipoAtt">:expr*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">methodCallExpr</span>:<span class="categoria">expr</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">args</span><span class="tipoAtt">:expr*</span></td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
 <tr><td><span class="nodo">intType</span>:<span class="categoria">type</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
