@@ -1,12 +1,68 @@
-class T_ERRSIN02;
-create
-	g;	/* g no se crea en ninguna feature
-feature f is
-	do
-		return;
+//*
+
+ Hipoteca.txt V1.0
+
+- Programa de ejemplo que muestra las características del lenguaje
+- La sintaxis tiene que ser obligatoriamente la que se muestra en este ejemplo
+*//
+
+class HIPOTECA;
+	
+	global
+		/* No hay declaraciones aquí
+		
+	create
+		calcularHipoteca;
+		
+	feature potencia(base: DOUBLE, exponente: INTEGER): DOUBLE is
+		local
+			total: DOUBLE;
+		do
+			if exponente = 0 then
+				total := 1.0;
+			else if exponente < 0 then
+					total := 1.0 / potencia(base, 0 - exponente);
+				else
+					total := base;
+					/*from
+					until exponente = 0 loop
+						total := total * base;
+						exponente := exponente - 1;
+					end
+				end
+			end
+			return total;		
 	end
+	
+	feature letraHipoteca(capital: DOUBLE, meses: INTEGER, interes: DOUBLE): DOUBLE is
+		local
+			mensual: DOUBLE;
+		do
+			mensual := interes / 12.0;
+			return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - meses)));
+	end /* letraHipoteca
+
+	feature calcularHipoteca is
+		local
+			precioVivienda, interes: DOUBLE;
+			mesesHipoteca: INTEGER;
+		do
+			//*
+				read (precioVivienda);
+				read (mesesHipoteca);
+				read (interes);
+			*//
+				precioVivienda := 200000.0;
+				mesesHipoteca := 30 * 12;
+				interes := 2.04;	
+
+				println (letraHipoteca(precioVivienda, mesesHipoteca, interes));
+
+			/*	Con los datos anteriores deberían salir (redondeando) 743 euros de letra al mes		
+	end /* calcularHipoteca
+		
 end
 
 main
-	f();
-end
+	calcularHipoteca();
+end /* HIPOTECA

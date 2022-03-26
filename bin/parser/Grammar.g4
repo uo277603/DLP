@@ -73,8 +73,8 @@ sentencia returns[Sentence ast]
 	t=('print' | 'println') listaexpresionOpt ';' {$ast = new Print($t.text, $listaexpresionOpt.list);}
 	| 'read' listaexpresion ';' {$ast = new Read($listaexpresion.list);}
 	| asignacion {$ast = $asignacion.ast;}
-	| 'if' expr 'then' ls+=sentencia+ elseOpt 'end' {$ast = new Conditional($expr.ast, $ls, $elseOpt.list);}
-	| fromOpt 'until' expr 'loop' ls+=sentencia+ 'end' {$ast = new Loop($fromOpt.list, $expr.ast, $ls);}
+	| 'if' expr 'then' ls+=sentencia* elseOpt 'end' {$ast = new Conditional($expr.ast, $ls, $elseOpt.list);}
+	| fromOpt 'until' expr 'loop' ls+=sentencia* 'end' {$ast = new Loop($fromOpt.list, $expr.ast, $ls);}
 	| IDENT '(' listaexpresionOpt ')' ';' {$ast = new MethodCallSentence($IDENT, $listaexpresionOpt.list);}
 	| 'return' exprOpt ';' {$ast = new ReturnNode($exprOpt.ast);}
 	;

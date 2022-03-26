@@ -77,11 +77,25 @@ public class Identification extends DefaultVisitor {
         tabSimbFeature.put(method.getName(), method);
 
         tabSimbVar.set();
-        super.visit(method, param);
+        super.visit(method, method);
         tabSimbVar.reset();
 
         return null;
     }
+
+    //	class ReturnNode { Expr expr; }
+	public Object visit(ReturnNode returnNode, Object param) {
+
+		// super.visit(node, param);
+
+		if (returnNode.getExpr() != null)
+			returnNode.getExpr().accept(this, param);
+
+        // returnNode.method = method
+        returnNode.setMethod((Method) param);
+
+		return null;
+	}
 
     // class MethodCallSentence { String name; List<Expr> args; }
     public Object visit(MethodCallSentence methodCallSentence, Object param) {
