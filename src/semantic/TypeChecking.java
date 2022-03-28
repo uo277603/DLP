@@ -52,8 +52,6 @@ public class TypeChecking extends DefaultVisitor {
     // List<Definition> definition; List<Sentence> sentence; }
     public Object visit(Method method, Object param) {
 
-        super.visit(method, param);
-
         /*
          * if (method.getParameter() != null)
          * for (Parameter child : method.getParameter())
@@ -70,18 +68,22 @@ public class TypeChecking extends DefaultVisitor {
          * for (Sentence child : method.getSentence())
          * child.accept(this, param);
          */
-
-        if (method.getRetorno().getClass() != VoidType.class) {
-            boolean existsReturn = false;
-            for (Sentence s : method.getSentence()) {
-                if (s instanceof ReturnNode) {
-                    existsReturn = true;
-                    break;
-                }
+        boolean existsReturn = false;
+        for (Sentence s : method.getSentence()) {
+            s.setMethod(method);
+            if (s instanceof ReturnNode) {
+                existsReturn = true;
+                break;
             }
+        }
+        if (method.getRetorno().getClass() != VoidType.class) {     
             predicado(existsReturn, "Este método debe retornar un resultado de tipo: " + method.getRetorno(),
                     method.getStart());
+            if(existsReturn)
+                method.setRetornable(true);
         }
+
+        super.visit(method, param);
 
         return null;
     }
@@ -143,6 +145,7 @@ public class TypeChecking extends DefaultVisitor {
          */
         predicado(mismoTipo(assignment.getLeft().getType(), assignment.getRight().getType()),
                 "Los operandos deben ser del mismo tipo", assignment);
+        predicado(esPrimitivo(assignment.getLeft().getType()), "La parte de la izquierda tiene que ser simple", assignment.getStart());
         predicado(assignment.getLeft().isModifiable(), "Se requiere expresión modificable", assignment.getLeft());
         return null;
     }
@@ -224,8 +227,17 @@ public class TypeChecking extends DefaultVisitor {
             for (Expr child : methodCallSentence.getArgs())
                 child.accept(this, param);
 
-        predicado(methodCallSentence.getArgs().size() == methodCallSentence.getDefinition().getParameter().size(),
+        boolean sameArgs = methodCallSentence.getArgs().size() == methodCallSentence.getDefinition().getParameter().size();
+        predicado(sameArgs,
                 "El número de parámetos no coincide", methodCallSentence.getStart());
+        if(sameArgs){
+            boolean sameType = true;
+            for(int i = 0; i < methodCallSentence.getArgs().size(); i++){
+                if(!mismoTipo(methodCallSentence.getArgs().get(i).getType(), methodCallSentence.getDefinition().getParameter().get(i).getType()))
+                    sameType = false;
+            }
+            predicado(sameType, "El tipo de los parámetros no coincide", methodCallSentence.getStart());
+        }
         return null;
     }
 
@@ -320,8 +332,19 @@ public class TypeChecking extends DefaultVisitor {
         if (acces.getLeft() != null)
             acces.getLeft().accept(this, param);
 
-        predicado(acces.getLeft().getType().getClass() == StructType.class, "La expresión de la izquierda tiene que ser una estructura", acces.getStart());
-        acces.setType(acces.getLeft().getType());
+        predicado(acces.getLeft().getType() instanceof StructType, "La expresión de la izquierda tiene que ser una estructura", acces.getStart());
+        acces.setModifiable(true);
+        if(acces.getLeft().getType() instanceof StructType){
+            StructType tipo = (StructType) acces.getLeft().getType();
+            for(VarDefinition d : tipo.getDefinition().getVardefinition()){
+                if(d.getName().get(0).equals(acces.getRight())){
+                    acces.setType(d.getType());
+                }
+            }
+            predicado(acces.getType() != null, "El campo " + acces.getRight() + " no está definido", acces.getStart());
+        }
+        if(acces.getType() == null)
+            acces.setType(acces.getLeft().getType()); // para evitar nullPointer
         return null;
     }
 
@@ -338,8 +361,8 @@ public class TypeChecking extends DefaultVisitor {
         
         predicado(arrayAcces.getLeft().getType().getClass() == ArrayType.class, "La expresión de la izquierda tiene que ser un array", arrayAcces.getStart());
         predicado(arrayAcces.getRight().getType().getClass() == IntType.class, "El índice tiene que ser un entero", arrayAcces.getStart());
-        if(arrayAcces.getLeft() instanceof ArrayType){
-            ArrayType tipo = (ArrayType) arrayAcces.getLeft();
+        if(arrayAcces.getLeft().getType() instanceof ArrayType){
+            ArrayType tipo = (ArrayType) arrayAcces.getLeft().getType();
             arrayAcces.setType(tipo.getType());
         }else{
             arrayAcces.setType(arrayAcces.getLeft().getType());
@@ -405,9 +428,20 @@ public class TypeChecking extends DefaultVisitor {
         if (methodCallExpr.getArgs() != null)
             for (Expr child : methodCallExpr.getArgs())
                 child.accept(this, param);
-
-        predicado(methodCallExpr.getArgs().size() == methodCallExpr.getDefinition().getParameter().size(),
+        boolean sameArgs = methodCallExpr.getArgs().size() == methodCallExpr.getDefinition().getParameter().size();
+        predicado(sameArgs,
                 "El número de parámetos no coincide", methodCallExpr.getStart());
+        predicado(methodCallExpr.getDefinition().isRetornable(), "La función " + methodCallExpr.getName() + " no tiene tipo de retorno",
+        methodCallExpr.getStart());
+
+        if(sameArgs){
+            boolean sameType = true;
+            for(int i = 0; i < methodCallExpr.getArgs().size(); i++){
+                if(!mismoTipo(methodCallExpr.getArgs().get(i).getType(), methodCallExpr.getDefinition().getParameter().get(i).getType()))
+                    sameType = false;
+            }
+            predicado(sameType, "El tipo de los parámetros no coincide", methodCallExpr.getStart());
+        }
 
         methodCallExpr.setType(methodCallExpr.getDefinition().getRetorno());
         return null;

@@ -30,6 +30,7 @@ class
 vars
 		juan : Persona;
 		anton : Persona;
+		prueba : [10] INTEGER;
 
 	create
 		inicio;
@@ -109,7 +110,6 @@ vars
 			print to<INTEGER>(juan);	/* Expresiones de tipos simples
 			print to<DOUBLE>(2.5);		/* Deben ser distintos tipos
 			
-			print juan[5][7][7];
 			print juan[5];	/* Debe ser tipo array
 			print 2[5];		/* Debe ser tipo array
 			print v[5.0];	/* Debe ser indice entero

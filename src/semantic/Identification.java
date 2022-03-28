@@ -91,9 +91,6 @@ public class Identification extends DefaultVisitor {
 		if (returnNode.getExpr() != null)
 			returnNode.getExpr().accept(this, param);
 
-        // returnNode.method = method
-        returnNode.setMethod((Method) param);
-
 		return null;
 	}
 
