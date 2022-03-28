@@ -80,7 +80,7 @@ public class TypeChecking extends DefaultVisitor {
                 }
             }
             predicado(existsReturn, "Este método debe retornar un resultado de tipo: " + method.getRetorno(),
-                    method.getRetorno());
+                    method.getStart());
         }
 
         return null;
@@ -338,7 +338,12 @@ public class TypeChecking extends DefaultVisitor {
         
         predicado(arrayAcces.getLeft().getType().getClass() == ArrayType.class, "La expresión de la izquierda tiene que ser un array", arrayAcces.getStart());
         predicado(arrayAcces.getRight().getType().getClass() == IntType.class, "El índice tiene que ser un entero", arrayAcces.getStart());
-        arrayAcces.setType(arrayAcces.getLeft().getType());
+        if(arrayAcces.getLeft() instanceof ArrayType){
+            ArrayType tipo = (ArrayType) arrayAcces.getLeft();
+            arrayAcces.setType(tipo.getType());
+        }else{
+            arrayAcces.setType(arrayAcces.getLeft().getType());
+        }
         arrayAcces.setModifiable(true);
 
         return null;
@@ -356,8 +361,11 @@ public class TypeChecking extends DefaultVisitor {
             cast.getExpr().accept(this, param);
 
         predicado(esPrimitivo(cast.getTypeToConvert()), "El tipo a convertir tiene que ser primitivo", cast.getStart());    
+        predicado(esPrimitivo(cast.getExpr().getType()), "Solo se pueden convertir tipos simples", cast.getStart());
         predicado(cast.getTypeToConvert().getClass() != cast.getExpr().getType().getClass(), "Los tipos del cast tienen que ser diferentes", cast.getStart());
+        predicado(isCompaitbleCast(cast.getTypeToConvert(), cast.getExpr().getType()), "Los tipos del cast no son compatibles", cast.getStart());
         cast.setType(cast.getTypeToConvert());
+        cast.setModifiable(false);
         return null;
     }
 
@@ -481,6 +489,18 @@ public class TypeChecking extends DefaultVisitor {
     private boolean esNumero(Type tipo){
         return tipo.getClass() == IntType.class || tipo.getClass() == RealType.class;
     }
+
+    boolean isCompaitbleCast(Type typeToConvert, Type type) {
+        if(typeToConvert == type)
+            return false;
+        else if(typeToConvert.getClass() == RealType.class && type.getClass() == CharType.class)
+            return false;
+        else if(typeToConvert.getClass() == CharType.class& type.getClass() == RealType.class)
+            return false;
+        else
+            return true;
+    }
+    
     
 
     /**

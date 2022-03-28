@@ -286,6 +286,7 @@ public class ASTPrinter extends DefaultVisitor {
 
 		visit(indent + 1, "left", "Expr", arrayAcces.getLeft());
 		visit(indent + 1, "right", "Expr", arrayAcces.getRight());
+		print(indent + 1, "Tipo", "Type", arrayAcces.getType());
 		return null;
 	}
 
