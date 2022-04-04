@@ -4,6 +4,10 @@
 
 package ast;
 
-public interface Definition extends AST {
+import semantic.Ambito;
 
+public interface Definition extends AST {
+    
+    public void setAmbito(Ambito ambito);
+    public Ambito getAmbito();
 }

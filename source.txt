@@ -1,126 +1,89 @@
 //*
-Test para probar la Fase de Comprobación de Tipos
-
-COMPROBACION: El compilador del alumno debe detectar todos los errores indicados en los comentarios.
-
-ADVERTENCIA: Hay algunos errores que producen otros errores derivados.
-
-Por ejemplo:
-
-	print juan + anton;	// suma de dos estructuras 
-
-Lo anterior produce el error de que se están sumando dos expresiones de tipos no simples y además
-puede producir el error de que la expresión a imprimir tampoco es de tipo simple (al no quedar
-un tipo simple asociado a la suma al no haberse podido calcular su tipo).
-Estos errores derivados son normales y no es necesario intentar suprimirlos. 
-
-NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje si no coincide
-con la del lenguaje que le corresponde.
+*** Fichero fuente recuperado por SourcePrinterVisitor
 *//
 
 class
-	T_ERRTCH01;
+	Test_02;
 
-	global
+global
 	types
-		deftuple Persona as
-			edad : INTEGER;
-			meses : [12] INTEGER;
+		deftuple tuple1 as /* Estructura
+			a : INTEGER;
+			c : CHARACTER;
+			d : DOUBLE;
 		end
-vars
-		juan : Persona;
-		anton : Persona;
-		prueba : [10] INTEGER;
-
-	create
-		inicio;
-
-	feature g : Persona is	/* Error: Retorno de tipo no simple
-		do
+		deftuple tuple2 as /* Estructura
+			aa : INTEGER;
+			tt : tuple1;
 		end
-
-	feature f (a : [10] INTEGER) is	/* Los parámetros deben de ser tipos primitivos
-		do
-			return 25;	/* El return no debe tener expresión en funciones void
-		end
-
-	feature h : INTEGER is
-		do
-			return 5.6;	/* Tipo de retorno no coincide
-		end
-
-	feature j (a : INTEGER, b : DOUBLE) : DOUBLE is
-		do
-			h(2);	/* Numero de argumentos incorrecto
-			return; /* Debe haber un valor de retorno
-		end
-
-	feature inicio is
-		local
+	vars
 		i : INTEGER;
-		f : DOUBLE;
-		v : [10]INTEGER;
+		j : INTEGER;
+		ai : [2] INTEGER;
+		bi : [2] [2] INTEGER;
+		t : tuple1;
 
-		do
-			if 2.5 then end /* La condicion debe ser de tipo entero
-			if i then end
-			
-			from
-			until juan /* La condicion debe ser de tipo entero
-			loop end	
-			from
-			until not i
-			loop end	
-			
-			5 := 6; /* Valor de la izquierda no modificable
-			i := f; /* Valores de distinto tipo
-			juan := anton; /* Valor de la izquierda debe ser simple
+create
+	inicio;
+	otroInicio;
 
-			read juan;	/* Debe ser un tipo simple
-			read 35;	/* Debe ser modificable
-			read i;
-			
-			print juan; /* Debe ser tipo simple
-			print f / 2.5;
-			
-			j(12, 12.5);
-			j(12, 12); 		/* Tipo de los parámetros no coincide
-			j(12);			/* Número de argumentos no coincide
-			j(12, 12.5, 4); /* Número de argumentos no coincide
-			
-			print inicio();	/* No tiene tipo de retorno
-			print j(12, 12.5);
-			print j(12, 12); 		/* Tipo de los parámetros no coincide
-			print j(12);			/* Número de argumentos no coincide
-			print j(12, 12.5, 4); 	/* Número de argumentos no coincide
-
-			print juan + anton;	/* Deben ser tipos simples
-			print 2.5 * 2;		/* Deben ser del mismo tipo
-			print i - 2;
-
-			print 2.5 and f;	/* Deben ser tipo entero
-			print 2 or i;
-			
-			print juan > anton;	/* Deben ser tipos simples
-			print 2.5 < 2;		/* Deben ser del mismo tipo
-			print i = 2;
-			
-			print to<INTEGER>(2.5) + i;
-			print to<Persona>(2.5);		/* El cast sólo puede ser usado con tipos simples
-			print to<INTEGER>(juan);	/* Expresiones de tipos simples
-			print to<DOUBLE>(2.5);		/* Deben ser distintos tipos
-			
-			print juan[5];	/* Debe ser tipo array
-			print 2[5];		/* Debe ser tipo array
-			print v[5.0];	/* Debe ser indice entero
-			print v[i+2];
-			
-			print juan.edad;
-			print 5.edad;		/* Se requiere tipo struct
-			print juan.nombre;	/* Campo no definido
+feature
+	factorial(i : INTEGER) : INTEGER is
+	local
+		j : INTEGER;
+	do
+		from
+			j :=  -(1) ;
+		until i = 0 loop
+			j := ( -((j + i))  * i);
+			i := (i -  -(1) );
 		end
-end /* T_ERRTCH01
+		return j;
+	end /* factorial
+
+feature
+	inicio(ii : INTEGER, ij : INTEGER, ik : INTEGER) is
+	local
+		i : INTEGER;
+		ai : [5] INTEGER;
+		t2 : [4] tuple2;
+	do
+		read t.a;
+		if ((t.a < 5) and  not((t.a = 0)) ) then
+			t.a := (t.a * 2);
+			else
+			if (t.a = 0) then
+				t.a := 100;
+				else
+				t.a := (t.a + to<INTEGER>(10.0));
+				t.a :=  -(t.a) ;
+			end
+			read t2[0].tt.d;
+			t2[0].tt.a := (1 + to<INTEGER>(t2[0].tt.d));
+		end
+		from
+			i := 0;
+		until i = 5 loop
+			ai[i] := (t.a * i);
+			i := (i + factorial(4));
+		end
+	end /* inicio
+
+feature
+	otroInicio : INTEGER is
+	/*local
+	do
+		read i;
+		read j;
+		j := (i * 7);
+		if (((i < 1) and (j > 7)) or  not((i < j)) ) then
+			i := 1;
+			j := 2;
+		end
+		return (i - j);
+	end /* otroInicio
+end /* Test_02
 
 main
-	inicio();
-end
+	inicio (2, 3, (4 + 5));
+end /* Main

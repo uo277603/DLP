@@ -49,6 +49,11 @@ public class Identification extends DefaultVisitor {
 
         super.visit(classNode, param);
 
+        // Asignar ámbito a las definiciones
+        for (Definition child : classNode.getDefinition()) {
+			child.setAmbito(Ambito.GLOBAL);
+		}
+
         // Antes de nada visitar todos los hijos para añadir a la tabla los métodos
         // que pueden ir en el constructor
         List<String> names = classNode.getCreateMethod();
@@ -79,6 +84,14 @@ public class Identification extends DefaultVisitor {
         tabSimbVar.set();
         super.visit(method, method);
         tabSimbVar.reset();
+
+        // Establecer el ámbito de los parámetros
+        for (Parameter child : method.getParameter())
+            child.getDefinition().setAmbito(Ambito.PARAMETRO);
+
+        // Establecer el ámbito de las definiciones
+        for (Definition child : method.getDefinition()) 
+            child.setAmbito(Ambito.LOCAL);
 
         return null;
     }
@@ -181,8 +194,10 @@ public class Identification extends DefaultVisitor {
         // tabSimbVar[name] == ∅
         VarDefinition definition = tabSimbVar.getFromTop(parameter.getName());
         predicado(definition == null, "Parámetro ya definido: " + parameter.getName(), parameter);
-        // Parameter.definition = tabSimbVar[name]
+        // parameter.definition = tabSimbVar[name]
         tabSimbVar.put(parameter.getName(), varDefinition);
+        // parameter.definition = tabSimbVar[name]
+        parameter.setDefinition(varDefinition);
 
         return null;
     }
