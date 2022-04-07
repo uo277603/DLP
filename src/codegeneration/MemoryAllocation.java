@@ -25,6 +25,9 @@ public class MemoryAllocation extends DefaultVisitor {
 					child.setAddress(acumAddress);
 					acumAddress += child.getType().getSize();
 				}
+				if(child instanceof TupleDefinition){
+					child.accept(this, param);
+				}
 			}
 
 		if (classNode.getMethod() != null)
@@ -39,17 +42,23 @@ public class MemoryAllocation extends DefaultVisitor {
 	public Object visit(Method method, Object param) {
 
 		// super.visit(node, param);
-
+		int parameterAddress = 4;
 		if (method.getParameter() != null)
-			for (Parameter child : method.getParameter())
-				child.accept(this, param);
+			for(int i = method.getParameter().size() - 1; i >= 0 ; i--){
+				method.getParameter().get(i).getDefinition().setAddress(parameterAddress);
+				parameterAddress += method.getParameter().get(i).getDefinition().getType().getSize();
+			}
 
 		if (method.getRetorno() != null)
 			method.getRetorno().accept(this, param);
 
+		int localAddress = 0;
 		if (method.getDefinition() != null)
-			for (Definition child : method.getDefinition())
-				child.accept(this, param);
+			for (Definition child : method.getDefinition()){
+				localAddress -= child.getType().getSize();
+				child.setAddress(localAddress);
+
+			}
 
 		if (method.getSentence() != null)
 			for (Sentence child : method.getSentence())

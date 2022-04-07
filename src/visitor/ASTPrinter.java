@@ -140,6 +140,7 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "name", "String", parameter.getName());
 		visit(indent + 1, "type", "Type", parameter.getType());
+		print(indent + 1, "address", "int", parameter.getDefinition().getAddress());
 		return null;
 	}
 

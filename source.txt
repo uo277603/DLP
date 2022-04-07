@@ -1,89 +1,66 @@
 //*
-*** Fichero fuente recuperado por SourcePrinterVisitor
+* Test para probar la Fase de Gestión de Memoria.
+* 
+* COMPROBACION: Las direcciones asignadas a cada nodo deben coincidir con la dirección del comentario de cada definición.
+* 
+* CONSEJO: Para poder validar más cómodamente este ejercicio se aconseja añadir a 'visitor/ASTPrinter.java' la siguiente sentencia:
+* 
+* 	print(indent + 1, "direccion", "int", node.getDireccion());
+* 
+* Esta llamada deberá añadirse en los métodos visit de los nodos a los que se les haya asignado un atributo 'direccion' (habitualmente aquellos que * representen definiciones de variables globales, locales, parámetros y/o campos de estructuras)
+* 
+* Si se desea que ASTPrinter imprima el nombre del elemento, cambiar la implementación del método print (de ASTPrinter):
+* 	private void print(int indent, String name, String type, Object value) {
+* 		write(indent, formatValue(value) + "  " + typeTag(type));
+* 	}
+* por el siguiente:
+* 	private void print(int indent, String name, String type, Object value) {
+* 		write(indent, name + " " + formatValue(value) + "  " + typeTag(type));
+* 	}
+* 
+* NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje si no coincide
+* con la del lenguaje que le corresponde.
 *//
 
-class
-	Test_02;
+//*
+* En el siguiente programa, al lado de cada variable (global, local y parámetro) y al lado de cada campo de tupla
+* se ha colocado la dirección que tendrá en ejecución como comentario. Comprobar que coinciden con las obetenidas.
+*//
 
-global
-	types
-		deftuple tuple1 as /* Estructura
-			a : INTEGER;
-			c : CHARACTER;
-			d : DOUBLE;
-		end
-		deftuple tuple2 as /* Estructura
-			aa : INTEGER;
-			tt : tuple1;
-		end
-	vars
-		i : INTEGER;
-		j : INTEGER;
-		ai : [2] INTEGER;
-		bi : [2] [2] INTEGER;
-		t : tuple1;
-
-create
-	inicio;
-	otroInicio;
-
-feature
-	factorial(i : INTEGER) : INTEGER is
-	local
-		j : INTEGER;
-	do
-		from
-			j :=  -(1) ;
-		until i = 0 loop
-			j := ( -((j + i))  * i);
-			i := (i -  -(1) );
-		end
-		return j;
-	end /* factorial
-
-feature
-	inicio(ii : INTEGER, ij : INTEGER, ik : INTEGER) is
-	local
-		i : INTEGER;
-		ai : [5] INTEGER;
-		t2 : [4] tuple2;
-	do
-		read t.a;
-		if ((t.a < 5) and  not((t.a = 0)) ) then
-			t.a := (t.a * 2);
-			else
-			if (t.a = 0) then
-				t.a := 100;
-				else
-				t.a := (t.a + to<INTEGER>(10.0));
-				t.a :=  -(t.a) ;
+class Test_MemoryAllocation;
+	global
+		types
+			deftuple Persona as
+				edad : INTEGER;			/* Dir 0 
+				meses : [12] INTEGER;	/* Dir 2 
+				a : DOUBLE;				/* Dir 26 
 			end
-			read t2[0].tt.d;
-			t2[0].tt.a := (1 + to<INTEGER>(t2[0].tt.d));
-		end
-		from
-			i := 0;
-		until i = 5 loop
-			ai[i] := (t.a * i);
-			i := (i + factorial(4));
-		end
-	end /* inicio
+			deftuple Prueba as
+				campo1 : INTEGER; /* Dir 0 
+				campo2 : INTEGER; /* Dir 2 
+			end
 
-feature
-	otroInicio : INTEGER is
-	/*local
-	do
-		read i;
-		read j;
-		j := (i * 7);
-		if (((i < 1) and (j > 7)) or  not((i < j)) ) then
-			i := 1;
-			j := 2;
-		end
-		return (i - j);
-	end /* otroInicio
-end /* Test_02
+		vars
+			a : CHARACTER;	/* Dir 0
+			b : DOUBLE;	/* Dir 1 
+			c : [2] Persona;	/* Dir 5 
+			d : INTEGER;		/* Dir 65 
+
+	create
+		f;
+
+	/*--> Ojo, los parámetros van en sentido decreciente y comienzan en 4
+	feature f (a: INTEGER, b: DOUBLE, h : CHARACTER) is /* a = BP+9, b = BP+5, h = BP+4  
+		local
+			c : CHARACTER;	/* BP-1 
+			d : INTEGER;	/* BP-3 
+			e : [2]Persona; /* BP-63 
+			f : DOUBLE; 	/* BP-67 
+		do
+	end
+end
 
 main
-	inicio (2, 3, (4 + 5));
-end /* Main
+	f(1, 2.5, 'a');
+end
+
