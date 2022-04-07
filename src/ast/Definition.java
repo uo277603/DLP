@@ -13,4 +13,7 @@ public interface Definition extends AST {
 
     public void setAddress(int address);
     public int getAddress();
+
+    public Type getType();
+    public void setType(Type type);
 }

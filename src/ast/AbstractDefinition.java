@@ -10,6 +10,7 @@ public abstract class AbstractDefinition extends AbstractAST implements Definiti
 
     private Ambito ambito;
     private int address;
+    private Type type;
 
     public Ambito getAmbito() {
         return ambito;
@@ -25,6 +26,14 @@ public abstract class AbstractDefinition extends AbstractAST implements Definiti
 
     public void setAddress(int address) {
         this.address = address;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     

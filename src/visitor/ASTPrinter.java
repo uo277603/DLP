@@ -419,6 +419,7 @@ public class ASTPrinter extends DefaultVisitor {
 		print(indent + 1, "name", "List<String>", varDefinition.getName());
 		visit(indent + 1, "type", "Type", varDefinition.getType());
 		print(indent + 1, "scope", "Ambito", varDefinition.getAmbito());
+		print(indent + 1, "address", "int", varDefinition.getAddress());
 		return null;
 	}
 
