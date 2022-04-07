@@ -53,4 +53,13 @@ public class StructType extends AbstractType {
    public void setDefinition(TupleDefinition definition){
 	   this.definition = definition;
    }
+
+   @Override
+	public int getSize() {
+		int size = 0;
+		for (VarDefinition v: definition.getVardefinition()){
+			size += v.getType().getSize();
+		}
+		return size;
+	}
 }

@@ -273,12 +273,14 @@ public class TypeChecking extends DefaultVisitor {
         if (exprUnariaAritmetica.getExpr() != null)
             exprUnariaAritmetica.getExpr().accept(this, param);
 
+        exprUnariaAritmetica.setType(exprUnariaAritmetica.getExpr().getType());
+
         predicado(
                 exprUnariaAritmetica.getType().getClass() == IntType.class
                         || exprUnariaAritmetica.getType().getClass() == RealType.class,
                 "Las operaciones aritméticas solo son aplicables a int o real", exprUnariaAritmetica.getStart());
 
-        exprUnariaAritmetica.setType(exprUnariaAritmetica.getExpr().getType());
+        
         exprUnariaAritmetica.setModifiable(false);
 
         return null;

@@ -10,4 +10,7 @@ public interface Definition extends AST {
     
     public void setAmbito(Ambito ambito);
     public Ambito getAmbito();
+
+    public void setAddress(int address);
+    public int getAddress();
 }

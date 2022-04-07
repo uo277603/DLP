@@ -26,4 +26,12 @@ public class VoidType extends AbstractType {
 	public String getName() {
 		return "VOID";
 	}
+
+
+	@Override
+	public int getSize() {
+		return 0;
+	}
+
+	
 }

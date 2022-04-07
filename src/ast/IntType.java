@@ -26,4 +26,9 @@ public class IntType extends AbstractType {
 	public String getName() {
 		return "INTEGER";
 	}
+
+	@Override
+	public int getSize() {
+		return 2;
+	}
 }

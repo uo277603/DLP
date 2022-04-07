@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch TestLexer",
+            "request": "launch",
+            "mainClass": "main.TestLexer",
+            "projectName": "z"
+        },
+        {
+            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "main.Main",

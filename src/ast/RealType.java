@@ -26,4 +26,9 @@ public class RealType extends AbstractType {
 	public String getName() {
 		return "DOUBLE";
 	}
+
+	@Override
+	public int getSize() {
+		return 4;
+	}
 }

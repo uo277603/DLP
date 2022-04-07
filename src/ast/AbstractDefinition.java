@@ -9,6 +9,7 @@ import semantic.Ambito;
 public abstract class AbstractDefinition extends AbstractAST implements Definition {
 
     private Ambito ambito;
+    private int address;
 
     public Ambito getAmbito() {
         return ambito;
@@ -17,6 +18,16 @@ public abstract class AbstractDefinition extends AbstractAST implements Definiti
     public void setAmbito(Ambito ambito) {
         this.ambito = ambito;
     }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+    }
+
+    
 
     
 }
