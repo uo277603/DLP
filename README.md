@@ -6,3 +6,6 @@ Fases hechas hasta ahora
 
 - Analizador léxico
 - Analizador sintáctico
+- Identificación
+- Type Checking
+- Gestión de memoria
