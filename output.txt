@@ -1,3 +1,5 @@
+call inicio
+halt
 inicio:
 enter 0
 pushb 72
@@ -23,5 +25,3 @@ outb
 pushb 33
 outb
 ret 0, 0, 0
-call inicio
-pop

@@ -30,13 +30,11 @@ public class CodeSelection extends DefaultVisitor {
     // class Program { ClassNode classnode; MethodCallSentence methodcallsentence; }
     public Object visit(Program program, Object param) {
 
-        // super.visit(node, param);
-
-        if (program.getClassnode() != null)
-            program.getClassnode().accept(this, param);
-
         if (program.getMethodcallsentence() != null)
             program.getMethodcallsentence().accept(this, param);
+        out("halt");
+        if (program.getClassnode() != null)
+            program.getClassnode().accept(this, param);
 
         return null;
     }
@@ -191,7 +189,10 @@ public class CodeSelection extends DefaultVisitor {
     public Object visit(MethodCallSentence methodCallSentence, Object param) {
 
         out("call " + methodCallSentence.getName());
-        out("pop" + methodCallSentence.getDefinition().getRetorno().getSuffix());
+        if (methodCallSentence.getDefinition().getRetorno().getClass() != VoidType.class) {
+            out("pop" + methodCallSentence.getDefinition().getRetorno().getSuffix());
+        }
+       
         return null;
     }
 
