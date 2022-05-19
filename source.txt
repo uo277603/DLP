@@ -1,66 +1,18 @@
-//*
-* Test para probar la Fase de Gestión de Memoria.
-* 
-* COMPROBACION: Las direcciones asignadas a cada nodo deben coincidir con la dirección del comentario de cada definición.
-* 
-* CONSEJO: Para poder validar más cómodamente este ejercicio se aconseja añadir a 'visitor/ASTPrinter.java' la siguiente sentencia:
-* 
-* 	print(indent + 1, "direccion", "int", node.getDireccion());
-* 
-* Esta llamada deberá añadirse en los métodos visit de los nodos a los que se les haya asignado un atributo 'direccion' (habitualmente aquellos que * representen definiciones de variables globales, locales, parámetros y/o campos de estructuras)
-* 
-* Si se desea que ASTPrinter imprima el nombre del elemento, cambiar la implementación del método print (de ASTPrinter):
-* 	private void print(int indent, String name, String type, Object value) {
-* 		write(indent, formatValue(value) + "  " + typeTag(type));
-* 	}
-* por el siguiente:
-* 	private void print(int indent, String name, String type, Object value) {
-* 		write(indent, name + " " + formatValue(value) + "  " + typeTag(type));
-* 	}
-* 
-* NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje si no coincide
-* con la del lenguaje que le corresponde.
-*//
+class Test000; /* Hola Mundo!
+/*/-------------------------------
 
-//*
-* En el siguiente programa, al lado de cada variable (global, local y parámetro) y al lado de cada campo de tupla
-* se ha colocado la dirección que tendrá en ejecución como comentario. Comprobar que coinciden con las obetenidas.
-*//
+	create inicio;
+	
+/*/-------------------------------
 
-class Test_MemoryAllocation;
-	global
-		types
-			deftuple Persona as
-				edad : INTEGER;			/* Dir 0 
-				meses : [12] INTEGER;	/* Dir 2 
-				a : DOUBLE;				/* Dir 26 
-			end
-			deftuple Prueba as
-				campo1 : INTEGER; /* Dir 0 
-				campo2 : INTEGER; /* Dir 2 
-			end
-
-		vars
-			a : CHARACTER;	/* Dir 0
-			b : DOUBLE;	/* Dir 1 
-			c : [2] Persona;	/* Dir 5 
-			d : INTEGER;		/* Dir 65 
-
-	create
-		f;
-
-	/*--> Ojo, los parámetros van en sentido decreciente y comienzan en 4
-	feature f (a: INTEGER, b: DOUBLE, h : CHARACTER) is /* a = BP+9, b = BP+5, h = BP+4  
-		local
-			c : CHARACTER;	/* BP-1 
-			d : INTEGER;	/* BP-3 
-			e : [2]Persona; /* BP-63 
-			f : DOUBLE; 	/* BP-67 
+	feature inicio is
 		do
+            print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o';
+            println '!';
 	end
+
 end
 
 main
-	f(1, 2.5, 'a');
+	inicio();
 end
-

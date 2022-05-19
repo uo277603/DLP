@@ -1,0 +1,27 @@
+inicio:
+enter 0
+pushb 72
+outb
+pushb 111
+outb
+pushb 108
+outb
+pushb 97
+outb
+pushb 32
+outb
+pushb 77
+outb
+pushb 117
+outb
+pushb 110
+outb
+pushb 100
+outb
+pushb 111
+outb
+pushb 33
+outb
+ret 0, 0, 0
+call inicio
+pop

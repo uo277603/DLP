@@ -6,4 +6,8 @@ package ast;
 
 public abstract class AbstractType extends AbstractAST implements Type {
 
+    @Override
+    public String getSuffix() {
+        return "";
+    }
 }

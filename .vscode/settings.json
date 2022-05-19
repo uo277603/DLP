@@ -12,5 +12,6 @@
     "trace.bat": false,
     ".vscode": false,
     "bin": false
-}
+},
+"java.help.firstView": "overview"
 }

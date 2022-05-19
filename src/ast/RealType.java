@@ -31,4 +31,10 @@ public class RealType extends AbstractType {
 	public int getSize() {
 		return 4;
 	}
+
+
+	@Override
+	public String getSuffix() {
+		return "f";
+	}
 }

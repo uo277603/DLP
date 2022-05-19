@@ -31,4 +31,9 @@ public class CharType extends AbstractType {
 	public int getSize() {
 		return 1;
 	}
+
+	@Override
+	public String getSuffix(){
+		return "b";
+	}
 }
