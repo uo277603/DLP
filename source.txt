@@ -1,78 +1,143 @@
 //*
-Test 3 para probar la Fase de Generación de Código
+Tiene varios resutados:
+48
+(1) 0+1=1
+(2) 1+1=2
+(3) 1+2=3
+(4) 2+3=5
+(5) 3+5=8
+(6) 5+8=13
+(7) 8+13=21
+(8) 13+21=34
+56
+0 1 1 2 
 
-COMPROBACION. Al ejecutar el programa deberá salir:
-A
-1.5
-1.49
-1.48
-
-CONSEJO: No limitarse a comprobar el resultado de la ejecución. Se recomienda además abrir el fichero generado usando el depurador GVM y comprobar sus instrucciones.
-
-Para facilitar esta tarea es de gran utilidad que el alumno haya generado directivas '#line' en el fichero de salida.
-Para información sobre la función de dicha directiva se debe abrir con GVM el siguiente tutorial: 
-Tutorial\3 Uso básico del depurador\4 Fusión Alto Nivel.txt
-
-NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje si no coincide
-con la del lenguaje que le corresponde.
+Cada resutlado está comentado donde se obtiene.
 *//
 
-class Test003;
+class Test005;
 	global
 		types
-			deftuple Piloto as
-				inicial:CHARACTER;  
-				crono:[3]DOUBLE;	/* Tiempos en la Q1, Q2 y Q3
+			deftuple Pareja as
+			  entero:INTEGER;
+			  caracter:CHARACTER;
+			end
+			deftuple Empleado as edad:INTEGER; end
+
+			deftuple Empresa as
+				empleados:[2]Empleado;
 			end
 		vars
-			F1: [3]Piloto;
+			pareja:Pareja;
+			acme:[2]Empresa;
+			fibonacci:[8][3] INTEGER;
+
+/*/-------------------------------
 
 	create inicio;
 	
-	feature inicia(i:INTEGER, inicial:CHARACTER, q1:DOUBLE, q2:DOUBLE, q3:DOUBLE) is
+/*/-------------------------------
+
+	feature p is do end
+
+
+	feature f (paramReal:DOUBLE, paramInt:INTEGER):INTEGER is
+		local
+			localReal:DOUBLE;
+			digito:CHARACTER;
+			resultado:INTEGER;
 		do
-			F1[i].inicial := inicial;
-			F1[i].crono[0] := q1;
-			F1[i].crono[1] := q2;
-			F1[i].crono[2] := q3;
+			localReal := paramReal * 10.0;
+			digito := '0';
+			if paramInt < 256 then
+				digito := to<CHARACTER>(paramInt);
+				resultado := to<INTEGER>(digito);
+			else
+				resultado := to<INTEGER>(localReal);
+			end
+			return resultado;
 	end
 
-	feature imprimeElMejor is
+
+	feature inicializa is
 		local
-			mejorPiloto:INTEGER;
-			menorCrono:DOUBLE;
-			ultimaCrono:DOUBLE;
-			i:INTEGER;
+		i:INTEGER;
 		do
-			menorCrono := 1000.0;
+			fibonacci[0][0] := 0;
+			fibonacci[0][1] := 1;
+			fibonacci[0][2] := 1;
 			from
+				i := 1;
+			until i = 8 loop
+				fibonacci[i][0] := fibonacci[i - 1][1];
+				fibonacci[i][1] := fibonacci[i - 1][2];
+				fibonacci[i][2] := fibonacci[i][0] + fibonacci[i][1];
+				i := i + 1;
+			end
+	end
+
+/*/-------------------------------
+
+	feature inicio is
+		local
+			i:INTEGER;
+			j:INTEGER;
+		do
+			p();
+
 			i := 0;
-			until i >= 3 loop
-				ultimaCrono := F1[i].crono[2];
-				if ultimaCrono < menorCrono then	/* Solo importa la Q3
-					menorCrono := ultimaCrono; 
-					mejorPiloto := i;
+			pareja.caracter := '0';
+			pareja.entero := to<INTEGER>('0');
+
+			println f(to<DOUBLE>(i), to<INTEGER>(pareja.caracter));  /* Sale 48 (código ASCII de '0')
+			f(1.3, 2);
+
+			inicializa(); 
+			from
+				i := 0;
+			until i = 8 loop 	/* Salen 8 primeros de Fibonacci (de 1 a 34)
+				print '(';
+				print i + 1;
+				print ')';
+				print ' ';
+				print fibonacci[i][0];
+				print '+';
+				print fibonacci[i][1];
+				print '=';
+				print fibonacci[i][2];
+				print '\n';
+				i := i + 1;
+			end
+
+			acme[1].empleados[1].edad := 56;
+			println acme[1].empleados[1].edad;	/* Sale 56
+
+			from
+				i := 0;
+			until i = 2 loop
+				from
+					j := 0;
+				until j = 2 loop
+					acme[i].empleados[j].edad := i + j;
+					j := j + 1;
 				end
 				i := i + 1;
 			end
 
-			println F1[mejorPiloto].inicial;
 			from
 				i := 0;
-			until i >= 3 loop
-				println F1[mejorPiloto].crono[i];
+			until i = 2 loop
+				from
+					j := 0;
+				until j = 2 loop	      /* Sale: 0 1 1 2
+					print acme[i].empleados[j].edad;
+					print ' ';
+					j := j + 1;
+				end
 				i := i + 1;
-			end 
+			end
 	end
 
-	feature inicio is
-		do
-		inicia(0, 'A', 1.50, 1.49, 1.48);	/* Alonso
-		inicia(1, 'H', 1.52, 1.51, 1.50);	/* Hamilton
-		inicia(2, 'V', 1.54, 1.52, 1.51);	/* Vettel
-
-		imprimeElMejor();	/* Los ordenadores no se equivocan
-	end
 end
 
 main

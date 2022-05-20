@@ -7,6 +7,7 @@ package codegeneration;
 
 import java.io.*;
 import java.util.logging.MemoryHandler;
+import java.util.spi.ToolProvider;
 
 import org.antlr.v4.parse.ANTLRParser.ruleEntry_return;
 
@@ -122,7 +123,7 @@ public class CodeSelection extends DefaultVisitor {
     // class Assignment { Expr left; Expr right; }
     public Object visit(Assignment assignment, Object param) {
 
-        //line(assignment);
+        line(assignment.getStart());
 
         if (assignment.getLeft() != null)
             assignment.getLeft().accept(this, Funcion.DIRECCION);
@@ -201,7 +202,6 @@ public class CodeSelection extends DefaultVisitor {
 
     // class MethodCallSentence { String name; List<Expr> args; }
     public Object visit(MethodCallSentence methodCallSentence, Object param) {
-        line(methodCallSentence);
         if (methodCallSentence.getArgs() != null)
             for (Expr child : methodCallSentence.getArgs())
                 child.accept(this, Funcion.VALOR);
@@ -215,6 +215,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ExprBinariaAritmetica { Expr left; String op; Expr right; }
     public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
+        line(exprBinariaAritmetica);
         if (exprBinariaAritmetica.getLeft() != null)
             exprBinariaAritmetica.getLeft().accept(this, Funcion.VALOR);
 
@@ -243,6 +244,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ExprUnariaAritmetica { String op; Expr expr; }
     public Object visit(ExprUnariaAritmetica exprUnariaAritmetica, Object param) {
+        line(exprUnariaAritmetica);
         if (exprUnariaAritmetica.getOp().equals("-")) {
             exprUnariaAritmetica.getExpr().accept(this, Funcion.VALOR);
             out("push" + exprUnariaAritmetica.getExpr().getType().getSuffix() + " -1");
@@ -254,7 +256,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ExprBinariaLogica { Expr left; String op; Expr right; }
     public Object visit(ExprBinariaLogica exprBinariaLogica, Object param) {
-
+        line(exprBinariaLogica);
         if (exprBinariaLogica.getLeft() != null)
             exprBinariaLogica.getLeft().accept(this, Funcion.VALOR);
 
@@ -292,7 +294,8 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ExprUnariaLogica { String op; Expr expr; }
     public Object visit(ExprUnariaLogica exprUnariaLogica, Object param) {
-
+    line(exprUnariaLogica);
+        
         if (exprUnariaLogica.getOp().equals("not")) {
             exprUnariaLogica.getExpr().accept(this, Funcion.VALOR);
             out("not");
@@ -303,7 +306,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class Acces { Expr left; String op; String right; }
     public Object visit(Acces acces, Object param) {
-   
+        line(acces);
         acces.getLeft().accept(this, Funcion.DIRECCION);
         StructType tipo = (StructType) acces.getLeft().getType();
         VarDefinition definition = null;
@@ -324,7 +327,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ArrayAcces { Expr left; Expr right; }
     public Object visit(ArrayAcces arrayAcces, Object param) {
-
+        line(arrayAcces);
         ArrayType tipo = (ArrayType) arrayAcces.getLeft().getType();
 
         if (param.equals(Funcion.VALOR)) {
@@ -337,7 +340,7 @@ public class CodeSelection extends DefaultVisitor {
             out("load" + tipo.getType().getSuffix());
         } else if (param.equals(Funcion.DIRECCION)) {
             arrayAcces.getLeft().accept(this, Funcion.DIRECCION);
-            out("push " + tipo.getSize());
+            out("push " + tipo.getType().getSize());
             arrayAcces.getRight().accept(this, Funcion.VALOR);
             out("mul");
             out("add");
@@ -348,45 +351,43 @@ public class CodeSelection extends DefaultVisitor {
 
     // class Cast { Type typeToConvert; Expr expr; }
     public Object visit(Cast cast, Object param) {
+        line(cast);
         if (cast.getExpr() != null)
             cast.getExpr().accept(this, Funcion.VALOR);
 
-        if (cast.getTypeToConvert().getClass() == IntType.class
-                && cast.getExpr().getType().getClass() == CharType.class)
-            out("b2i");
-        else if (cast.getTypeToConvert().getClass() == IntType.class
-                && cast.getExpr().getType().getClass() == RealType.class)
-            out("f2i");
-        else if (cast.getTypeToConvert().getClass() == CharType.class
-                && cast.getExpr().getType().getClass() == IntType.class)
-            out("i2b");
-        else if (cast.getTypeToConvert().getClass() == RealType.class
-                && cast.getExpr().getType().getClass() == IntType.class)
-            out("i2f");
+        out(cast.getExpr().getType().getSuffix() + "2" + cast.getTypeToConvert().getSuffix());
+        
 
         return null;
     }
 
     // class LitEnt { String string; }
     public Object visit(LitEnt litEnt, Object param) {
+        line(litEnt);
         out("push " + litEnt.getString());
         return null;
     }
 
     // class LitReal { String string; }
     public Object visit(LitReal litReal, Object param) {
+        line(litReal);
         out("pushf " + litReal.getString());
         return null;
     }
 
     // class LitChar { String string; }
     public Object visit(LitChar litChar, Object param) {
-        out("pushb " + (int) litChar.getString().charAt(1));
+        line(litChar);
+        if("'\\n'".equals(litChar.getString()))
+            out("pushb 10");
+        else
+            out("pushb " + (int) litChar.getString().charAt(1));
         return null;
     }
 
     // class Variable { String string; }
     public Object visit(Variable variable, Object param) {
+        line(variable);
         if (param.equals(Funcion.VALOR)) {
             variable.accept(this, Funcion.DIRECCION);
             out("load" + variable.getType().getSuffix());
@@ -405,7 +406,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class MethodCallExpr { String name; List<Expr> args; }
     public Object visit(MethodCallExpr methodCallExpr, Object param) {
-
+        line(methodCallExpr);
         if (methodCallExpr.getArgs() != null)
             for (Expr child : methodCallExpr.getArgs())
                 child.accept(this, Funcion.VALOR);
@@ -416,6 +417,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class TupleDefinition { String name; List<VarDefinition> vardefinition; }
     public Object visit(TupleDefinition tupleDefinition, Object param) {
+        line(tupleDefinition);
         out("#type " + tupleDefinition.getName() + ": {");
         for (VarDefinition v: tupleDefinition.getVardefinition())
             for (String s : v.getName()) 
@@ -426,6 +428,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class VarDefinition { List<String> name; Type type; }
     public Object visit(VarDefinition varDefinition, Object param) {
+        line(varDefinition);
         for (String s : varDefinition.getName()) {
             out("#global " + s + ":" + varDefinition.getType().getName());
         }
