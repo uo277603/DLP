@@ -99,7 +99,7 @@ public class Identification extends DefaultVisitor {
     //	class ReturnNode { Expr expr; }
 	public Object visit(ReturnNode returnNode, Object param) {
 
-		// super.visit(node, param);
+		returnNode.setMethod((Method)param);
 
 		if (returnNode.getExpr() != null)
 			returnNode.getExpr().accept(this, param);

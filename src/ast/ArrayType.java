@@ -60,7 +60,7 @@ public class ArrayType extends AbstractType {
 
 	@Override
 	public String getName() {
-		return "[" + getIndex() + "]" + getType().getName();
+		return getIndex() + " * " + getType().getName();
 	}
 
 	@Override

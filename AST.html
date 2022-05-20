@@ -22,37 +22,256 @@
 <body><pre>
 [ASTPrinter] -------------------------------- line:col  line:col
 
-<span class="dots"></span>Program &rarr;                                                   <span class="pos">10:19  17:7  </span><span class="sourceText">print </span><span class="posText">'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o';</span><span class="sourceText"> ... </span><span class="posText">inicio</span><span class="sourceText">();</span>
-<span class="dots">.  </span>ClassNode &rarr;                                              <span class="pos">10:19  11:23 </span><span class="sourceText">print </span><span class="posText">'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o';</span><span class="sourceText"> ... </span><span class="posText">println '!'</span><span class="sourceText">;</span>
-<span class="dots">.  .  </span>"<span class="value">Test000</span>"  
+<span class="dots"></span>Program &rarr;                                                   <span class="pos">24:5  79:7   </span><span class="sourceText"></span><span class="posText">inicial:CHARACTER;  </span><span class="sourceText"> ... </span><span class="posText">inicio</span><span class="sourceText">();</span>
+<span class="dots">.  </span>ClassNode &rarr;                                              <span class="pos">24:5  74:16  </span><span class="sourceText"></span><span class="posText">inicial:CHARACTER;  </span><span class="sourceText"> ... </span><span class="posText">imprimeElMejor</span><span class="sourceText">();	/* Los ordenadores no se equivocan</span>
+<span class="dots">.  .  </span>"<span class="value">Test003</span>"  
 <span class="dots">.  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  </span>TupleDefinition &rarr;                                  <span class="pos">24:5  25:12  </span><span class="sourceText"></span><span class="posText">inicial:CHARACTER;  </span><span class="sourceText"> ... </span><span class="posText">crono:[3</span><span class="sourceText">]DOUBLE;	/* Tiempos en la Q1, Q2 y Q3</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">Piloto</span>"  
+<span class="dots">.  .  |  .  </span>vardefinition  <span class="type">List&lt;VarDefinition&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">24:5  24:11  </span><span class="sourceText"></span><span class="posText">inicial</span><span class="sourceText">:CHARACTER;  </span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">inicial</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">CharType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="null">null</span>  <span class="type">Ambito</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">25:5  25:12  </span><span class="sourceText"></span><span class="posText">crono:[3</span><span class="sourceText">]DOUBLE;	/* Tiempos en la Q1, Q2 y Q3</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">crono</span>"
+<span class="dots">.  .  |  .  |  .  </span>ArrayType &rarr;                               <span class="pos">25:12  25:12 </span><span class="sourceText">crono:[</span><span class="posText">3</span><span class="sourceText">]DOUBLE;	/* Tiempos en la Q1, Q2 y Q3</span>
+<span class="dots">.  .  |  .  |  .  |  </span><span class="value">3</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  .  |  </span><span class="value">RealType</span> &rarr;                             <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="null">null</span>  <span class="type">Ambito</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">1</span>  <span class="type">int</span>
+<span class="dots">.  .  |  </span>VarDefinition &rarr;                                    <span class="pos">28:4  28:9   </span><span class="sourceText"></span><span class="posText">F1: [3</span><span class="sourceText">]Piloto;</span>
+<span class="dots">.  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>"<span class="value">F1</span>"
+<span class="dots">.  .  |  .  </span>ArrayType &rarr;                                     <span class="pos">28:9  28:9   </span><span class="sourceText">F1: [</span><span class="posText">3</span><span class="sourceText">]Piloto;</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">3</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>"Piloto"  <span class="type">StructType.name</span>                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span><span class="value">GLOBAL</span>  <span class="type">Ambito</span>
+<span class="dots">.  .  |  .  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  </span>createMethod  <span class="type">List&lt;String&gt;</span> = 
 <span class="dots">.  .  |  </span>"<span class="value">inicio</span>"
 <span class="dots">.  .  </span>method  <span class="type">List&lt;Method&gt;</span> = 
-<span class="dots">.  .  |  </span>Method &rarr;                                           <span class="pos">10:19  11:23 </span><span class="sourceText">print </span><span class="posText">'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o';</span><span class="sourceText"> ... </span><span class="posText">println '!'</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>Method &rarr;                                           <span class="pos">32:17  37:23 </span><span class="sourceText">feature inicia(</span><span class="posText">i:INTEGER, inicial:CHARACTER, q1:DOUBLE, q2:DOUBLE, q3:DOUBLE) is</span><span class="sourceText"> ... </span><span class="posText">F1[i].crono[2] := q3</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">inicia</span>"  
+<span class="dots">.  .  |  .  </span>parameter  <span class="type">List&lt;Parameter&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">32:17  32:17 </span><span class="sourceText">feature inicia(</span><span class="posText">i</span><span class="sourceText">:INTEGER, inicial:CHARACTER, q1:DOUBLE, q2:DOUBLE, q3:DOUBLE) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">i</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">17</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">32:28  32:34 </span><span class="sourceText">feature inicia(i:INTEGER, </span><span class="posText">inicial</span><span class="sourceText">:CHARACTER, q1:DOUBLE, q2:DOUBLE, q3:DOUBLE) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">inicial</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">CharType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">16</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">32:47  32:48 </span><span class="sourceText">feature inicia(i:INTEGER, inicial:CHARACTER, </span><span class="posText">q1</span><span class="sourceText">:DOUBLE, q2:DOUBLE, q3:DOUBLE) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">q1</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">RealType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">12</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">32:58  32:59 </span><span class="sourceText">feature inicia(i:INTEGER, inicial:CHARACTER, q1:DOUBLE, </span><span class="posText">q2</span><span class="sourceText">:DOUBLE, q3:DOUBLE) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">q2</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">RealType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">8</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>Parameter &rarr;                                  <span class="pos">32:69  32:70 </span><span class="sourceText">feature inicia(i:INTEGER, inicial:CHARACTER, q1:DOUBLE, q2:DOUBLE, </span><span class="posText">q3</span><span class="sourceText">:DOUBLE) is</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">q3</span>"  
+<span class="dots">.  .  |  .  |  .  </span><span class="value">RealType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">4</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  </span><span class="value">VoidType</span> &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Assignment &rarr;                                 <span class="pos">34:4  34:27  </span><span class="sourceText"></span><span class="posText">F1[i].inicial := inicial</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>Acces &rarr;                                   <span class="pos">34:4  34:16  </span><span class="sourceText"></span><span class="posText">F1[i].inicial</span><span class="sourceText"> := inicial;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>ArrayAcces &rarr;                           <span class="pos">34:4  34:7   </span><span class="sourceText"></span><span class="posText">F1[i</span><span class="sourceText">].inicial := inicial;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"F1"  <span class="type">Variable.string</span>               <span class="pos">34:4  34:5   </span><span class="sourceText"></span><span class="posText">F1</span><span class="sourceText">[i].inicial := inicial;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">34:7  34:7   </span><span class="sourceText">F1[</span><span class="posText">i</span><span class="sourceText">].inicial := inicial;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span><span class="value">{name:Piloto}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">inicial</span>"  
+<span class="dots">.  .  |  .  |  .  </span>"inicial"  <span class="type">Variable.string</span>                <span class="pos">34:21  34:27 </span><span class="sourceText">F1[i].inicial := </span><span class="posText">inicial</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>Assignment &rarr;                                 <span class="pos">35:4  35:23  </span><span class="sourceText"></span><span class="posText">F1[i].crono[0] := q1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ArrayAcces &rarr;                              <span class="pos">35:4  35:16  </span><span class="sourceText"></span><span class="posText">F1[i].crono[0</span><span class="sourceText">] := q1;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Acces &rarr;                                <span class="pos">35:4  35:14  </span><span class="sourceText"></span><span class="posText">F1[i].crono</span><span class="sourceText">[0] := q1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ArrayAcces &rarr;                        <span class="pos">35:4  35:7   </span><span class="sourceText"></span><span class="posText">F1[i</span><span class="sourceText">].crono[0] := q1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"F1"  <span class="type">Variable.string</span>            <span class="pos">35:4  35:5   </span><span class="sourceText"></span><span class="posText">F1</span><span class="sourceText">[i].crono[0] := q1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">35:7  35:7   </span><span class="sourceText">F1[</span><span class="posText">i</span><span class="sourceText">].crono[0] := q1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span><span class="value">{name:Piloto}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">crono</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"0"  <span class="type">LitEnt.string</span>                     <span class="pos">35:16  35:16 </span><span class="sourceText">F1[i].crono[</span><span class="posText">0</span><span class="sourceText">] := q1;</span>
+<span class="dots">.  .  |  .  |  .  |  </span><span class="value">{RealType}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  </span>"q1"  <span class="type">Variable.string</span>                     <span class="pos">35:22  35:23 </span><span class="sourceText">F1[i].crono[0] := </span><span class="posText">q1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>Assignment &rarr;                                 <span class="pos">36:4  36:23  </span><span class="sourceText"></span><span class="posText">F1[i].crono[1] := q2</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ArrayAcces &rarr;                              <span class="pos">36:4  36:16  </span><span class="sourceText"></span><span class="posText">F1[i].crono[1</span><span class="sourceText">] := q2;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Acces &rarr;                                <span class="pos">36:4  36:14  </span><span class="sourceText"></span><span class="posText">F1[i].crono</span><span class="sourceText">[1] := q2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ArrayAcces &rarr;                        <span class="pos">36:4  36:7   </span><span class="sourceText"></span><span class="posText">F1[i</span><span class="sourceText">].crono[1] := q2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"F1"  <span class="type">Variable.string</span>            <span class="pos">36:4  36:5   </span><span class="sourceText"></span><span class="posText">F1</span><span class="sourceText">[i].crono[1] := q2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">36:7  36:7   </span><span class="sourceText">F1[</span><span class="posText">i</span><span class="sourceText">].crono[1] := q2;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span><span class="value">{name:Piloto}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">crono</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"1"  <span class="type">LitEnt.string</span>                     <span class="pos">36:16  36:16 </span><span class="sourceText">F1[i].crono[</span><span class="posText">1</span><span class="sourceText">] := q2;</span>
+<span class="dots">.  .  |  .  |  .  |  </span><span class="value">{RealType}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  </span>"q2"  <span class="type">Variable.string</span>                     <span class="pos">36:22  36:23 </span><span class="sourceText">F1[i].crono[1] := </span><span class="posText">q2</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>Assignment &rarr;                                 <span class="pos">37:4  37:23  </span><span class="sourceText"></span><span class="posText">F1[i].crono[2] := q3</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ArrayAcces &rarr;                              <span class="pos">37:4  37:16  </span><span class="sourceText"></span><span class="posText">F1[i].crono[2</span><span class="sourceText">] := q3;</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Acces &rarr;                                <span class="pos">37:4  37:14  </span><span class="sourceText"></span><span class="posText">F1[i].crono</span><span class="sourceText">[2] := q3;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ArrayAcces &rarr;                        <span class="pos">37:4  37:7   </span><span class="sourceText"></span><span class="posText">F1[i</span><span class="sourceText">].crono[2] := q3;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"F1"  <span class="type">Variable.string</span>            <span class="pos">37:4  37:5   </span><span class="sourceText"></span><span class="posText">F1</span><span class="sourceText">[i].crono[2] := q3;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">37:7  37:7   </span><span class="sourceText">F1[</span><span class="posText">i</span><span class="sourceText">].crono[2] := q3;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span><span class="value">{name:Piloto}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">crono</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"2"  <span class="type">LitEnt.string</span>                     <span class="pos">37:16  37:16 </span><span class="sourceText">F1[i].crono[</span><span class="posText">2</span><span class="sourceText">] := q3;</span>
+<span class="dots">.  .  |  .  |  .  |  </span><span class="value">{RealType}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  </span>"q3"  <span class="type">Variable.string</span>                     <span class="pos">37:22  37:23 </span><span class="sourceText">F1[i].crono[2] := </span><span class="posText">q3</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>Method &rarr;                                           <span class="pos">42:4  64:14  </span><span class="sourceText"></span><span class="posText">mejorPiloto:INTEGER;</span><span class="sourceText"> ... </span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>"<span class="value">imprimeElMejor</span>"  
+<span class="dots">.  .  |  .  </span>parameter  <span class="type">List&lt;Parameter&gt;</span> = 
+<span class="dots">.  .  |  .  </span><span class="value">VoidType</span> &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">42:4  42:14  </span><span class="sourceText"></span><span class="posText">mejorPiloto</span><span class="sourceText">:INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">mejorPiloto</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">LOCAL</span>  <span class="type">Ambito</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">-2</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">43:4  43:13  </span><span class="sourceText"></span><span class="posText">menorCrono</span><span class="sourceText">:DOUBLE;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">menorCrono</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">RealType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">LOCAL</span>  <span class="type">Ambito</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">-6</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">44:4  44:14  </span><span class="sourceText"></span><span class="posText">ultimaCrono</span><span class="sourceText">:DOUBLE;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">ultimaCrono</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">RealType</span> &rarr;                                <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">LOCAL</span>  <span class="type">Ambito</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">-10</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  |  </span>VarDefinition &rarr;                              <span class="pos">45:4  45:4   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText">:INTEGER;</span>
+<span class="dots">.  .  |  .  |  .  </span>name  <span class="type">List&lt;String&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">i</span>"
+<span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">LOCAL</span>  <span class="type">Ambito</span>
+<span class="dots">.  .  |  .  |  .  </span><span class="value">-12</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  </span>Assignment &rarr;                                 <span class="pos">47:4  47:23  </span><span class="sourceText"></span><span class="posText">menorCrono := 1000.0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>"menorCrono"  <span class="type">Variable.string</span>             <span class="pos">47:4  47:13  </span><span class="sourceText"></span><span class="posText">menorCrono</span><span class="sourceText"> := 1000.0;</span>
+<span class="dots">.  .  |  .  |  .  </span>"1000.0"  <span class="type">LitReal.string</span>                  <span class="pos">47:18  47:23 </span><span class="sourceText">menorCrono := </span><span class="posText">1000.0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>Loop &rarr;                                       <span class="pos">49:4  56:14  </span><span class="sourceText"></span><span class="posText">i := 0;</span><span class="sourceText"> ... </span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>init  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">49:4  49:9   </span><span class="sourceText"></span><span class="posText">i := 0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">49:4  49:4   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> := 0;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"0"  <span class="type">LitEnt.string</span>                  <span class="pos">49:9  49:9   </span><span class="sourceText">i := </span><span class="posText">0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                       <span class="pos">50:10  50:15 </span><span class="sourceText">until </span><span class="posText">i >= 3</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>                   <span class="pos">50:10  50:10 </span><span class="sourceText">until </span><span class="posText">i</span><span class="sourceText"> >= 3 loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">>=</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"3"  <span class="type">LitEnt.string</span>                     <span class="pos">50:15  50:15 </span><span class="sourceText">until i >= </span><span class="posText">3</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">51:5  51:32  </span><span class="sourceText"></span><span class="posText">ultimaCrono := F1[i].crono[2</span><span class="sourceText">];</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"ultimaCrono"  <span class="type">Variable.string</span>      <span class="pos">51:5  51:15  </span><span class="sourceText"></span><span class="posText">ultimaCrono</span><span class="sourceText"> := F1[i].crono[2];</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ArrayAcces &rarr;                        <span class="pos">51:20  51:32 </span><span class="sourceText">ultimaCrono := </span><span class="posText">F1[i].crono[2</span><span class="sourceText">];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Acces &rarr;                          <span class="pos">51:20  51:30 </span><span class="sourceText">ultimaCrono := </span><span class="posText">F1[i].crono</span><span class="sourceText">[2];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>ArrayAcces &rarr;                  <span class="pos">51:20  51:23 </span><span class="sourceText">ultimaCrono := </span><span class="posText">F1[i</span><span class="sourceText">].crono[2];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"F1"  <span class="type">Variable.string</span>      <span class="pos">51:20  51:21 </span><span class="sourceText">ultimaCrono := </span><span class="posText">F1</span><span class="sourceText">[i].crono[2];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>       <span class="pos">51:23  51:23 </span><span class="sourceText">ultimaCrono := F1[</span><span class="posText">i</span><span class="sourceText">].crono[2];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span><span class="value">{name:Piloto}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"<span class="value">crono</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"2"  <span class="type">LitEnt.string</span>               <span class="pos">51:32  51:32 </span><span class="sourceText">ultimaCrono := F1[i].crono[</span><span class="posText">2</span><span class="sourceText">];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span><span class="value">{RealType}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Conditional &rarr;                          <span class="pos">52:8  54:21  </span><span class="sourceText">if </span><span class="posText">ultimaCrono < menorCrono then	/* Solo importa la Q3</span><span class="sourceText"> ... </span><span class="posText">mejorPiloto := i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                 <span class="pos">52:8  52:31  </span><span class="sourceText">if </span><span class="posText">ultimaCrono < menorCrono</span><span class="sourceText"> then	/* Solo importa la Q3</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"ultimaCrono"  <span class="type">Variable.string</span>   <span class="pos">52:8  52:18  </span><span class="sourceText">if </span><span class="posText">ultimaCrono</span><span class="sourceText"> < menorCrono then	/* Solo importa la Q3</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value"><</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"menorCrono"  <span class="type">Variable.string</span>    <span class="pos">52:22  52:31 </span><span class="sourceText">if ultimaCrono < </span><span class="posText">menorCrono</span><span class="sourceText"> then	/* Solo importa la Q3</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>iftrue  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Assignment &rarr;                     <span class="pos">53:6  53:30  </span><span class="sourceText"></span><span class="posText">menorCrono := ultimaCrono</span><span class="sourceText">; </span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"menorCrono"  <span class="type">Variable.string</span> <span class="pos">53:6  53:15  </span><span class="sourceText"></span><span class="posText">menorCrono</span><span class="sourceText"> := ultimaCrono; </span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"ultimaCrono"  <span class="type">Variable.string</span><span class="pos">53:20  53:30 </span><span class="sourceText">menorCrono := </span><span class="posText">ultimaCrono</span><span class="sourceText">; </span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>Assignment &rarr;                     <span class="pos">54:6  54:21  </span><span class="sourceText"></span><span class="posText">mejorPiloto := i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"mejorPiloto"  <span class="type">Variable.string</span><span class="pos">54:6  54:16  </span><span class="sourceText"></span><span class="posText">mejorPiloto</span><span class="sourceText"> := i;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>          <span class="pos">54:21  54:21 </span><span class="sourceText">mejorPiloto := </span><span class="posText">i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>iffalse  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">56:5  56:14  </span><span class="sourceText"></span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">56:5  56:5   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> := i + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">56:10  56:14 </span><span class="sourceText">i := </span><span class="posText">i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">56:10  56:10 </span><span class="sourceText">i := </span><span class="posText">i</span><span class="sourceText"> + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"1"  <span class="type">LitEnt.string</span>               <span class="pos">56:14  56:14 </span><span class="sourceText">i := i + </span><span class="posText">1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>Print &rarr;                                      <span class="pos">59:12  59:34 </span><span class="sourceText">println </span><span class="posText">F1[mejorPiloto].inicial</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">println</span>"  
+<span class="dots">.  .  |  .  |  .  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Acces &rarr;                                <span class="pos">59:12  59:34 </span><span class="sourceText">println </span><span class="posText">F1[mejorPiloto].inicial</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ArrayAcces &rarr;                        <span class="pos">59:12  59:25 </span><span class="sourceText">println </span><span class="posText">F1[mejorPiloto</span><span class="sourceText">].inicial;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"F1"  <span class="type">Variable.string</span>            <span class="pos">59:12  59:13 </span><span class="sourceText">println </span><span class="posText">F1</span><span class="sourceText">[mejorPiloto].inicial;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"mejorPiloto"  <span class="type">Variable.string</span>   <span class="pos">59:15  59:25 </span><span class="sourceText">println F1[</span><span class="posText">mejorPiloto</span><span class="sourceText">].inicial;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span><span class="value">{name:Piloto}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">inicial</span>"  
+<span class="dots">.  .  |  .  |  </span>Loop &rarr;                                       <span class="pos">61:5  64:14  </span><span class="sourceText"></span><span class="posText">i := 0;</span><span class="sourceText"> ... </span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>init  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">61:5  61:10  </span><span class="sourceText"></span><span class="posText">i := 0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">61:5  61:5   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> := 0;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"0"  <span class="type">LitEnt.string</span>                  <span class="pos">61:10  61:10 </span><span class="sourceText">i := </span><span class="posText">0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>ExprBinariaLogica &rarr;                       <span class="pos">62:10  62:15 </span><span class="sourceText">until </span><span class="posText">i >= 3</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>                   <span class="pos">62:10  62:10 </span><span class="sourceText">until </span><span class="posText">i</span><span class="sourceText"> >= 3 loop</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"<span class="value">>=</span>"  
+<span class="dots">.  .  |  .  |  .  |  </span>"3"  <span class="type">LitEnt.string</span>                     <span class="pos">62:15  62:15 </span><span class="sourceText">until i >= </span><span class="posText">3</span><span class="sourceText"> loop</span>
+<span class="dots">.  .  |  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>Print &rarr;                                <span class="pos">63:13  63:35 </span><span class="sourceText">println </span><span class="posText">F1[mejorPiloto].crono[i</span><span class="sourceText">];</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"<span class="value">println</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>ArrayAcces &rarr;                     <span class="pos">63:13  63:35 </span><span class="sourceText">println </span><span class="posText">F1[mejorPiloto].crono[i</span><span class="sourceText">];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>Acces &rarr;                       <span class="pos">63:13  63:33 </span><span class="sourceText">println </span><span class="posText">F1[mejorPiloto].crono</span><span class="sourceText">[i];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>ArrayAcces &rarr;               <span class="pos">63:13  63:26 </span><span class="sourceText">println </span><span class="posText">F1[mejorPiloto</span><span class="sourceText">].crono[i];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"F1"  <span class="type">Variable.string</span>   <span class="pos">63:13  63:14 </span><span class="sourceText">println </span><span class="posText">F1</span><span class="sourceText">[mejorPiloto].crono[i];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span>"mejorPiloto"  <span class="type">Variable.string</span><span class="pos">63:16  63:26 </span><span class="sourceText">println F1[</span><span class="posText">mejorPiloto</span><span class="sourceText">].crono[i];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  .  </span><span class="value">{name:Piloto}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"<span class="value">.</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  |  </span>"<span class="value">crono</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>          <span class="pos">63:35  63:35 </span><span class="sourceText">println F1[mejorPiloto].crono[</span><span class="posText">i</span><span class="sourceText">];</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  .  </span><span class="value">{RealType}</span>  <span class="type">Type</span>
+<span class="dots">.  .  |  .  |  .  |  </span>Assignment &rarr;                           <span class="pos">64:5  64:14  </span><span class="sourceText"></span><span class="posText">i := i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>"i"  <span class="type">Variable.string</span>                <span class="pos">64:5  64:5   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> := i + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  </span>ExprBinariaAritmetica &rarr;             <span class="pos">64:10  64:14 </span><span class="sourceText">i := </span><span class="posText">i + 1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"i"  <span class="type">Variable.string</span>             <span class="pos">64:10  64:10 </span><span class="sourceText">i := </span><span class="posText">i</span><span class="sourceText"> + 1;</span>
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  |  .  |  .  |  </span>"1"  <span class="type">LitEnt.string</span>               <span class="pos">64:14  64:14 </span><span class="sourceText">i := i + </span><span class="posText">1</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>Method &rarr;                                           <span class="pos">70:3  74:16  </span><span class="sourceText"></span><span class="posText">inicia(0, 'A', 1.50, 1.49, 1.48);	/* Alonso</span><span class="sourceText"> ... </span><span class="posText">imprimeElMejor</span><span class="sourceText">();	/* Los ordenadores no se equivocan</span>
 <span class="dots">.  .  |  .  </span>"<span class="value">inicio</span>"  
 <span class="dots">.  .  |  .  </span>parameter  <span class="type">List&lt;Parameter&gt;</span> = 
 <span class="dots">.  .  |  .  </span><span class="value">VoidType</span> &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">.  .  |  .  </span>definition  <span class="type">List&lt;Definition&gt;</span> = 
 <span class="dots">.  .  |  .  </span>sentence  <span class="type">List&lt;Sentence&gt;</span> = 
-<span class="dots">.  .  |  .  |  </span>Print &rarr;                                      <span class="pos">10:19  10:66 </span><span class="sourceText">print </span><span class="posText">'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o'</span><span class="sourceText">;</span>
-<span class="dots">.  .  |  .  |  .  </span>"<span class="value">print</span>"  
-<span class="dots">.  .  |  .  |  .  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
-<span class="dots">.  .  |  .  |  .  |  </span>"'H'"  <span class="type">LitChar.string</span>                  <span class="pos">10:19  10:21 </span><span class="sourceText">print </span><span class="posText">'H'</span><span class="sourceText">, 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'o'"  <span class="type">LitChar.string</span>                  <span class="pos">10:24  10:26 </span><span class="sourceText">print 'H', </span><span class="posText">'o'</span><span class="sourceText">, 'l', 'a', ' ', 'M', 'u', 'n', 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'l'"  <span class="type">LitChar.string</span>                  <span class="pos">10:29  10:31 </span><span class="sourceText">print 'H', 'o', </span><span class="posText">'l'</span><span class="sourceText">, 'a', ' ', 'M', 'u', 'n', 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'a'"  <span class="type">LitChar.string</span>                  <span class="pos">10:34  10:36 </span><span class="sourceText">print 'H', 'o', 'l', </span><span class="posText">'a'</span><span class="sourceText">, ' ', 'M', 'u', 'n', 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"' '"  <span class="type">LitChar.string</span>                  <span class="pos">10:39  10:41 </span><span class="sourceText">print 'H', 'o', 'l', 'a', </span><span class="posText">' '</span><span class="sourceText">, 'M', 'u', 'n', 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'M'"  <span class="type">LitChar.string</span>                  <span class="pos">10:44  10:46 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', </span><span class="posText">'M'</span><span class="sourceText">, 'u', 'n', 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'u'"  <span class="type">LitChar.string</span>                  <span class="pos">10:49  10:51 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', </span><span class="posText">'u'</span><span class="sourceText">, 'n', 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'n'"  <span class="type">LitChar.string</span>                  <span class="pos">10:54  10:56 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', </span><span class="posText">'n'</span><span class="sourceText">, 'd', 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'d'"  <span class="type">LitChar.string</span>                  <span class="pos">10:59  10:61 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', </span><span class="posText">'d'</span><span class="sourceText">, 'o';</span>
-<span class="dots">.  .  |  .  |  .  |  </span>"'o'"  <span class="type">LitChar.string</span>                  <span class="pos">10:64  10:66 </span><span class="sourceText">print 'H', 'o', 'l', 'a', ' ', 'M', 'u', 'n', 'd', </span><span class="posText">'o'</span><span class="sourceText">;</span>
-<span class="dots">.  .  |  .  |  </span>Print &rarr;                                      <span class="pos">11:21  11:23 </span><span class="sourceText">println </span><span class="posText">'!'</span><span class="sourceText">;</span>
-<span class="dots">.  .  |  .  |  .  </span>"<span class="value">println</span>"  
-<span class="dots">.  .  |  .  |  .  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
-<span class="dots">.  .  |  .  |  .  |  </span>"'!'"  <span class="type">LitChar.string</span>                  <span class="pos">11:21  11:23 </span><span class="sourceText">println </span><span class="posText">'!'</span><span class="sourceText">;</span>
-<span class="dots">.  </span>MethodCallSentence &rarr;                                     <span class="pos">17:2  17:7   </span><span class="sourceText"></span><span class="posText">inicio</span><span class="sourceText">();</span>
+<span class="dots">.  .  |  .  |  </span>MethodCallSentence &rarr;                         <span class="pos">70:3  70:33  </span><span class="sourceText"></span><span class="posText">inicia(0, 'A', 1.50, 1.49, 1.48</span><span class="sourceText">);	/* Alonso</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">inicia</span>"  
+<span class="dots">.  .  |  .  |  .  </span>args  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"0"  <span class="type">LitEnt.string</span>                     <span class="pos">70:10  70:10 </span><span class="sourceText">inicia(</span><span class="posText">0</span><span class="sourceText">, 'A', 1.50, 1.49, 1.48);	/* Alonso</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'A'"  <span class="type">LitChar.string</span>                  <span class="pos">70:13  70:15 </span><span class="sourceText">inicia(0, </span><span class="posText">'A'</span><span class="sourceText">, 1.50, 1.49, 1.48);	/* Alonso</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.50"  <span class="type">LitReal.string</span>                 <span class="pos">70:18  70:21 </span><span class="sourceText">inicia(0, 'A', </span><span class="posText">1.50</span><span class="sourceText">, 1.49, 1.48);	/* Alonso</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.49"  <span class="type">LitReal.string</span>                 <span class="pos">70:24  70:27 </span><span class="sourceText">inicia(0, 'A', 1.50, </span><span class="posText">1.49</span><span class="sourceText">, 1.48);	/* Alonso</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.48"  <span class="type">LitReal.string</span>                 <span class="pos">70:30  70:33 </span><span class="sourceText">inicia(0, 'A', 1.50, 1.49, </span><span class="posText">1.48</span><span class="sourceText">);	/* Alonso</span>
+<span class="dots">.  .  |  .  |  </span>MethodCallSentence &rarr;                         <span class="pos">71:3  71:33  </span><span class="sourceText"></span><span class="posText">inicia(1, 'H', 1.52, 1.51, 1.50</span><span class="sourceText">);	/* Hamilton</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">inicia</span>"  
+<span class="dots">.  .  |  .  |  .  </span>args  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"1"  <span class="type">LitEnt.string</span>                     <span class="pos">71:10  71:10 </span><span class="sourceText">inicia(</span><span class="posText">1</span><span class="sourceText">, 'H', 1.52, 1.51, 1.50);	/* Hamilton</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'H'"  <span class="type">LitChar.string</span>                  <span class="pos">71:13  71:15 </span><span class="sourceText">inicia(1, </span><span class="posText">'H'</span><span class="sourceText">, 1.52, 1.51, 1.50);	/* Hamilton</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.52"  <span class="type">LitReal.string</span>                 <span class="pos">71:18  71:21 </span><span class="sourceText">inicia(1, 'H', </span><span class="posText">1.52</span><span class="sourceText">, 1.51, 1.50);	/* Hamilton</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.51"  <span class="type">LitReal.string</span>                 <span class="pos">71:24  71:27 </span><span class="sourceText">inicia(1, 'H', 1.52, </span><span class="posText">1.51</span><span class="sourceText">, 1.50);	/* Hamilton</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.50"  <span class="type">LitReal.string</span>                 <span class="pos">71:30  71:33 </span><span class="sourceText">inicia(1, 'H', 1.52, 1.51, </span><span class="posText">1.50</span><span class="sourceText">);	/* Hamilton</span>
+<span class="dots">.  .  |  .  |  </span>MethodCallSentence &rarr;                         <span class="pos">72:3  72:33  </span><span class="sourceText"></span><span class="posText">inicia(2, 'V', 1.54, 1.52, 1.51</span><span class="sourceText">);	/* Vettel</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">inicia</span>"  
+<span class="dots">.  .  |  .  |  .  </span>args  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  .  |  .  |  .  |  </span>"2"  <span class="type">LitEnt.string</span>                     <span class="pos">72:10  72:10 </span><span class="sourceText">inicia(</span><span class="posText">2</span><span class="sourceText">, 'V', 1.54, 1.52, 1.51);	/* Vettel</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"'V'"  <span class="type">LitChar.string</span>                  <span class="pos">72:13  72:15 </span><span class="sourceText">inicia(2, </span><span class="posText">'V'</span><span class="sourceText">, 1.54, 1.52, 1.51);	/* Vettel</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.54"  <span class="type">LitReal.string</span>                 <span class="pos">72:18  72:21 </span><span class="sourceText">inicia(2, 'V', </span><span class="posText">1.54</span><span class="sourceText">, 1.52, 1.51);	/* Vettel</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.52"  <span class="type">LitReal.string</span>                 <span class="pos">72:24  72:27 </span><span class="sourceText">inicia(2, 'V', 1.54, </span><span class="posText">1.52</span><span class="sourceText">, 1.51);	/* Vettel</span>
+<span class="dots">.  .  |  .  |  .  |  </span>"1.51"  <span class="type">LitReal.string</span>                 <span class="pos">72:30  72:33 </span><span class="sourceText">inicia(2, 'V', 1.54, 1.52, </span><span class="posText">1.51</span><span class="sourceText">);	/* Vettel</span>
+<span class="dots">.  .  |  .  |  </span>MethodCallSentence &rarr;                         <span class="pos">74:3  74:16  </span><span class="sourceText"></span><span class="posText">imprimeElMejor</span><span class="sourceText">();	/* Los ordenadores no se equivocan</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">imprimeElMejor</span>"  
+<span class="dots">.  .  |  .  |  .  </span>args  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">.  </span>MethodCallSentence &rarr;                                     <span class="pos">79:2  79:7   </span><span class="sourceText"></span><span class="posText">inicio</span><span class="sourceText">();</span>
 <span class="dots">.  .  </span>"<span class="value">inicio</span>"  
 <span class="dots">.  .  </span>args  <span class="type">List&lt;Expr&gt;</span> = 
 

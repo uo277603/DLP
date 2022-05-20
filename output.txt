@@ -1,27 +1,287 @@
+#source "source.txt"
+
+#line 79
 call inicio
 halt
-inicio:
+#type Piloto: {
+inicial:char
+crono:3 * float
+}
+#global F1:3 * Piloto
+
+#line 32
+inicia:
+#func inicia
+#ret VOID
+#param i:int
+#param inicial:char
+#param q1:float
+#param q2:float
+#param q3:float
 enter 0
+pusha 0
+push 39
+pusha bp
+push 17
+add
+loadi
+mul
+add
+push 0
+add
+pusha bp
+push 16
+add
+loadb
+storeb
+pusha 0
+push 39
+pusha bp
+push 17
+add
+loadi
+mul
+add
+push 1
+add
+push 12
+push 0
+mul
+add
+pusha bp
+push 12
+add
+loadf
+storef
+pusha 0
+push 39
+pusha bp
+push 17
+add
+loadi
+mul
+add
+push 1
+add
+push 12
+push 1
+mul
+add
+pusha bp
+push 8
+add
+loadf
+storef
+pusha 0
+push 39
+pusha bp
+push 17
+add
+loadi
+mul
+add
+push 1
+add
+push 12
+push 2
+mul
+add
+pusha bp
+push 4
+add
+loadf
+storef
+ret 0, 0, 15
+
+#line 42
+imprimeElMejor:
+#func imprimeElMejor
+#ret VOID
+#local mejorPiloto:int
+#local menorCrono:float
+#local ultimaCrono:float
+#local i:int
+enter 12
+pusha bp
+push -6
+add
+pushf 1000.0
+storef
+
+#line 56
+pusha bp
+push -12
+add
+push 0
+storei
+inicioLoop0:
+pusha bp
+push -12
+add
+loadi
+push 3
+gei
+jnz finLoop0
+pusha bp
+push -10
+add
+pusha 0
+push 39
+pusha bp
+push -12
+add
+loadi
+mul
+add
+push 1
+add
+push 2
+push 4
+mul
+add
+loadf
+storef
+
+#line 54
+pusha bp
+push -10
+add
+loadf
+pusha bp
+push -6
+add
+loadf
+ltf
+jz else1
+pusha bp
+push -6
+add
+pusha bp
+push -10
+add
+loadf
+storef
+pusha bp
+push -2
+add
+pusha bp
+push -12
+add
+loadi
+storei
+jmp finIf1
+else1:
+finIf1:
+pusha bp
+push -12
+add
+pusha bp
+push -12
+add
+loadi
+push 1
+addi
+storei
+jmp inicioLoop0
+finLoop0:
+
+#line 59
+pusha 0
+push 39
+pusha bp
+push -2
+add
+loadi
+mul
+add
+push 0
+add
+loadb
+outb
+pushb 10
+outb
+
+#line 64
+pusha bp
+push -12
+add
+push 0
+storei
+inicioLoop2:
+pusha bp
+push -12
+add
+loadi
+push 3
+gei
+jnz finLoop2
+
+#line 63
+pusha 0
+push 39
+pusha bp
+push -2
+add
+loadi
+mul
+add
+push 1
+add
+pusha bp
+push -12
+add
+loadi
+push 4
+mul
+add
+loadf
+outf
+pushb 10
+outb
+pusha bp
+push -12
+add
+pusha bp
+push -12
+add
+loadi
+push 1
+addi
+storei
+jmp inicioLoop2
+finLoop2:
+ret 0, 12, 0
+
+#line 70
+inicio:
+#func inicio
+#ret VOID
+enter 0
+
+#line 70
+push 0
+pushb 65
+pushf 1.50
+pushf 1.49
+pushf 1.48
+call inicia
+
+#line 71
+push 1
 pushb 72
-outb
-pushb 111
-outb
-pushb 108
-outb
-pushb 97
-outb
-pushb 32
-outb
-pushb 77
-outb
-pushb 117
-outb
-pushb 110
-outb
-pushb 100
-outb
-pushb 111
-outb
-pushb 33
-outb
+pushf 1.52
+pushf 1.51
+pushf 1.50
+call inicia
+
+#line 72
+push 2
+pushb 86
+pushf 1.54
+pushf 1.52
+pushf 1.51
+call inicia
+
+#line 74
+call imprimeElMejor
 ret 0, 0, 0

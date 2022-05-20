@@ -24,7 +24,7 @@ public class IntType extends AbstractType {
 
 	@Override
 	public String getName() {
-		return "INTEGER";
+		return "int";
 	}
 
 	@Override

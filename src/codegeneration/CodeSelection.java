@@ -29,7 +29,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class Program { ClassNode classnode; MethodCallSentence methodcallsentence; }
     public Object visit(Program program, Object param) {
-
+        out("#source \"" + sourceFile + "\"");
         if (program.getMethodcallsentence() != null)
             program.getMethodcallsentence().accept(this, param);
         out("halt");
@@ -42,8 +42,6 @@ public class CodeSelection extends DefaultVisitor {
     // class ClassNode { String name; List<Definition> definition; List<String>
     // createMethod; List<Method> method; }
     public Object visit(ClassNode classNode, Object param) {
-
-        // super.visit(node, param);
 
         if (classNode.getDefinition() != null)
             for (Definition child : classNode.getDefinition())
@@ -59,11 +57,20 @@ public class CodeSelection extends DefaultVisitor {
     // class Method { String name; List<Parameter> parameter; Type retorno;
     // List<Definition> definition; List<Sentence> sentence; }
     public Object visit(Method method, Object param) {
-
+        line(method.getStart());
         out(method.getName() + ":");
+        out("#func " + method.getName());
+        out("#ret " + method.getRetorno().getName());
+        for(Parameter p: method.getParameter()){
+            out("#param " + p.getName() + ":" + p.getType().getName());
+        }
         int localsSize = 0;
         for (Definition v : method.getDefinition()) {
             localsSize += v.getType().getSize();
+            VarDefinition vars = (VarDefinition) v;
+            for (String s : vars.getName()) {
+                out("#local " + s + ":" + vars.getType().getName());
+            }
         }
         out("enter " + localsSize);
 
@@ -72,7 +79,7 @@ public class CodeSelection extends DefaultVisitor {
                 child.accept(this, param);
 
         if (method.getRetorno().getClass() == VoidType.class) {
-            int parameterSize = method.getDefinition().stream().map(a -> a.getType().getSize())
+            int parameterSize = method.getParameter().stream().map(a -> a.getType().getSize())
                     .reduce(0, (x, y) -> x + y);
             out("ret 0, " + localsSize + ", " + parameterSize);
         }
@@ -83,13 +90,16 @@ public class CodeSelection extends DefaultVisitor {
     // class Print { String string; List<Expr> expr; }
     public Object visit(Print print, Object param) {
 
-        // super.visit(node, param);
-
+        line(print);
         if (print.getExpr() != null)
             for (Expr child : print.getExpr()) {
                 child.accept(this, Funcion.VALOR);
                 out("out" + child.getType().getSuffix());
             }
+        if (print.getString().equalsIgnoreCase("println")) {
+            out("pushb 10");
+            out("outb");
+        }
 
         return null;
     }
@@ -97,7 +107,7 @@ public class CodeSelection extends DefaultVisitor {
     // class Read { List<Expr> expr; }
     public Object visit(Read read, Object param) {
 
-        // super.visit(node, param);
+        line(read);
 
         if (read.getExpr() != null)
             for (Expr child : read.getExpr()) {
@@ -112,7 +122,7 @@ public class CodeSelection extends DefaultVisitor {
     // class Assignment { Expr left; Expr right; }
     public Object visit(Assignment assignment, Object param) {
 
-        // super.visit(node, param);
+        //line(assignment);
 
         if (assignment.getLeft() != null)
             assignment.getLeft().accept(this, Funcion.DIRECCION);
@@ -128,6 +138,8 @@ public class CodeSelection extends DefaultVisitor {
     // iffalse; }
     public Object visit(Conditional conditional, Object param) {
 
+        line(conditional);
+
         int n = count++;
 
         if (conditional.getCondition() != null)
@@ -137,7 +149,7 @@ public class CodeSelection extends DefaultVisitor {
         if (conditional.getIftrue() != null)
             for (Sentence child : conditional.getIftrue())
                 child.accept(this, param);
-        out("jmp finalIf" + n);
+        out("jmp finIf" + n);
         out("else" + n + ":");
         if (conditional.getIffalse() != null)
             for (Sentence child : conditional.getIffalse())
@@ -150,6 +162,7 @@ public class CodeSelection extends DefaultVisitor {
     // class Loop { List<Sentence> init; Expr condition; List<Sentence> sentence; }
     public Object visit(Loop loop, Object param) {
 
+        line(loop);
         int n = count++;
 
         if (loop.getInit() != null)
@@ -171,9 +184,10 @@ public class CodeSelection extends DefaultVisitor {
     // class ReturnNode { Expr expr; }
     public Object visit(ReturnNode returnNode, Object param) {
 
-        // super.visit(node, param);
+        line(returnNode);
 
         if (returnNode.getExpr() != null) {
+            returnNode.getExpr().accept(this, Funcion.VALOR);
             int localSize = returnNode.getMethod().getDefinition().stream().map(a -> a.getType().getSize())
                     .reduce(0, (x, y) -> x + y);
             int paramSize = returnNode.getMethod().getParameter().stream()
@@ -187,18 +201,20 @@ public class CodeSelection extends DefaultVisitor {
 
     // class MethodCallSentence { String name; List<Expr> args; }
     public Object visit(MethodCallSentence methodCallSentence, Object param) {
-
+        line(methodCallSentence);
+        if (methodCallSentence.getArgs() != null)
+            for (Expr child : methodCallSentence.getArgs())
+                child.accept(this, Funcion.VALOR);
         out("call " + methodCallSentence.getName());
         if (methodCallSentence.getDefinition().getRetorno().getClass() != VoidType.class) {
             out("pop" + methodCallSentence.getDefinition().getRetorno().getSuffix());
         }
-       
+
         return null;
     }
 
     // class ExprBinariaAritmetica { Expr left; String op; Expr right; }
     public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
-
         if (exprBinariaAritmetica.getLeft() != null)
             exprBinariaAritmetica.getLeft().accept(this, Funcion.VALOR);
 
@@ -227,7 +243,6 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ExprUnariaAritmetica { String op; Expr expr; }
     public Object visit(ExprUnariaAritmetica exprUnariaAritmetica, Object param) {
-
         if (exprUnariaAritmetica.getOp().equals("-")) {
             exprUnariaAritmetica.getExpr().accept(this, Funcion.VALOR);
             out("push" + exprUnariaAritmetica.getExpr().getType().getSuffix() + " -1");
@@ -247,6 +262,9 @@ public class CodeSelection extends DefaultVisitor {
             exprBinariaLogica.getRight().accept(this, Funcion.VALOR);
 
         switch (exprBinariaLogica.getOp()) {
+            case "=":
+                out("eq" + exprBinariaLogica.getLeft().getType().getSuffix());
+                break;
             case ">":
                 out("gt" + exprBinariaLogica.getLeft().getType().getSuffix());
                 break;
@@ -285,18 +303,19 @@ public class CodeSelection extends DefaultVisitor {
 
     // class Acces { Expr left; String op; String right; }
     public Object visit(Acces acces, Object param) {
+   
         acces.getLeft().accept(this, Funcion.DIRECCION);
         StructType tipo = (StructType) acces.getLeft().getType();
         VarDefinition definition = null;
-        for (VarDefinition d : tipo.getDefinition().getVardefinition()) 
-            for (String n : d.getName()) 
-                if (n.equals(acces.getRight())) 
-                    definition = d;    
+        for (VarDefinition d : tipo.getDefinition().getVardefinition())
+            for (String n : d.getName())
+                if (n.equals(acces.getRight()))
+                    definition = d;
         out("push" + acces.getLeft().getType().getSuffix() + " " + definition.getAddress());
-        if (param.equals(Funcion.VALOR)) {     
+        if (param.equals(Funcion.VALOR)) {
             out("add");
             out("load" + definition.getType().getSuffix());
-        }else if(param.equals(Funcion.DIRECCION)){
+        } else if (param.equals(Funcion.DIRECCION)) {
             out("add");
         }
 
@@ -305,6 +324,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ArrayAcces { Expr left; Expr right; }
     public Object visit(ArrayAcces arrayAcces, Object param) {
+
         ArrayType tipo = (ArrayType) arrayAcces.getLeft().getType();
 
         if (param.equals(Funcion.VALOR)) {
@@ -328,17 +348,20 @@ public class CodeSelection extends DefaultVisitor {
 
     // class Cast { Type typeToConvert; Expr expr; }
     public Object visit(Cast cast, Object param) {
-
         if (cast.getExpr() != null)
             cast.getExpr().accept(this, Funcion.VALOR);
 
-        if (cast.getTypeToConvert().equals(IntType.class) && cast.getExpr().getType().equals(CharType.class))
+        if (cast.getTypeToConvert().getClass() == IntType.class
+                && cast.getExpr().getType().getClass() == CharType.class)
             out("b2i");
-        else if (cast.getTypeToConvert().equals(IntType.class) && cast.getExpr().getType().equals(RealType.class))
+        else if (cast.getTypeToConvert().getClass() == IntType.class
+                && cast.getExpr().getType().getClass() == RealType.class)
             out("f2i");
-        else if (cast.getTypeToConvert().equals(CharType.class) && cast.getExpr().getType().equals(IntType.class))
+        else if (cast.getTypeToConvert().getClass() == CharType.class
+                && cast.getExpr().getType().getClass() == IntType.class)
             out("i2b");
-        else if (cast.getTypeToConvert().equals(RealType.class) && cast.getExpr().getType().equals(IntType.class))
+        else if (cast.getTypeToConvert().getClass() == RealType.class
+                && cast.getExpr().getType().getClass() == IntType.class)
             out("i2f");
 
         return null;
@@ -391,30 +414,24 @@ public class CodeSelection extends DefaultVisitor {
         return null;
     }
 
-    /*
-     * // class TupleDefinition { String name; List<VarDefinition> vardefinition; }
-     * public Object visit(TupleDefinition tupleDefinition, Object param) {
-     * 
-     * // super.visit(node, param);
-     * 
-     * if (tupleDefinition.getVardefinition() != null)
-     * for (VarDefinition child : tupleDefinition.getVardefinition())
-     * child.accept(this, param);
-     * 
-     * return null;
-     * }
-     * 
-     * // class VarDefinition { List<String> name; Type type; }
-     * public Object visit(VarDefinition varDefinition, Object param) {
-     * 
-     * // super.visit(node, param);
-     * 
-     * if (varDefinition.getType() != null)
-     * varDefinition.getType().accept(this, param);
-     * 
-     * return null;
-     * }
-     */
+    // class TupleDefinition { String name; List<VarDefinition> vardefinition; }
+    public Object visit(TupleDefinition tupleDefinition, Object param) {
+        out("#type " + tupleDefinition.getName() + ": {");
+        for (VarDefinition v: tupleDefinition.getVardefinition())
+            for (String s : v.getName()) 
+                out(s + ":" + v.getType().getName());
+        out("}");
+        return null;
+    }
+
+    // class VarDefinition { List<String> name; Type type; }
+    public Object visit(VarDefinition varDefinition, Object param) {
+        for (String s : varDefinition.getName()) {
+            out("#global " + s + ":" + varDefinition.getType().getName());
+        }
+
+        return null;
+    }
 
     // Métodos auxiliares recomendados (opcionales) -------------
 

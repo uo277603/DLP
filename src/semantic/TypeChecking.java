@@ -159,7 +159,7 @@ public class TypeChecking extends DefaultVisitor {
         /*
          * if (conditional.getCondition() != null)
          * conditional.getCondition().accept(this, param);
-         * 
+         * /
          * if (conditional.getIftrue() != null)
          * for (Sentence child : conditional.getIftrue())
          * child.accept(this, param);
@@ -207,7 +207,7 @@ public class TypeChecking extends DefaultVisitor {
          * returnNode.getExpr().accept(this, param);
          */
         if (returnNode.getMethod().getRetorno().getClass() == VoidType.class) {
-            predicado(returnNode.getExpr() == null, "El retorno tiene que ser de tipo Void", returnNode.getExpr());
+            predicado(returnNode.getExpr() == null, "El retorno tiene que ser de tipo Void", returnNode.getEnd());
         } else {   
             predicado(returnNode.getExpr() != null, "El retorno no puede ser de tipo Void", returnNode.getEnd());
             if(returnNode.getExpr() != null)
@@ -306,7 +306,7 @@ public class TypeChecking extends DefaultVisitor {
         }else{
             predicado(esNumero(exprBinariaLogica.getLeft().getType()), "Los operandos deben de ser enteros o reales", exprBinariaLogica.getStart());
         }
-        exprBinariaLogica.setType(exprBinariaLogica.getLeft().getType());
+        exprBinariaLogica.setType(new IntType());
         exprBinariaLogica.setModifiable(false);
         return null;
     }
@@ -321,7 +321,7 @@ public class TypeChecking extends DefaultVisitor {
 
         predicado(exprUnariaLogica.getExpr().getType().getClass() == IntType.class, "El tipo de la expresión tiene que ser entero", exprUnariaLogica.getStart());
 
-        exprUnariaLogica.setType(exprUnariaLogica.getExpr().getType());
+        exprUnariaLogica.setType(new IntType());
         exprUnariaLogica.setModifiable(false);
         return null;
     }

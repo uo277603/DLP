@@ -24,7 +24,7 @@ public class RealType extends AbstractType {
 
 	@Override
 	public String getName() {
-		return "DOUBLE";
+		return "float";
 	}
 
 	@Override
