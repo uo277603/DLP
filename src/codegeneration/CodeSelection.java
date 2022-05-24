@@ -213,6 +213,25 @@ public class CodeSelection extends DefaultVisitor {
         return null;
     }
 
+    //	class ExprTernaria { Expr condicion;  Expr expr1;  Expr expr2; }
+	public Object visit(ExprTernaria exprTernaria, Object param) {
+        int n = count++;
+		if (exprTernaria.getCondicion() != null)
+			exprTernaria.getCondicion().accept(this, Funcion.VALOR);
+        out("jz segundaExpr" + n);
+
+		if (exprTernaria.getExpr1() != null)
+			exprTernaria.getExpr1().accept(this, Funcion.VALOR);
+        out("jmp fin" + n);
+        out("segundaExpr" + n + ":");
+
+		if (exprTernaria.getExpr2() != null)
+			exprTernaria.getExpr2().accept(this, Funcion.VALOR);
+        out("fin" + n + ":");
+
+		return null;
+	}
+
     // class ExprBinariaAritmetica { Expr left; String op; Expr right; }
     public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
         line(exprBinariaAritmetica);

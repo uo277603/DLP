@@ -28,6 +28,7 @@ litReal:expr -> string ;
 litChar:expr -> string ;
 variable:expr -> string ;
 methodCallExpr:expr -> name:string args:expr* ;
+exprTernaria:expr -> condicion:expr expr1:expr expr2:expr;
 
 intType:type -> ;
 realType:type -> ;

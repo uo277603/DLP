@@ -241,6 +241,19 @@ public class TypeChecking extends DefaultVisitor {
         return null;
     }
 
+    //	class ExprTernaria { Expr condicion;  Expr expr1;  Expr expr2; }
+	public Object visit(ExprTernaria exprTernaria, Object param) {
+
+		super.visit(exprTernaria, param);
+
+        predicado(mismoTipo(exprTernaria.getExpr1().getType(), exprTernaria.getExpr2().getType()), "Los tipos de ambas expresiones debe coincidir");
+        predicado(exprTernaria.getCondicion().getType().getClass() == IntType.class, "La condición debe de ser de tipo entero",
+        exprTernaria);
+        exprTernaria.setType(exprTernaria.getExpr1().getType());
+
+		return null;
+	}
+
     // class ExprBinariaAritmetica { Expr left; String op; Expr right; }
     public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
 

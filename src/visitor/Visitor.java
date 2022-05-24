@@ -38,4 +38,5 @@ public interface Visitor {
 	public Object visit(StructType structType, Object param);
 	public Object visit(TupleDefinition tupleDefinition, Object param);
 	public Object visit(VarDefinition varDefinition, Object param);
+	public Object visit(ExprTernaria exprTernaria, Object param);
 }

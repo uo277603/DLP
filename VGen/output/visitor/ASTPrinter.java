@@ -343,6 +343,18 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class ExprTernaria { Expr condicion;  Expr expr1;  Expr expr2; }
+	public Object visit(ExprTernaria exprTernaria, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "ExprTernaria", exprTernaria, false);
+
+		visit(indent + 1, "condicion", "Expr", exprTernaria.getCondicion());
+		visit(indent + 1, "expr1", "Expr", exprTernaria.getExpr1());
+		visit(indent + 1, "expr2", "Expr", exprTernaria.getExpr2());
+		return null;
+	}
+
 	//	class IntType {  }
 	public Object visit(IntType intType, Object param) {
 		int indent = ((Integer)param).intValue();

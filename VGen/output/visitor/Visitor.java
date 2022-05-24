@@ -30,6 +30,7 @@ public interface Visitor {
 	public Object visit(LitChar litChar, Object param);
 	public Object visit(Variable variable, Object param);
 	public Object visit(MethodCallExpr methodCallExpr, Object param);
+	public Object visit(ExprTernaria exprTernaria, Object param);
 	public Object visit(IntType intType, Object param);
 	public Object visit(RealType realType, Object param);
 	public Object visit(CharType charType, Object param);

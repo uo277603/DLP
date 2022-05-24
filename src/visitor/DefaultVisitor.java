@@ -182,6 +182,17 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class ExprTernaria { Expr condicion;  Expr expr1;  Expr expr2; }
+	public Object visit(ExprTernaria exprTernaria, Object param) {
+		if (exprTernaria.getCondicion() != null)
+			exprTernaria.getCondicion().accept(this, param);
+		if (exprTernaria.getExpr1() != null)
+			exprTernaria.getExpr1().accept(this, param);
+		if (exprTernaria.getExpr2() != null)
+			exprTernaria.getExpr2().accept(this, param);
+		return null;
+	}
+
 	//	class IntType {  }
 	public Object visit(IntType intType, Object param) {
 		return null;

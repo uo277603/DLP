@@ -115,6 +115,7 @@ expr returns[Expr ast]
 	| left=expr op=('=' | '<>') right=expr {$ast = new ExprBinariaLogica($left.ast, $op.text, $right.ast);}
 	| left=expr op='and' right=expr {$ast = new ExprBinariaLogica($left.ast, $op.text, $right.ast);}
 	| left=expr op='or' right=expr {$ast = new ExprBinariaLogica($left.ast, $op.text, $right.ast);}
+	| condicion=expr '?' expr1=expr ':' expr2=expr {$ast = new ExprTernaria($condicion.ast, $expr1.ast, $expr2.ast);}
 	;
 
 listaexpresionOpt returns[List<Expr> list = new ArrayList<Expr>()]
