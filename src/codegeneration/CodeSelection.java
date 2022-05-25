@@ -67,8 +67,9 @@ public class CodeSelection extends DefaultVisitor {
         }
         int localsSize = 0;
         for (Definition v : method.getDefinition()) {
-            localsSize += v.getType().getSize();
+            //localsSize += v.getType().getSize();
             VarDefinition vars = (VarDefinition) v;
+            localsSize += vars.getType().getSize() * vars.getName().size();
             for (String s : vars.getName()) {
                 out("#local " + s + ":" + vars.getType().getName());
             }
@@ -394,10 +395,10 @@ public class CodeSelection extends DefaultVisitor {
         } else if (param.equals(Funcion.DIRECCION)) {
             if (variable.getDefinition().getAmbito() != Ambito.GLOBAL) {
                 out("pusha bp");
-                out("push " + variable.getDefinition().getAddress());
+                out("push " + variable.getDefinition().getVarAddress(variable.getString()));
                 out("add");
             } else {
-                out("pusha " + variable.getDefinition().getAddress());
+                out("pusha " + variable.getDefinition().getVarAddress(variable.getString()));
             }
         }
 

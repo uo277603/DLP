@@ -72,4 +72,11 @@ public class VarDefinition extends AbstractDefinition {
 		return data.toString();
 	}
 
+	public int getVarAddress(String ident){
+		if(getAddress() < 0)
+			return getAddress() - getName().indexOf(ident) * getType().getSize();
+		else
+			return getName().indexOf(ident) * getType().getSize() + getAddress();
+	}
+
 }
