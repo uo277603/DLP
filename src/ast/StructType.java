@@ -54,6 +54,7 @@ public class StructType extends AbstractType {
 	   this.definition = definition;
    }
 
+   // structType.size = ∑ structType.definition.varDefinitionsi.type.size | 0 <= j < i
    @Override
 	public int getSize() {
 		int size = 0;

@@ -7,7 +7,8 @@ import Lexicon;
 
 start
 	returns[Program ast]:
-	clase 'main' IDENT '(' listaexpresionOpt ')' ';' 'end' {$ast = new Program($clase.ast, new MethodCallSentence($IDENT, $listaexpresionOpt.list));};
+	clase 'main' IDENT'(' listaexpresionOpt ')' ';' 'end' {$ast = new Program($clase.ast, new MethodCallSentence($IDENT, $listaexpresionOpt.list));};
+	
 
 clase returns[ClassNode ast]
 	: 'class' nombreClase=IDENT ';' atributosOpt 'create' constructores  lm+=metodo+ 'end'

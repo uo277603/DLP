@@ -63,6 +63,7 @@ public class ArrayType extends AbstractType {
 		return getIndex() + " * " + getType().getName();
 	}
 
+	// arrayType.size = arrayType.index * arrayType.type.size
 	@Override
 	public int getSize(){
 		return index * type.getSize();

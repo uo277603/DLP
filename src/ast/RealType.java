@@ -27,6 +27,7 @@ public class RealType extends AbstractType {
 		return "float";
 	}
 
+	// realType.size = 4
 	@Override
 	public int getSize() {
 		return 4;

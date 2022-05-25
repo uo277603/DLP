@@ -38,6 +38,7 @@ public class Identification extends DefaultVisitor {
 			program.getMethodcallsentence().accept(this, param);
 
         Method main = tabSimbFeature.get(program.getMethodcallsentence().getName());
+        // tabSimbFeature[methodcallsentence.name].isConstructor()
         predicado(main.isConstructor(), "El método " + main.getName() + " definido en el main no es un constructor", program);
 
 		return null;
@@ -62,7 +63,7 @@ public class Identification extends DefaultVisitor {
             // tabSimbFeature[name] ≠ ∅
             Method definition = tabSimbFeature.get(name);
             predicado(definition != null, "Método no definido: " + name, classNode);
-            // methodCallSentence.definition = tabSimbFeature[name]
+            // ClassNode.createDefinitions += createMethodi
             if(definition != null)
                 definition.setConstructor();
             classNode.setCreateDefinitions(name);
@@ -81,9 +82,17 @@ public class Identification extends DefaultVisitor {
         // tabSimbFeature[name] = method
         tabSimbFeature.put(method.getName(), method);
 
+        // tabSimbVar.set
         tabSimbVar.set();
+        // super.visit
         super.visit(method, method);
+        // tabSimVar.reset
         tabSimbVar.reset();
+
+        // sentenciai.method = method
+        for (Sentence child : method.getSentence()){
+		    child.setMethod(method);
+        }
 
         // Establecer el ámbito de los parámetros
         for (Parameter child : method.getParameter())
@@ -95,17 +104,6 @@ public class Identification extends DefaultVisitor {
 
         return null;
     }
-
-    //	class ReturnNode { Expr expr; }
-	public Object visit(ReturnNode returnNode, Object param) {
-
-		returnNode.setMethod((Method)param);
-
-		if (returnNode.getExpr() != null)
-			returnNode.getExpr().accept(this, param);
-
-		return null;
-	}
 
     // class MethodCallSentence { String name; List<Expr> args; }
     public Object visit(MethodCallSentence methodCallSentence, Object param) {
@@ -156,8 +154,10 @@ public class Identification extends DefaultVisitor {
 
     // class StructType { String name; }
     public Object visit(StructType structType, Object param) {
+        // tabSimbTuple[name] ≠ ∅
         TupleDefinition definition = tabSimbTuple.get(structType.getName());
         predicado(definition != null, "Variable no definida: " + structType.getName(), structType);
+        // StructType.definition = tabSimbTuple[name]
         structType.setDefinition(definition);
         return null;
     }
@@ -194,7 +194,7 @@ public class Identification extends DefaultVisitor {
         // tabSimbVar[name] == ∅
         VarDefinition definition = tabSimbVar.getFromTop(parameter.getName());
         predicado(definition == null, "Parámetro ya definido: " + parameter.getName(), parameter);
-        // parameter.definition = tabSimbVar[name]
+        // tabSimbVar[name] = parameter
         tabSimbVar.put(parameter.getName(), varDefinition);
         // parameter.definition = tabSimbVar[name]
         parameter.setDefinition(varDefinition);

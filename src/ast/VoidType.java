@@ -27,7 +27,7 @@ public class VoidType extends AbstractType {
 		return "VOID";
 	}
 
-
+	// voidType = 0
 	@Override
 	public int getSize() {
 		return 0;

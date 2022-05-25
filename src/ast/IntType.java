@@ -27,6 +27,7 @@ public class IntType extends AbstractType {
 		return "int";
 	}
 
+	// intType.size = 2
 	@Override
 	public int getSize() {
 		return 2;

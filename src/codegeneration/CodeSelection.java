@@ -393,12 +393,16 @@ public class CodeSelection extends DefaultVisitor {
             variable.accept(this, Funcion.DIRECCION);
             out("load" + variable.getType().getSuffix());
         } else if (param.equals(Funcion.DIRECCION)) {
-            if (variable.getDefinition().getAmbito() != Ambito.GLOBAL) {
+            if (variable.getDefinition().getAmbito() == Ambito.LOCAL) {
                 out("pusha bp");
                 out("push " + variable.getDefinition().getVarAddress(variable.getString()));
                 out("add");
-            } else {
+            } else if(variable.getDefinition().getAmbito() == Ambito.GLOBAL){
                 out("pusha " + variable.getDefinition().getVarAddress(variable.getString()));
+            }else{
+                out("pusha bp");
+                out("push " + variable.getDefinition().getAddress());
+                out("add");
             }
         }
 

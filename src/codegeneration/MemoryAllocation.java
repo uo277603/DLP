@@ -19,6 +19,8 @@ public class MemoryAllocation extends DefaultVisitor {
 		int acumAddress = 0;
 		// super.visit(node, param);
 
+		// definitioni.address = 
+		// ∑ definitioni.type.size * definition.name.size | 0 <= j < i
 		if (classNode.getDefinition() != null)
 			for (Definition child : classNode.getDefinition()) {
 				if (child instanceof VarDefinition) {
@@ -44,6 +46,7 @@ public class MemoryAllocation extends DefaultVisitor {
 
 		// super.visit(node, param);
 		int parameterAddress = 4;
+		// parameteri.addres = 4 + ∑ parameteri.type.size | 0 <= j < i
 		if (method.getParameter() != null)
 			for(int i = method.getParameter().size() - 1; i >= 0 ; i--){
 				method.getParameter().get(i).getDefinition().setAddress(parameterAddress);
@@ -53,14 +56,14 @@ public class MemoryAllocation extends DefaultVisitor {
 		if (method.getRetorno() != null)
 			method.getRetorno().accept(this, param);
 
+		// definitioni.address = ∑ -definitioni.type.size * definition.name.size | 0 <= j < i
 		int localAddress = 0;
 		if (method.getDefinition() != null)
 			for (Definition child : method.getDefinition()){
 				if(child instanceof VarDefinition){
 					VarDefinition def = (VarDefinition) child;
 					localAddress -= child.getType().getSize() * def.getName().size();
-				}else
-					localAddress -= child.getType().getSize();
+				}
 				child.setAddress(localAddress);
 
 			}
@@ -76,23 +79,14 @@ public class MemoryAllocation extends DefaultVisitor {
 	public Object visit(TupleDefinition tupleDefinition, Object param) {
 
 		// super.visit(node, param);
+
+		// vardefinitioni.address = ∑ vardefinitioni.type.size | 0 <= j < i
 		int offset = 0;
 		if (tupleDefinition.getVardefinition() != null)
 			for (VarDefinition child : tupleDefinition.getVardefinition()) {
 				child.setAddress(offset);
 				offset += child.getType().getSize();
 			}
-
-		return null;
-	}
-
-	// class VarDefinition { List<String> name; Type type; }
-	public Object visit(VarDefinition varDefinition, Object param) {
-
-		// super.visit(node, param);
-
-		if (varDefinition.getType() != null)
-			varDefinition.getType().accept(this, param);
 
 		return null;
 	}

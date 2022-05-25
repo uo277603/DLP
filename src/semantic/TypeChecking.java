@@ -70,15 +70,18 @@ public class TypeChecking extends DefaultVisitor {
          */
         boolean existsReturn = false;
         for (Sentence s : method.getSentence()) {
-            s.setMethod(method);
             if (s instanceof ReturnNode) {
                 existsReturn = true;
                 break;
             }
         }
+        // si retorno ≠ voidType
         if (method.getRetorno().getClass() != VoidType.class) {     
+            // returnNode ⊂ method.definition
             predicado(existsReturn, "Este método debe retornar un resultado de tipo: " + method.getRetorno(),
                     method.getStart());
+            // si (∃ return) => 
+            //method.retornable = true
             if(existsReturn)
                 method.setRetornable(true);
         }
@@ -96,6 +99,7 @@ public class TypeChecking extends DefaultVisitor {
         if (parameter.getType() != null)
             parameter.getType().accept(this, param);
 
+        // esPrimitivo(type)
         predicado(esPrimitivo(parameter.getType()), "El parámetro debe de ser de tipo primitivo", parameter.getStart());
         return null;
     }
@@ -109,6 +113,7 @@ public class TypeChecking extends DefaultVisitor {
             for (Expr child : print.getExpr())
                 child.accept(this, param);
 
+        // esPrimitivo(expri.type)
         for (Expr e : print.getExpr()) {
             predicado(esPrimitivo(e.getType()), "La expresión debe de ser de tipo primitivo", e.getStart());
         }
@@ -124,6 +129,8 @@ public class TypeChecking extends DefaultVisitor {
             for (Expr child : read.getExpr())
                 child.accept(this, param);
 
+        // esPrimitivo(expri.type)
+        // expri.modifiable
         for (Expr e : read.getExpr()) {
             predicado(esPrimitivo(e.getType()), "La expresión debe de ser de tipo primitivo", e.getStart());
             predicado(e.isModifiable(), "La expresión debe de ser modificable", e.getStart());
@@ -143,9 +150,13 @@ public class TypeChecking extends DefaultVisitor {
          * if (assignment.getRight() != null)
          * assignment.getRight().accept(this, param);
          */
+
+        // mismoTipo(left.type, right.type)
         predicado(mismoTipo(assignment.getLeft().getType(), assignment.getRight().getType()),
                 "Los operandos deben ser del mismo tipo", assignment);
+        // esPrimitivo(left.type)
         predicado(esPrimitivo(assignment.getLeft().getType()), "La parte de la izquierda tiene que ser simple", assignment.getStart());
+        // left.modifiable
         predicado(assignment.getLeft().isModifiable(), "Se requiere expresión modificable", assignment.getLeft());
         return null;
     }
@@ -169,6 +180,7 @@ public class TypeChecking extends DefaultVisitor {
          * child.accept(this, param);
          */
 
+        // condition.type == intType
         predicado(conditional.getCondition().getType().getClass() == IntType.class,
                 "La condición debe de ser de tipo entero", conditional);
         return null;
@@ -192,6 +204,7 @@ public class TypeChecking extends DefaultVisitor {
          * child.accept(this, param);
          */
 
+        // condition.type == intType
         predicado(loop.getCondition().getType().getClass() == IntType.class, "La condición debe de ser de tipo entero",
                 loop);
         return null;
@@ -206,10 +219,15 @@ public class TypeChecking extends DefaultVisitor {
          * if (returnNode.getExpr() != null)
          * returnNode.getExpr().accept(this, param);
          */
+
+        // si returnNode.method.retorno == voidType
         if (returnNode.getMethod().getRetorno().getClass() == VoidType.class) {
+            // expr == null
             predicado(returnNode.getExpr() == null, "El retorno tiene que ser de tipo Void", returnNode.getEnd());
         } else {   
+            // expr.type  ≠ VoidType
             predicado(returnNode.getExpr() != null, "El retorno no puede ser de tipo Void", returnNode.getEnd());
+            // expr.type ==   returnNode.method.retorno
             if(returnNode.getExpr() != null)
                 predicado(returnNode.getExpr().getType().getClass() == returnNode.getMethod().getRetorno().getClass(),
                     "El tipo de la expresión no coincide con el tipo de retorno", returnNode.getExpr());
@@ -227,10 +245,12 @@ public class TypeChecking extends DefaultVisitor {
             for (Expr child : methodCallSentence.getArgs())
                 child.accept(this, param);
 
+        // methodCallSentence.definition.parameter.length == args.length
         boolean sameArgs = methodCallSentence.getArgs().size() == methodCallSentence.getDefinition().getParameter().size();
         predicado(sameArgs,
                 "El número de parámetos no coincide", methodCallSentence.getStart());
         if(sameArgs){
+            // methodCallSentence.definition.parameteri.type == argsi.type
             boolean sameType = true;
             for(int i = 0; i < methodCallSentence.getArgs().size(); i++){
                 if(!mismoTipo(methodCallSentence.getArgs().get(i).getType(), methodCallSentence.getDefinition().getParameter().get(i).getType()))
@@ -253,14 +273,19 @@ public class TypeChecking extends DefaultVisitor {
          * if (exprBinariaAritmetica.getRight() != null)
          * exprBinariaAritmetica.getRight().accept(this, param);
          */
+
+        // mismoTipo(left.type, right.type)
         predicado(mismoTipo(exprBinariaAritmetica.getLeft().getType(), exprBinariaAritmetica.getRight().getType()),
                 "Los tipos de los operandos deben coincidir", exprBinariaAritmetica.getStart());
+        // left.type == intType || left.type == realType
         predicado(
                 exprBinariaAritmetica.getLeft().getType().getClass() == IntType.class
                         || exprBinariaAritmetica.getLeft().getType().getClass() == RealType.class,
                 "Las operaciones aritméticas solo son aplicables a int o real", exprBinariaAritmetica.getStart());
 
+        // exprBianariaAritmetica.type = left.type
         exprBinariaAritmetica.setType(exprBinariaAritmetica.getLeft().getType());
+        // exprBinariaAritmetica.modifiable = false
         exprBinariaAritmetica.setModifiable(false);
         return null;
     }
@@ -273,14 +298,15 @@ public class TypeChecking extends DefaultVisitor {
         if (exprUnariaAritmetica.getExpr() != null)
             exprUnariaAritmetica.getExpr().accept(this, param);
 
-        exprUnariaAritmetica.setType(exprUnariaAritmetica.getExpr().getType());
-
+        // expr.type == intType || expr.type == realType
         predicado(
-                exprUnariaAritmetica.getType().getClass() == IntType.class
-                        || exprUnariaAritmetica.getType().getClass() == RealType.class,
+                exprUnariaAritmetica.getExpr().getType().getClass() == IntType.class
+                        || exprUnariaAritmetica.getExpr().getType().getClass() == RealType.class,
                 "Las operaciones aritméticas solo son aplicables a int o real", exprUnariaAritmetica.getStart());
 
-        
+        // exprBianariaAritmetica.type = left.type
+        exprUnariaAritmetica.setType(exprUnariaAritmetica.getExpr().getType());
+        // exprBinariaAritmetica.modifiable = false
         exprUnariaAritmetica.setModifiable(false);
 
         return null;
@@ -297,16 +323,26 @@ public class TypeChecking extends DefaultVisitor {
         if (exprBinariaLogica.getRight() != null)
             exprBinariaLogica.getRight().accept(this, param);*/
 
+        // mismoTipo(left.type, right.type)
         predicado(mismoTipo(exprBinariaLogica.getLeft().getType(), exprBinariaLogica.getRight().getType()),
             "Los tipos de los operandos deben coincidir", exprBinariaLogica.getStart());
+
+        // si(“<>” || “=”)
         if(exprBinariaLogica.getOp().equals("<>") || exprBinariaLogica.getOp().equals("=")){
+            // esPrimitivo(left.type)
             predicado(esPrimitivo(exprBinariaLogica.getLeft().getType()), "El tipo de los operandos debe de ser primitivo", exprBinariaLogica.getStart());
+        // si(“and” || “or”)
         }else if (exprBinariaLogica.getOp().equals("and") || exprBinariaLogica.getOp().equals("or")){
+            // left.type == IntType
             predicado(exprBinariaLogica.getLeft().getType().getClass() == IntType.class, "Los operandos deben de ser enteros", exprBinariaLogica.getStart());
         }else{
+            // esNumero(left.type)
             predicado(esNumero(exprBinariaLogica.getLeft().getType()), "Los operandos deben de ser enteros o reales", exprBinariaLogica.getStart());
         }
+
+        // exprBinariaLogica.type = intType
         exprBinariaLogica.setType(new IntType());
+        // exprBinariaLogica.modifiable = false
         exprBinariaLogica.setModifiable(false);
         return null;
     }
@@ -319,9 +355,12 @@ public class TypeChecking extends DefaultVisitor {
         if (exprUnariaLogica.getExpr() != null)
             exprUnariaLogica.getExpr().accept(this, param);
 
+        // expr.type == intType
         predicado(exprUnariaLogica.getExpr().getType().getClass() == IntType.class, "El tipo de la expresión tiene que ser entero", exprUnariaLogica.getStart());
 
+        // exprUnariaLogica.type = intType
         exprUnariaLogica.setType(new IntType());
+        // exprUnariaLogica.modifiable = false
         exprUnariaLogica.setModifiable(false);
         return null;
     }
@@ -334,19 +373,30 @@ public class TypeChecking extends DefaultVisitor {
         if (acces.getLeft() != null)
             acces.getLeft().accept(this, param);
 
+        // left.type == structType
         predicado(acces.getLeft().getType() instanceof StructType, "La expresión de la izquierda tiene que ser una estructura", acces.getStart());
-        acces.setModifiable(true);
+
+        VarDefinition campo = null;
+        
+        // left.definition.varDefinition.contains(right)
         if(acces.getLeft().getType() instanceof StructType){
             StructType tipo = (StructType) acces.getLeft().getType();
             for(VarDefinition d : tipo.getDefinition().getVardefinition()){
                 if(d.getName().get(0).equals(acces.getRight())){
-                    acces.setType(d.getType());
+                    campo = d;
                 }
             }
-            predicado(acces.getType() != null, "El campo " + acces.getRight() + " no está definido", acces.getStart());
+            predicado(campo != null, "El campo " + acces.getRight() + " no está definido", acces.getStart());
         }
-        if(acces.getType() == null)
-            acces.setType(acces.getLeft().getType()); // para evitar nullPointer
+        // access.type = left.definition.varDefinition.get(right).type
+        if(campo != null)
+            acces.setType(campo.getType());
+        else
+            acces.setType(acces.getLeft().getType()); // para evitar NullPointer
+        
+        // arrayAcces.modifiable = true
+        acces.setModifiable(true);
+            
         return null;
     }
 
@@ -361,14 +411,18 @@ public class TypeChecking extends DefaultVisitor {
         if (arrayAcces.getRight() != null)
             arrayAcces.getRight().accept(this, param);*/
         
+        // left.type == arrayType
         predicado(arrayAcces.getLeft().getType().getClass() == ArrayType.class, "La expresión de la izquierda tiene que ser un array", arrayAcces.getStart());
+        // right.type == intType
         predicado(arrayAcces.getRight().getType().getClass() == IntType.class, "El índice tiene que ser un entero", arrayAcces.getStart());
         if(arrayAcces.getLeft().getType() instanceof ArrayType){
+            // arrayAcces.type = left.type.type
             ArrayType tipo = (ArrayType) arrayAcces.getLeft().getType();
             arrayAcces.setType(tipo.getType());
         }else{
-            arrayAcces.setType(arrayAcces.getLeft().getType());
+            arrayAcces.setType(arrayAcces.getLeft().getType()); // Para evitar NullPointer
         }
+        // arrayAcces.modifiable = true
         arrayAcces.setModifiable(true);
 
         return null;
@@ -385,39 +439,54 @@ public class TypeChecking extends DefaultVisitor {
         if (cast.getExpr() != null)
             cast.getExpr().accept(this, param);
 
-        predicado(esPrimitivo(cast.getTypeToConvert()), "El tipo a convertir tiene que ser primitivo", cast.getStart());    
+        // esPrimitivo(typeToConvert)
+        predicado(esPrimitivo(cast.getTypeToConvert()), "El tipo a convertir tiene que ser primitivo", cast.getStart());
+        // esPrimitivo(expr)    
         predicado(esPrimitivo(cast.getExpr().getType()), "Solo se pueden convertir tipos simples", cast.getStart());
+        // typeToConvert ≠ expr.type
         predicado(cast.getTypeToConvert().getClass() != cast.getExpr().getType().getClass(), "Los tipos del cast tienen que ser diferentes", cast.getStart());
+        // isCompatibleCast(typeToConvert, expr)
         predicado(isCompaitbleCast(cast.getTypeToConvert(), cast.getExpr().getType()), "Los tipos del cast no son compatibles", cast.getStart());
+
+        // cast.type = typeToConvert
         cast.setType(cast.getTypeToConvert());
+        // cast.modifiable = false
         cast.setModifiable(false);
         return null;
     }
 
     // class LitEnt { String string; }
     public Object visit(LitEnt litEnt, Object param) {
+        // litEnt.type = intType
         litEnt.setType(new IntType());
+        // litEnt.modifiable = false
         litEnt.setModifiable(false);
         return null;
     }
 
     // class LitReal { String string; }
     public Object visit(LitReal litReal, Object param) {
+        // litReal.type = realType
         litReal.setType(new RealType());
+        // litReal.modifiable = false
         litReal.setModifiable(false);
         return null;
     }
 
     // class LitChar { String string; }
     public Object visit(LitChar litChar, Object param) {
+        // litChar.type = charType
         litChar.setType(new CharType());
+        // litChar.modifiable = false
         litChar.setModifiable(false);
         return null;
     }
 
     // class Variable { String string; }
     public Object visit(Variable variable, Object param) {
+        // variable.type = variable.definition.type
         variable.setType(variable.getDefinition().getType());
+        // variable.modifiable = true
         variable.setModifiable(true);
         return null;
     }
@@ -431,8 +500,10 @@ public class TypeChecking extends DefaultVisitor {
             for (Expr child : methodCallExpr.getArgs())
                 child.accept(this, param);
         boolean sameArgs = methodCallExpr.getArgs().size() == methodCallExpr.getDefinition().getParameter().size();
+        // methodCallExpr.definition.parameter.length == args.length
         predicado(sameArgs,
                 "El número de parámetos no coincide", methodCallExpr.getStart());
+        // methodCallExpr.defintion.retornable
         predicado(methodCallExpr.getDefinition().isRetornable(), "La función " + methodCallExpr.getName() + " no tiene tipo de retorno",
         methodCallExpr.getStart());
 
@@ -442,9 +513,11 @@ public class TypeChecking extends DefaultVisitor {
                 if(!mismoTipo(methodCallExpr.getArgs().get(i).getType(), methodCallExpr.getDefinition().getParameter().get(i).getType()))
                     sameType = false;
             }
+            // methodCallExpr.definition.parameteri.type == argsi.type
             predicado(sameType, "El tipo de los parámetros no coincide", methodCallExpr.getStart());
         }
 
+        // methodCallExpr.type = methodCallExpr.definition.type
         methodCallExpr.setType(methodCallExpr.getDefinition().getRetorno());
         return null;
     }
