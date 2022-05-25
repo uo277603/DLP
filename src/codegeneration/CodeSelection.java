@@ -94,8 +94,23 @@ public class CodeSelection extends DefaultVisitor {
         line(print);
         if (print.getExpr() != null)
             for (Expr child : print.getExpr()) {
-                child.accept(this, Funcion.VALOR);
-                out("out" + child.getType().getSuffix());
+                if(child.getType().getClass() != ArrayType.class){
+                    child.accept(this, Funcion.VALOR);
+                    out("out" + child.getType().getSuffix());
+                }else{            
+                    ArrayType tipo = (ArrayType) child.getType();
+                    int size = tipo.getType().getSize();
+                    for(int i = 0; i < tipo.getIndex(); i++){
+                        // dir[[child]]
+                        child.accept(this, Funcion.DIRECCION);
+                        out("push " + i);
+                        out("push " + size);
+                        out("mul");
+                        out("add");
+                        out("load" + tipo.getType().getSuffix());
+                        out("out" + tipo.getType().getSuffix());
+                    }
+                }
             }
         if (print.getString().equalsIgnoreCase("println")) {
             out("pushb 10");

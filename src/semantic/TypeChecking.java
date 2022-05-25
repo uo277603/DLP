@@ -110,7 +110,7 @@ public class TypeChecking extends DefaultVisitor {
                 child.accept(this, param);
 
         for (Expr e : print.getExpr()) {
-            predicado(esPrimitivo(e.getType()), "La expresión debe de ser de tipo primitivo", e.getStart());
+            predicado(esPrimitivo(e.getType()) || esArrayChar(e.getType()), "La expresión debe de ser de tipo primitivo o un Array de caracteres", e.getStart());
         }
         return null;
     }
@@ -520,6 +520,13 @@ public class TypeChecking extends DefaultVisitor {
     private boolean esPrimitivo(Type tipo) {
         return tipo.getClass() == IntType.class || tipo.getClass() == RealType.class
                 || tipo.getClass() == CharType.class;
+    }
+
+    private boolean esArrayChar(Type tipo) {
+        if(tipo.getClass() != ArrayType.class)
+            return false;
+        ArrayType arrayType = (ArrayType) tipo;
+        return arrayType.getType().getClass() == CharType.class;
     }
 
     private boolean esNumero(Type tipo){
