@@ -6,179 +6,107 @@ halt
 inicio:
 #func inicio
 #ret VOID
-#local data:10 * char
-enter 10
+#local data:4 * char
+#local data2:2 * int
+#local otra:5 * char
+#local otraMal:2 * char
+#local valMal:int
+enter 17
 
-#line 12
+#line 16
 
-#line 12
+#line 16
 
-#line 12
+#line 16
 pusha bp
-push -10
+push -4
 add
 push 1
 
-#line 12
+#line 16
 push 0
 mul
 add
 
-#line 12
+#line 16
 pushb 72
 storeb
 
-#line 13
+#line 17
 
-#line 13
+#line 17
 
-#line 13
+#line 17
 pusha bp
-push -10
+push -4
 add
 push 1
 
-#line 13
+#line 17
 push 1
 mul
 add
 
-#line 13
+#line 17
 pushb 111
 storeb
 
-#line 14
+#line 18
 
-#line 14
+#line 18
 
-#line 14
+#line 18
 pusha bp
-push -10
+push -4
 add
 push 1
 
-#line 14
+#line 18
 push 2
 mul
 add
 
-#line 14
+#line 18
 pushb 108
 storeb
 
-#line 15
+#line 19
 
-#line 15
+#line 19
 
-#line 15
+#line 19
 pusha bp
-push -10
+push -4
 add
 push 1
 
-#line 15
+#line 19
 push 3
 mul
 add
 
-#line 15
+#line 19
 pushb 97
 storeb
 
-#line 16
-
-#line 16
-
-#line 16
-pusha bp
-push -10
-add
-push 1
-
-#line 16
-push 4
-mul
-add
-
-#line 16
-pushb 32
-storeb
-
-#line 17
-
-#line 17
-
-#line 17
-pusha bp
-push -10
-add
-push 1
-
-#line 17
-push 5
-mul
-add
-
-#line 17
-pushb 109
-storeb
-
-#line 18
-
-#line 18
-
-#line 18
-pusha bp
-push -10
-add
-push 1
-
-#line 18
-push 6
-mul
-add
-
-#line 18
-pushb 117
-storeb
-
-#line 19
-
-#line 19
-
-#line 19
-pusha bp
-push -10
-add
-push 1
-
-#line 19
-push 7
-mul
-add
-
-#line 19
-pushb 110
-storeb
-
 #line 20
 
 #line 20
 
 #line 20
 pusha bp
-push -10
+push -8
 add
-push 1
+push 2
 
 #line 20
-push 8
+push 0
 mul
 add
 
 #line 20
-pushb 100
-storeb
+push 1
+storei
 
 #line 21
 
@@ -186,24 +114,24 @@ storeb
 
 #line 21
 pusha bp
-push -10
+push -8
 add
-push 1
+push 2
 
 #line 21
-push 9
+push 1
 mul
 add
 
 #line 21
-pushb 111
-storeb
+push 2
+storei
 
 #line 22
 
 #line 22
 pusha bp
-push -10
+push -4
 add
 push 0
 push 1
@@ -214,7 +142,7 @@ outb
 
 #line 22
 pusha bp
-push -10
+push -4
 add
 push 1
 push 1
@@ -225,7 +153,7 @@ outb
 
 #line 22
 pusha bp
-push -10
+push -4
 add
 push 2
 push 1
@@ -236,7 +164,296 @@ outb
 
 #line 22
 pusha bp
-push -10
+push -4
+add
+push 3
+push 1
+mul
+add
+loadb
+outb
+pushb 10
+outb
+
+#line 23
+
+#line 23
+pushb 65
+outb
+pushb 10
+outb
+
+#line 24
+
+#line 24
+pushb 66
+outb
+pushb 10
+outb
+
+#line 26
+
+#line 26
+
+#line 26
+pusha bp
+push -13
+add
+push 1
+
+#line 26
+push 0
+mul
+add
+
+#line 26
+pushb 77
+storeb
+
+#line 27
+
+#line 27
+
+#line 27
+pusha bp
+push -13
+add
+push 1
+
+#line 27
+push 1
+mul
+add
+
+#line 27
+pushb 117
+storeb
+
+#line 28
+
+#line 28
+
+#line 28
+pusha bp
+push -13
+add
+push 1
+
+#line 28
+push 2
+mul
+add
+
+#line 28
+pushb 110
+storeb
+
+#line 29
+
+#line 29
+
+#line 29
+pusha bp
+push -13
+add
+push 1
+
+#line 29
+push 3
+mul
+add
+
+#line 29
+pushb 100
+storeb
+
+#line 30
+
+#line 30
+
+#line 30
+pusha bp
+push -13
+add
+push 1
+
+#line 30
+push 4
+mul
+add
+
+#line 30
+pushb 111
+storeb
+
+#line 31
+
+#line 31
+pusha bp
+push -4
+add
+push 0
+push 1
+mul
+add
+
+#line 31
+pusha bp
+push -13
+add
+push 0
+push 1
+mul
+add
+loadb
+storeb
+
+#line 31
+pusha bp
+push -4
+add
+push 1
+push 1
+mul
+add
+
+#line 31
+pusha bp
+push -13
+add
+push 1
+push 1
+mul
+add
+loadb
+storeb
+
+#line 31
+pusha bp
+push -4
+add
+push 2
+push 1
+mul
+add
+
+#line 31
+pusha bp
+push -13
+add
+push 2
+push 1
+mul
+add
+loadb
+storeb
+
+#line 31
+pusha bp
+push -4
+add
+push 3
+push 1
+mul
+add
+
+#line 31
+pusha bp
+push -13
+add
+push 3
+push 1
+mul
+add
+loadb
+storeb
+
+#line 32
+
+#line 32
+pusha bp
+push -4
+add
+push 0
+push 1
+mul
+add
+loadb
+outb
+
+#line 32
+pusha bp
+push -4
+add
+push 1
+push 1
+mul
+add
+loadb
+outb
+
+#line 32
+pusha bp
+push -4
+add
+push 2
+push 1
+mul
+add
+loadb
+outb
+
+#line 32
+pusha bp
+push -4
+add
+push 3
+push 1
+mul
+add
+loadb
+outb
+pushb 10
+outb
+
+#line 33
+
+#line 33
+pusha bp
+push -13
+add
+push 0
+push 1
+mul
+add
+loadb
+outb
+
+#line 33
+pusha bp
+push -13
+add
+push 1
+push 1
+mul
+add
+loadb
+outb
+
+#line 33
+pusha bp
+push -13
+add
+push 2
+push 1
+mul
+add
+loadb
+outb
+
+#line 33
+pusha bp
+push -13
 add
 push 3
 push 1
@@ -245,9 +462,9 @@ add
 loadb
 outb
 
-#line 22
+#line 33
 pusha bp
-push -10
+push -13
 add
 push 4
 push 1
@@ -255,59 +472,4 @@ mul
 add
 loadb
 outb
-
-#line 22
-pusha bp
-push -10
-add
-push 5
-push 1
-mul
-add
-loadb
-outb
-
-#line 22
-pusha bp
-push -10
-add
-push 6
-push 1
-mul
-add
-loadb
-outb
-
-#line 22
-pusha bp
-push -10
-add
-push 7
-push 1
-mul
-add
-loadb
-outb
-
-#line 22
-pusha bp
-push -10
-add
-push 8
-push 1
-mul
-add
-loadb
-outb
-
-#line 22
-pusha bp
-push -10
-add
-push 9
-push 1
-mul
-add
-loadb
-outb
-ret 0, 10, 0
+ret 0, 17, 0

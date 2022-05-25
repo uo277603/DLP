@@ -62,7 +62,7 @@ public class CodeSelection extends DefaultVisitor {
         out(method.getName() + ":");
         out("#func " + method.getName());
         out("#ret " + method.getRetorno().getName());
-        for(Parameter p: method.getParameter()){
+        for (Parameter p : method.getParameter()) {
             out("#param " + p.getName() + ":" + p.getType().getName());
         }
         int localsSize = 0;
@@ -94,13 +94,13 @@ public class CodeSelection extends DefaultVisitor {
         line(print);
         if (print.getExpr() != null)
             for (Expr child : print.getExpr()) {
-                if(child.getType().getClass() != ArrayType.class){
+                if (child.getType().getClass() != ArrayType.class) {
                     child.accept(this, Funcion.VALOR);
                     out("out" + child.getType().getSuffix());
-                }else{            
+                } else {
                     ArrayType tipo = (ArrayType) child.getType();
                     int size = tipo.getType().getSize();
-                    for(int i = 0; i < tipo.getIndex(); i++){
+                    for (int i = 0; i < tipo.getIndex(); i++) {
                         // dir[[child]]
                         child.accept(this, Funcion.DIRECCION);
                         out("push " + i);
@@ -139,14 +139,35 @@ public class CodeSelection extends DefaultVisitor {
     public Object visit(Assignment assignment, Object param) {
 
         line(assignment.getStart());
+        if (assignment.getLeft().getType().getClass() == ArrayType.class) {
+            ArrayType left = (ArrayType) assignment.getLeft().getType();
+            for(int i = 0; i < left.getIndex(); i++){
+                // dir left[i]
+                assignment.getLeft().accept(this, Funcion.DIRECCION);
+                out("push " + i);
+                out("push 1");
+                out("mul");
+                out("add");
 
-        if (assignment.getLeft() != null)
-            assignment.getLeft().accept(this, Funcion.DIRECCION);
+                // valor right[i]
+                assignment.getRight().accept(this, Funcion.DIRECCION);
+                out("push " + i);
+                out("push 1");
+                out("mul");
+                out("add");
+                out("loadb");
 
-        if (assignment.getRight() != null)
-            assignment.getRight().accept(this, Funcion.VALOR);
-        out("store" + assignment.getLeft().getType().getSuffix());
+                // left[i] = right[i]
+                out("storeb");
+            }
+        } else {
+            if (assignment.getLeft() != null)
+                assignment.getLeft().accept(this, Funcion.DIRECCION);
 
+            if (assignment.getRight() != null)
+                assignment.getRight().accept(this, Funcion.VALOR);
+            out("store" + assignment.getLeft().getType().getSuffix());
+        }
         return null;
     }
 
@@ -309,8 +330,8 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ExprUnariaLogica { String op; Expr expr; }
     public Object visit(ExprUnariaLogica exprUnariaLogica, Object param) {
-    line(exprUnariaLogica);
-        
+        line(exprUnariaLogica);
+
         if (exprUnariaLogica.getOp().equals("not")) {
             exprUnariaLogica.getExpr().accept(this, Funcion.VALOR);
             out("not");
@@ -371,7 +392,6 @@ public class CodeSelection extends DefaultVisitor {
             cast.getExpr().accept(this, Funcion.VALOR);
 
         out(cast.getExpr().getType().getSuffix() + "2" + cast.getTypeToConvert().getSuffix());
-        
 
         return null;
     }
@@ -393,7 +413,7 @@ public class CodeSelection extends DefaultVisitor {
     // class LitChar { String string; }
     public Object visit(LitChar litChar, Object param) {
         line(litChar);
-        if("'\\n'".equals(litChar.getString()))
+        if ("'\\n'".equals(litChar.getString()))
             out("pushb 10");
         else
             out("pushb " + (int) litChar.getString().charAt(1));
@@ -434,8 +454,8 @@ public class CodeSelection extends DefaultVisitor {
     public Object visit(TupleDefinition tupleDefinition, Object param) {
         line(tupleDefinition);
         out("#type " + tupleDefinition.getName() + ": {");
-        for (VarDefinition v: tupleDefinition.getVardefinition())
-            for (String s : v.getName()) 
+        for (VarDefinition v : tupleDefinition.getVardefinition())
+            for (String s : v.getName())
                 out(s + ":" + v.getType().getName());
         out("}");
         return null;

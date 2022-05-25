@@ -7,22 +7,30 @@ class Test000; /* Hola Mundo!
 
 	feature inicio is
 		local
-			data:[10]CHARACTER;
+			data:[4]CHARACTER;
 			data2:[2]INTEGER;
+			otra:[5]CHARACTER;
+			otraMal:[2]CHARACTER;
+			valMal:INTEGER;
 		do
 			data[0] := 'H';
 			data[1] := 'o';
 			data[2] := 'l';
 			data[3] := 'a';
-			data[4] := ' ';
-			data[5] := 'm';
-			data[6] := 'u';
-			data[7] := 'n';
-			data[8] := 'd';
-			data[9] := 'o';
 			data2[0] := 1;
 			data2[1] := 2;
-            print data;
+            println data;
+			println 'A';
+			println 'B';
+
+			otra[0] := 'M';
+			otra[1] := 'u';
+			otra[2] := 'n';
+			otra[3] := 'd';
+			otra[4] := 'o';
+			data := otra;
+			println data;
+			print otra;
 	end
 
 end

@@ -145,7 +145,15 @@ public class TypeChecking extends DefaultVisitor {
          */
         predicado(mismoTipo(assignment.getLeft().getType(), assignment.getRight().getType()),
                 "Los operandos deben ser del mismo tipo", assignment);
-        predicado(esPrimitivo(assignment.getLeft().getType()), "La parte de la izquierda tiene que ser simple", assignment.getStart());
+        predicado(esPrimitivo(assignment.getLeft().getType()) || esArrayChar(assignment.getLeft().getType()), "La parte de la izquierda tiene que ser simple o un array de caracteres", assignment.getStart());
+        if(assignment.getLeft().getType().getClass() == ArrayType.class){
+            predicado(esArrayChar(assignment.getRight().getType()), "Solo se puede asiginar a un array de caracteres otro del mismo tipo");
+            ArrayType izda = (ArrayType) assignment.getLeft().getType();
+            if(assignment.getRight().getType().getClass() == ArrayType.class){
+                ArrayType dcha = (ArrayType) assignment.getRight().getType();
+                predicado(dcha.getSize() >= izda.getSize(), "El array de la derecha ha de tener mayor o igual tamaño");
+            }
+        }
         predicado(assignment.getLeft().isModifiable(), "Se requiere expresión modificable", assignment.getLeft());
         return null;
     }
