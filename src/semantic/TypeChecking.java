@@ -150,6 +150,32 @@ public class TypeChecking extends DefaultVisitor {
         return null;
     }
 
+    //	class MultipleAssignment { List<Expr> expr;  Expr valor; }
+	public Object visit(MultipleAssignment multipleAssignment, Object param) {
+
+		super.visit(multipleAssignment, param);
+        boolean mismoTipo = true;
+        Type aux = multipleAssignment.getExpr().get(0).getType();
+        for(int i = 1; i < multipleAssignment.getExpr().size(); i++){
+            if(multipleAssignment.getExpr().get(i).getType().getClass() != aux.getClass()){
+                mismoTipo = false;
+                break;
+            }
+        }
+        predicado(mismoTipo, "Todas las variables tienen que ser del mismo tipo");
+        predicado(aux.getClass() == multipleAssignment.getValor().getType().getClass(), "Solo se pueden asignar valores a las variables si tienen el mismo tipo que el valor");
+        boolean allModifiable = true;
+        for(Expr expr: multipleAssignment.getExpr()){
+            if(!expr.isModifiable()){
+                allModifiable = false;
+                break;
+            }
+        }
+        predicado(esPrimitivo(aux), "Las variables tienen que ser de tipo simple");
+        predicado(allModifiable, "Solo se pueden asignar valores a variables de tipo simple");
+		return null;
+	}
+
     // class Conditional { Expr condition; List<Sentence> iftrue; List<Sentence>
     // iffalse; }
     public Object visit(Conditional conditional, Object param) {

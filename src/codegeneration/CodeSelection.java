@@ -135,6 +135,21 @@ public class CodeSelection extends DefaultVisitor {
         return null;
     }
 
+    //	class MultipleAssignment { List<Expr> expr;  Expr valor; }
+	public Object visit(MultipleAssignment multipleAssignment, Object param) {
+
+		// super.visit(node, param);
+
+		if (multipleAssignment.getExpr() != null)
+			for (Expr child : multipleAssignment.getExpr()){
+				child.accept(this, Funcion.DIRECCION);
+                multipleAssignment.getValor().accept(this, Funcion.VALOR);
+                out("store" + multipleAssignment.getValor().getType().getSuffix());
+            }
+
+		return null;
+	}
+
     // class Conditional { Expr condition; List<Sentence> iftrue; List<Sentence>
     // iffalse; }
     public Object visit(Conditional conditional, Object param) {
@@ -388,6 +403,8 @@ public class CodeSelection extends DefaultVisitor {
     // class Variable { String string; }
     public Object visit(Variable variable, Object param) {
         line(variable);
+        if(param == null)
+            return null;
         if (param.equals(Funcion.VALOR)) {
             variable.accept(this, Funcion.DIRECCION);
             out("load" + variable.getType().getSuffix());

@@ -1,141 +1,19 @@
-//*
-Tiene varios resutados:
-48
-(1) 0+1=1
-(2) 1+1=2
-(3) 1+2=3
-(4) 2+3=5
-(5) 3+5=8
-(6) 5+8=13
-(7) 8+13=21
-(8) 13+21=34
-56
-0 1 1 2 
-
-Cada resutlado está comentado donde se obtiene.
-*//
-
-class Test005;
-	global
-		types
-			deftuple Pareja as
-			  entero:INTEGER;
-			  caracter:CHARACTER;
-			end
-			deftuple Empleado as edad:INTEGER; end
-
-			deftuple Empresa as
-				empleados:[2]Empleado;
-			end
-		vars
-			pareja:Pareja;
-			acme:[2]Empresa;
-			fibonacci:[8][3] INTEGER;
-
+class Test000; /* Hola Mundo!
 /*/-------------------------------
 
 	create inicio;
 	
 /*/-------------------------------
 
-	feature p is do end
-
-
-	feature f (paramReal:DOUBLE, paramInt:INTEGER):INTEGER is
-		local
-			localReal:DOUBLE;
-			digito:CHARACTER;
-			resultado:INTEGER;
-		do
-			localReal := paramReal * 10.0;
-			digito := '0';
-			if paramInt < 256 then
-				digito := to<CHARACTER>(paramInt);
-				resultado := to<INTEGER>(digito);
-			else
-				resultado := to<INTEGER>(localReal);
-			end
-			return resultado;
-	end
-
-
-	feature inicializa is
-		local
-		i:INTEGER;
-		do
-			fibonacci[0][0] := 0;
-			fibonacci[0][1] := 1;
-			fibonacci[0][2] := 1;
-			from
-				i := 1;
-			until i = 8 loop
-				fibonacci[i][0] := fibonacci[i - 1][1];
-				fibonacci[i][1] := fibonacci[i - 1][2];
-				fibonacci[i][2] := fibonacci[i][0] + fibonacci[i][1];
-				i := i + 1;
-			end
-	end
-
-/*/-------------------------------
-
 	feature inicio is
 		local
-			i:INTEGER;
-			j:INTEGER;
+			a,b,c:INTEGER;
+			array:[3]INTEGER;
 		do
-			p();
-
-			i := 0;
-			pareja.caracter := '0';
-			pareja.entero := to<INTEGER>('0');
-
-			println f(to<DOUBLE>(i), to<INTEGER>(pareja.caracter));  /* Sale 48 (código ASCII de '0')
-			f(1.3, 2);
-
-			inicializa(); 
-			from
-				i := 0;
-			until i = 8 loop 	/* Salen 8 primeros de Fibonacci (de 1 a 34)
-				print '(';
-				print i + 1;
-				print ')';
-				print ' ';
-				print fibonacci[i][0];
-				print '+';
-				print fibonacci[i][1];
-				print '=';
-				print fibonacci[i][2];
-				print '\n';
-				i := i + 1;
-			end
-
-			acme[1].empleados[1].edad := 56;
-			println acme[1].empleados[1].edad;	/* Sale 56
-
-			from
-				i := 0;
-			until i = 2 loop
-				from
-					j := 0;
-				until j = 2 loop
-					acme[i].empleados[j].edad := i + j;
-					j := j + 1;
-				end
-				i := i + 1;
-			end
-
-			from
-				i := 0;
-			until i = 2 loop
-				from
-					j := 0;
-				until j = 2 loop	      /* Sale: 0 1 1 2
-					print acme[i].empleados[j].edad;
-					print ' ';
-					j := j + 1;
-				end
-				i := i + 1;
-			end
+			a := b := c := 4;
+			println a;
+			println b;
+			println c;
 	end
 
 end

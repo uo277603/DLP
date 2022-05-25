@@ -11,6 +11,7 @@ parameter -> name:string type ;
 print:sentence -> string expr* ;
 read:sentence -> expr*;
 assignment:sentence -> left:expr right:expr;
+multipleAssignment:sentence -> expr* valor:expr;
 conditional:sentence -> condition:expr iftrue:sentence* iffalse:sentence*;
 loop:sentence -> init:sentence* condition:expr sentence*;
 returnNode:sentence -> expr;

@@ -14,6 +14,7 @@ public interface Visitor {
 	public Object visit(Print print, Object param);
 	public Object visit(Read read, Object param);
 	public Object visit(Assignment assignment, Object param);
+	public Object visit(MultipleAssignment multipleAssignment, Object param);
 	public Object visit(Conditional conditional, Object param);
 	public Object visit(Loop loop, Object param);
 	public Object visit(ReturnNode returnNode, Object param);

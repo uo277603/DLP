@@ -68,6 +68,14 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class MultipleAssignment { List<Expr> expr;  Expr valor; }
+	public Object visit(MultipleAssignment multipleAssignment, Object param) {
+		visitChildren(multipleAssignment.getExpr(), param);
+		if (multipleAssignment.getValor() != null)
+			multipleAssignment.getValor().accept(this, param);
+		return null;
+	}
+
 	//	class Conditional { Expr condition;  List<Sentence> iftrue;  List<Sentence> iffalse; }
 	public Object visit(Conditional conditional, Object param) {
 		if (conditional.getCondition() != null)

@@ -73,10 +73,15 @@ sentencia returns[Sentence ast]
 	t=('print' | 'println') listaexpresionOpt ';' {$ast = new Print($t.text, $listaexpresionOpt.list);}
 	| 'read' listaexpresion ';' {$ast = new Read($listaexpresion.list);}
 	| asignacion {$ast = $asignacion.ast;}
+	| listaAsignacion ':=' valor=expr ';' {$ast = new MultipleAssignment($listaAsignacion.list, $valor.ast);}
 	| 'if' expr 'then' ls+=sentencia* elseOpt 'end' {$ast = new Conditional($expr.ast, $ls, $elseOpt.list);}
 	| fromOpt 'until' expr 'loop' ls+=sentencia* 'end' {$ast = new Loop($fromOpt.list, $expr.ast, $ls);}
 	| IDENT '(' listaexpresionOpt ')' ';' {$ast = new MethodCallSentence($IDENT, $listaexpresionOpt.list);}
 	| 'return' exprOpt ';' {$ast = new ReturnNode($exprOpt.ast);}
+	;
+
+listaAsignacion returns[List<Expr> list = new ArrayList<Expr>()]
+	:	expr {$list.add($expr.ast);} (':=' expr {$list.add($expr.ast);})+
 	;
 
 exprOpt returns[Expr ast]
