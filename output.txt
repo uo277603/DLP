@@ -7,80 +7,84 @@ halt
 #global e:float
 #global f:float
 
-#line 13
+#line 6
+#global y:int
+
+#line 14
 inicio:
 #func inicio
 #ret VOID
 #local a:int
 #local b:int
 #local c:int
-enter 6
+#local x:int
+enter 8
 
-#line 15
+#line 17
 
-#line 15
+#line 17
 pusha bp
 push -2
 add
 
-#line 15
+#line 17
 push 1
 storei
 
-#line 16
+#line 18
 
-#line 16
+#line 18
 pusha bp
 push -4
 add
 
-#line 16
+#line 18
 push 2
 storei
 
-#line 17
+#line 19
 
-#line 17
+#line 19
 pusha bp
 push -6
 add
 
-#line 17
+#line 19
 push 3
 storei
 
-#line 18
+#line 20
 
-#line 18
+#line 20
 pusha 0
 
-#line 18
+#line 20
 pushf 4.0
 storef
 
-#line 19
+#line 21
 
-#line 19
+#line 21
 pusha 4
 
-#line 19
+#line 21
 pushf 5.0
 storef
 
-#line 20
+#line 22
 
-#line 20
+#line 22
 pusha 8
 
-#line 20
+#line 22
 pushf 6.0
 storef
 
-#line 21
+#line 23
 
-#line 21
+#line 23
 
-#line 21
+#line 23
 pusha bp
 push -2
 add
@@ -89,11 +93,11 @@ outi
 pushb 10
 outb
 
-#line 22
+#line 24
 
-#line 22
+#line 24
 
-#line 22
+#line 24
 pusha bp
 push -4
 add
@@ -102,11 +106,11 @@ outi
 pushb 10
 outb
 
-#line 23
+#line 25
 
-#line 23
+#line 25
 
-#line 23
+#line 25
 pusha bp
 push -6
 add
@@ -115,36 +119,80 @@ outi
 pushb 10
 outb
 
-#line 24
+#line 26
 
-#line 24
+#line 26
 
-#line 24
+#line 26
 pusha 0
 loadf
 outf
 pushb 10
 outb
 
-#line 25
+#line 27
 
-#line 25
+#line 27
 
-#line 25
+#line 27
 pusha 4
 loadf
 outf
 pushb 10
 outb
 
-#line 26
+#line 28
 
-#line 26
+#line 28
 
-#line 26
+#line 28
 pusha 8
 loadf
 outf
 pushb 10
 outb
-ret 0, 6, 0
+
+#line 29
+
+#line 29
+pusha bp
+push -8
+add
+
+#line 29
+push 55
+storei
+
+#line 30
+
+#line 30
+
+#line 30
+pusha bp
+push -8
+add
+loadi
+outi
+pushb 10
+outb
+
+#line 31
+
+#line 31
+pusha 12
+
+#line 31
+push 66
+storei
+
+#line 32
+
+#line 32
+
+#line 32
+pusha 12
+loadi
+outi
+pushb 10
+outb
+ret 0, 8, 0

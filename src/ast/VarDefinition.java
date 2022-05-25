@@ -7,6 +7,7 @@ package ast;
 import java.util.*;
 import org.antlr.v4.runtime.*;
 
+import semantic.Ambito;
 import visitor.*;
 
 //	varDefinition:definition -> name:String*  type:type
@@ -73,10 +74,11 @@ public class VarDefinition extends AbstractDefinition {
 	}
 
 	public int getVarAddress(String ident){
-		if(getAddress() < 0)
-			return getAddress() - getName().indexOf(ident) * getType().getSize();
+		int size = getName().size();
+		if(getAmbito() == Ambito.LOCAL)
+			return (size - getName().indexOf(ident) - 1) * getType().getSize() + getAddress();
 		else
-			return getName().indexOf(ident) * getType().getSize() + getAddress();
+			return getAddress() - (size - getName().indexOf(ident)) * getType().getSize();
 	}
 
 }

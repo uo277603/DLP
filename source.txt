@@ -3,6 +3,7 @@ class Test000; /* Hola Mundo!
 	global
 		vars
 			d,e,f:DOUBLE;
+			y:INTEGER;
 
 	create inicio;
 	
@@ -11,6 +12,7 @@ class Test000; /* Hola Mundo!
 	feature inicio is
 		local
 			a,b,c:INTEGER;
+			x:INTEGER;
 		do
             a := 1;
 			b := 2;
@@ -24,6 +26,10 @@ class Test000; /* Hola Mundo!
 			println d;
 			println e;
 			println f;
+			x := 55;
+			println x;
+			y := 66;
+			println y;
 	end
 
 end
