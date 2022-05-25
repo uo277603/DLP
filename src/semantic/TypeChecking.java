@@ -241,6 +241,31 @@ public class TypeChecking extends DefaultVisitor {
         return null;
     }
 
+    //	class SwitchSentence { Expr valor;  List<CaseOption> caseoption;  DefaultCase defaultcase; }
+	public Object visit(SwitchSentence switchSentence, Object param) {
+        super.visit(switchSentence, param);
+        predicado(esPrimitivo(switchSentence.getValor().getType()), "Cannot switch on a value of type " + switchSentence.getValor().getType()
+         + ". Only primitve values are permitted");
+
+		return null;
+	}
+
+	//	class CaseOption { Expr valor;  List<Sentence> sentence; }
+	public Object visit(CaseOption caseOption, Object param) {
+
+		// super.visit(node, param);
+
+		if (caseOption.getValor() != null)
+			caseOption.getValor().accept(this, param);
+        predicado(mismoTipo(caseOption.getValor().getType(), caseOption.getSwitchSentence().getValor().getType()), "The value type of this case mismtach from the swtich sentence");
+
+		if (caseOption.getSentence() != null)
+			for (Sentence child : caseOption.getSentence())
+				child.accept(this, param);
+
+		return null;
+	}
+
     // class ExprBinariaAritmetica { Expr left; String op; Expr right; }
     public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
 

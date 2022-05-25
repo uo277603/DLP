@@ -202,6 +202,25 @@ public class Identification extends DefaultVisitor {
         return null;
     }
 
+    //	class SwitchSentence { Expr valor;  List<CaseOption> caseoption;  DefaultCase defaultcase; }
+	public Object visit(SwitchSentence switchSentence, Object param) {
+
+		// super.visit(node, param);
+
+		if (switchSentence.getValor() != null)
+			switchSentence.getValor().accept(this, param);
+
+		if (switchSentence.getCaseoption() != null)
+			for (CaseOption child : switchSentence.getCaseoption())
+                child.setSwitchSentence(switchSentence);
+
+		if (switchSentence.getDefaultcase() != null)
+			switchSentence.getDefaultcase().setSwitchSentence(switchSentence);
+
+		return null;
+	}
+
+
     // class VarDefinition { List<String> name; Type type; }
     public Object visit(VarDefinition varDefinition, Object param) {
 

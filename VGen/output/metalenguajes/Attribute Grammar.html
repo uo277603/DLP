@@ -50,6 +50,8 @@
 <tr><td><span class="nodo">classNode</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">definition</span><span class="tipoAtt">:definition*</span> <span class="nombreAtt">createMethod</span><span class="tipoAtt">:String*</span> <span class="nombreAtt">method</span><span class="tipoAtt">:method*</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">method</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">parameter</span><span class="tipoAtt">:parameter*</span> <span class="nombreAtt">retorno</span><span class="tipoAtt">:type</span> <span class="nombreAtt">definition</span><span class="tipoAtt">:definition*</span> <span class="nombreAtt">sentence</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">parameter</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">type</span><span class="tipoAtt">:type</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">caseOption</span>&nbsp;&rarr;  <span class="nombreAtt">valor</span><span class="tipoAtt">:expr</span> <span class="nombreAtt">sentence</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">defaultCase</span>&nbsp;&rarr;  <span class="nombreAtt">sentence</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
 <tr><td><span class="nodo">print</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">string</span><span class="tipoAtt">:String</span> <span class="nombreAtt">expr</span><span class="tipoAtt">:expr*</span></td><td></td><td></td></tr>
@@ -59,6 +61,8 @@
 <tr><td><span class="nodo">loop</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">init</span><span class="tipoAtt">:sentence*</span> <span class="nombreAtt">condition</span><span class="tipoAtt">:expr</span> <span class="nombreAtt">sentence</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">returnNode</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">expr</span><span class="tipoAtt">:expr</span></td><td></td><td></td></tr>
 <tr><td><span class="nodo">methodCallSentence</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span> <span class="nombreAtt">args</span><span class="tipoAtt">:expr*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">switchSentence</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">valor</span><span class="tipoAtt">:expr</span> <span class="nombreAtt">caseoption</span><span class="tipoAtt">:caseOption*</span> <span class="nombreAtt">defaultcase</span><span class="tipoAtt">:defaultCase</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">breakSentence</span>:<span class="categoria">sentence</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
 <tr><td>&nbsp;</td><td></td><td></td></tr>
 
 <tr><td><span class="nodo">exprBinariaAritmetica</span>:<span class="categoria">expr</span>&nbsp;&rarr;  <span class="nombreAtt">left</span><span class="tipoAtt">:expr</span> <span class="nombreAtt">op</span><span class="tipoAtt">:String</span> <span class="nombreAtt">right</span><span class="tipoAtt">:expr</span></td><td></td><td></td></tr>

@@ -18,6 +18,10 @@ public interface Visitor {
 	public Object visit(Loop loop, Object param);
 	public Object visit(ReturnNode returnNode, Object param);
 	public Object visit(MethodCallSentence methodCallSentence, Object param);
+	public Object visit(SwitchSentence switchSentence, Object param);
+	public Object visit(BreakSentence breakSentence, Object param);
+	public Object visit(CaseOption caseOption, Object param);
+	public Object visit(DefaultCase defaultCase, Object param);
 	public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param);
 	public Object visit(ExprUnariaAritmetica exprUnariaAritmetica, Object param);
 	public Object visit(ExprBinariaLogica exprBinariaLogica, Object param);

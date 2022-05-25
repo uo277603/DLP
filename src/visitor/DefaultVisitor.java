@@ -99,6 +99,35 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class SwitchSentence { Expr valor;  List<CaseOption> caseoption;  DefaultCase defaultcase; }
+	public Object visit(SwitchSentence switchSentence, Object param) {
+		if (switchSentence.getValor() != null)
+			switchSentence.getValor().accept(this, param);
+		visitChildren(switchSentence.getCaseoption(), param);
+		if (switchSentence.getDefaultcase() != null)
+			switchSentence.getDefaultcase().accept(this, param);
+		return null;
+	}
+
+	//	class BreakSentence {  }
+	public Object visit(BreakSentence breakSentence, Object param) {
+		return null;
+	}
+
+	//	class CaseOption { Expr valor;  List<Sentence> sentence; }
+	public Object visit(CaseOption caseOption, Object param) {
+		if (caseOption.getValor() != null)
+			caseOption.getValor().accept(this, param);
+		visitChildren(caseOption.getSentence(), param);
+		return null;
+	}
+
+	//	class DefaultCase { List<Sentence> sentence; }
+	public Object visit(DefaultCase defaultCase, Object param) {
+		visitChildren(defaultCase.getSentence(), param);
+		return null;
+	}
+
 	//	class ExprBinariaAritmetica { Expr left;  String op;  Expr right; }
 	public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
 		if (exprBinariaAritmetica.getLeft() != null)

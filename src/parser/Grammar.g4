@@ -77,6 +77,16 @@ sentencia returns[Sentence ast]
 	| fromOpt 'until' expr 'loop' ls+=sentencia* 'end' {$ast = new Loop($fromOpt.list, $expr.ast, $ls);}
 	| IDENT '(' listaexpresionOpt ')' ';' {$ast = new MethodCallSentence($IDENT, $listaexpresionOpt.list);}
 	| 'return' exprOpt ';' {$ast = new ReturnNode($exprOpt.ast);}
+	| 'switch' valor=expr '{' lsCase+=caseOption+ defaultCase '}' {$ast = new SwitchSentence($valor.ast, $lsCase, $defaultCase.ast);}
+	| BREAK ';' {$ast = new BreakSentence();}
+	;
+
+caseOption returns[CaseOption ast]
+	: 'case' valor=expr ':' ls+=sentencia* {$ast = new CaseOption($valor.ast, $ls);}
+	;
+
+defaultCase returns[DefaultCase ast]
+	:	('default' ':' ls+=sentencia* {$ast = new DefaultCase($ls);})?
 	;
 
 exprOpt returns[Expr ast]

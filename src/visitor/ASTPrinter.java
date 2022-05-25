@@ -140,7 +140,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "name", "String", parameter.getName());
 		visit(indent + 1, "type", "Type", parameter.getType());
-		print(indent + 1, "address", "int", parameter.getDefinition().getAddress());
 		return null;
 	}
 
@@ -221,6 +220,48 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class SwitchSentence { Expr valor;  List<CaseOption> caseoption;  DefaultCase defaultcase; }
+	public Object visit(SwitchSentence switchSentence, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "SwitchSentence", switchSentence, false);
+
+		visit(indent + 1, "valor", "Expr", switchSentence.getValor());
+		visit(indent + 1, "caseoption", "List<CaseOption>", switchSentence.getCaseoption());
+		visit(indent + 1, "defaultcase", "DefaultCase", switchSentence.getDefaultcase());
+		return null;
+	}
+
+	//	class BreakSentence {  }
+	public Object visit(BreakSentence breakSentence, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "BreakSentence", breakSentence, true);
+
+		return null;
+	}
+
+	//	class CaseOption { Expr valor;  List<Sentence> sentence; }
+	public Object visit(CaseOption caseOption, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "CaseOption", caseOption, false);
+
+		visit(indent + 1, "valor", "Expr", caseOption.getValor());
+		visit(indent + 1, "sentence", "List<Sentence>", caseOption.getSentence());
+		return null;
+	}
+
+	//	class DefaultCase { List<Sentence> sentence; }
+	public Object visit(DefaultCase defaultCase, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "DefaultCase", defaultCase, false);
+
+		visit(indent + 1, "sentence", "List<Sentence>", defaultCase.getSentence());
+		return null;
+	}
+
 	//	class ExprBinariaAritmetica { Expr left;  String op;  Expr right; }
 	public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
 		int indent = ((Integer)param).intValue();
@@ -287,7 +328,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		visit(indent + 1, "left", "Expr", arrayAcces.getLeft());
 		visit(indent + 1, "right", "Expr", arrayAcces.getRight());
-		print(indent + 1, "Tipo", "Type", arrayAcces.getType());
 		return null;
 	}
 
@@ -419,8 +459,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "name", "List<String>", varDefinition.getName());
 		visit(indent + 1, "type", "Type", varDefinition.getType());
-		print(indent + 1, "scope", "Ambito", varDefinition.getAmbito());
-		print(indent + 1, "address", "int", varDefinition.getAddress());
 		return null;
 	}
 

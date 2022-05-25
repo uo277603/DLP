@@ -213,6 +213,69 @@ public class CodeSelection extends DefaultVisitor {
         return null;
     }
 
+    //	class SwitchSentence { Expr valor;  List<CaseOption> caseoption;  DefaultCase defaultcase; }
+	public Object visit(SwitchSentence switchSentence, Object param) {
+        int n = count++;
+        int nCase = 1;
+		// super.visit(node, param);
+        int[] numbers = {n, nCase};
+        
+		if (switchSentence.getCaseoption() != null)
+			for (CaseOption child : switchSentence.getCaseoption()){
+                child.accept(this, numbers);
+                numbers[1]++;
+            }
+        out("case" + n + "_" + numbers[1] + ":");
+        out("caseWE" + n + "_" + numbers[1] + ":");
+		if (switchSentence.getDefaultcase() != null){
+			switchSentence.getDefaultcase().accept(this, param);
+        }
+        
+        out("finSwitch" + n + ":");
+		return null;
+	}
+
+    //	class BreakSentence {  }
+	public Object visit(BreakSentence breakSentence, Object param) {
+        int n = (int) param;
+        out("jmp finSwitch" + n);
+		return null;
+	}
+
+	//	class CaseOption { Expr valor;  List<Sentence> sentence; }
+	public Object visit(CaseOption caseOption, Object param) {
+
+		// super.visit(node, param);
+        int[] numbers = (int[]) param;
+        int n = numbers[0];
+        int nCase = numbers[1];
+        if(nCase != 1)
+            out("case" + n + "_" + nCase + ":");
+        caseOption.getSwitchSentence().getValor().accept(this, Funcion.VALOR);
+		if (caseOption.getValor() != null)
+			caseOption.getValor().accept(this, Funcion.VALOR);
+        out("eq" + caseOption.getValor().getType().getSuffix());
+        out("jz case" + n + "_" + (nCase + 1));
+        if(nCase != 1)
+            out("caseWE" + n + "_" + nCase + ":");
+		if (caseOption.getSentence() != null)
+			for (Sentence child : caseOption.getSentence())
+				child.accept(this, n);
+        out("jmp caseWE" + n + "_" + (nCase + 1));
+		return null;
+	}
+
+	//	class DefaultCase { List<Sentence> sentence; }
+	public Object visit(DefaultCase defaultCase, Object param) {
+
+		// super.visit(node, param);
+
+		if (defaultCase.getSentence() != null)
+			for (Sentence child : defaultCase.getSentence())
+				child.accept(this, param);
+		return null;
+	}
+
     // class ExprBinariaAritmetica { Expr left; String op; Expr right; }
     public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
         line(exprBinariaAritmetica);

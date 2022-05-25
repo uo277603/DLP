@@ -15,6 +15,11 @@ conditional:sentence -> condition:expr iftrue:sentence* iffalse:sentence*;
 loop:sentence -> init:sentence* condition:expr sentence*;
 returnNode:sentence -> expr;
 methodCallSentence:sentence -> name:string args:expr* ;
+switchSentence:sentence -> valor:expr caseOption* defaultCase;
+breakSentence:sentence -> ;
+
+caseOption -> valor:expr sentence* ;
+defaultCase -> sentence* ;
 
 exprBinariaAritmetica:expr -> left:expr op:string right:expr ;
 exprUnariaAritmetica:expr -> op:string expr ;
