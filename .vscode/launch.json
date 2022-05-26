@@ -2,16 +2,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch TestLexer",
-            "request": "launch",
-            "mainClass": "main.TestLexer",
-            "projectName": "z"
-        },
-        {
-            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "main.Main",
+            "args": "source.txt",
             "projectName": "z"
         },
         {
@@ -22,7 +16,7 @@
             "console": "integratedTerminal",
             "stopOnEntry": false,
             "mainClass": "main.Main",
-            "args": "",
+            "args": "source.txt",
             "projectName": "z"
         }
     ]
