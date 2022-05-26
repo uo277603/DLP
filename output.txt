@@ -1,745 +1,901 @@
 #source "source.txt"
-call calcularHipoteca
+call inicio
 halt
 
-#line 19
-PrintPrecioViv:
-#func PrintPrecioViv
+#line 6
+#global arr:10 * int
+
+#line 7
+#global numElem:int
+
+#line 13
+mensaje1:
+#func mensaje1
 #ret VOID
 enter 0
 
-#line 19
+#line 15
 
-#line 19
-pushb 80
+#line 15
+pushb 67
 outb
 
-#line 19
-pushb 114
+#line 15
+pushb 65
 outb
 
-#line 19
-pushb 101
+#line 15
+pushb 82
 outb
 
-#line 19
-pushb 99
+#line 15
+pushb 71
 outb
 
-#line 19
-pushb 105
+#line 15
+pushb 65
 outb
 
-#line 19
-pushb 111
-outb
-
-#line 19
+#line 15
 pushb 32
 outb
 
-#line 19
-pushb 100
+#line 15
+pushb 68
 outb
 
-#line 19
-pushb 101
-outb
-
-#line 19
-pushb 32
-outb
-
-#line 19
-pushb 108
-outb
-
-#line 19
-pushb 97
-outb
-
-#line 19
-pushb 32
-outb
-
-#line 19
-pushb 118
-outb
-
-#line 19
-pushb 105
-outb
-
-#line 19
-pushb 118
-outb
-
-#line 19
-pushb 105
-outb
-
-#line 19
-pushb 101
-outb
-
-#line 19
-pushb 110
-outb
-
-#line 19
-pushb 100
-outb
-
-#line 19
-pushb 97
-outb
-
-#line 19
-pushb 58
-outb
-
-#line 19
-pushb 32
-outb
-ret 0, 0, 0
-
-#line 24
-PrintMeses:
-#func PrintMeses
-#ret VOID
-enter 0
-
-#line 24
-
-#line 24
-pushb 77
-outb
-
-#line 24
-pushb 101
-outb
-
-#line 24
-pushb 115
-outb
-
-#line 24
-pushb 101
-outb
-
-#line 24
-pushb 115
-outb
-
-#line 24
-pushb 32
-outb
-
-#line 24
-pushb 100
-outb
-
-#line 24
-pushb 101
-outb
-
-#line 24
-pushb 32
-outb
-
-#line 24
-pushb 108
-outb
-
-#line 24
-pushb 97
-outb
-
-#line 24
-pushb 32
-outb
-
-#line 24
-pushb 104
-outb
-
-#line 24
-pushb 105
-outb
-
-#line 24
-pushb 112
-outb
-
-#line 24
-pushb 111
-outb
-
-#line 24
-pushb 116
-outb
-
-#line 24
-pushb 101
-outb
-
-#line 24
-pushb 99
-outb
-
-#line 24
-pushb 97
-outb
-
-#line 24
-pushb 58
-outb
-
-#line 24
-pushb 32
-outb
-ret 0, 0, 0
-
-#line 29
-PrintInteres:
-#func PrintInteres
-#ret VOID
-enter 0
-
-#line 29
-
-#line 29
-pushb 73
-outb
-
-#line 29
-pushb 110
-outb
-
-#line 29
-pushb 116
-outb
-
-#line 29
-pushb 101
-outb
-
-#line 29
-pushb 114
-outb
-
-#line 29
-pushb 233
-outb
-
-#line 29
-pushb 115
-outb
-
-#line 29
-pushb 32
-outb
-
-#line 29
-pushb 100
-outb
-
-#line 29
-pushb 101
-outb
-
-#line 29
-pushb 108
-outb
-
-#line 29
-pushb 32
-outb
-
-#line 29
-pushb 112
-outb
-
-#line 29
-pushb 114
-outb
-
-#line 29
-pushb 233
-outb
-
-#line 29
-pushb 115
-outb
-
-#line 29
-pushb 116
-outb
-
-#line 29
-pushb 97
-outb
-
-#line 29
-pushb 109
-outb
-
-#line 29
-pushb 111
-outb
-
-#line 29
-pushb 58
-outb
-
-#line 29
-pushb 32
-outb
-ret 0, 0, 0
-
-#line 34
-printMensaje:
-#func printMensaje
-#ret VOID
-enter 0
-
-#line 34
-
-#line 34
-pushb 72
-outb
-
-#line 34
-pushb 105
-outb
-
-#line 34
-pushb 112
-outb
-
-#line 34
-pushb 111
-outb
-
-#line 34
-pushb 116
-outb
-
-#line 34
-pushb 101
-outb
-
-#line 34
-pushb 99
-outb
-
-#line 34
-pushb 97
-outb
-
-#line 34
-pushb 32
-outb
-ret 0, 0, 0
-
-#line 38
-potencia:
-#func potencia
-#ret float
-#param base:float
-#param exponente:int
-#local total:float
-enter 4
-
-#line 51
-
-#line 42
-
-#line 42
-
-#line 42
-pusha bp
-push 4
-add
-loadi
-
-#line 42
-push 0
-eqi
-jz else0
-
-#line 43
-
-#line 43
-pusha bp
-push -4
-add
-
-#line 43
-pushf 1.0
-storef
-jmp finIf0
-else0:
-
-#line 51
-
-#line 44
-
-#line 44
-
-#line 44
-pusha bp
-push 4
-add
-loadi
-
-#line 44
-push 0
-lti
-jz else1
-
-#line 45
-
-#line 45
-pusha bp
-push -4
-add
-
-#line 45
-
-#line 45
-pushf 1.0
-
-#line 45
-
-#line 45
-
-#line 45
-pusha bp
-push 6
-add
-loadf
-
-#line 45
-
-#line 45
-push 0
-
-#line 45
-
-#line 45
-pusha bp
-push 4
-add
-loadi
-subi
-call potencia
-divf
-storef
-jmp finIf1
-else1:
-
-#line 47
-
-#line 47
-pusha bp
-push -4
-add
-
-#line 47
-
-#line 47
-pusha bp
-push 6
-add
-loadf
-storef
-
-#line 51
-inicioLoop2:
-
-#line 49
-
-#line 49
-
-#line 49
-pusha bp
-push 4
-add
-loadi
-
-#line 49
-push 0
-eqi
-jnz finLoop2
-
-#line 50
-
-#line 50
-pusha bp
-push -4
-add
-
-#line 50
-
-#line 50
-
-#line 50
-pusha bp
-push -4
-add
-loadf
-
-#line 50
-
-#line 50
-pusha bp
-push 6
-add
-loadf
-mulf
-storef
-
-#line 51
-
-#line 51
-pusha bp
-push 4
-add
-
-#line 51
-
-#line 51
-
-#line 51
-pusha bp
-push 4
-add
-loadi
-
-#line 51
-push 1
-subi
-storei
-jmp inicioLoop2
-finLoop2:
-finIf1:
-finIf0:
-
-#line 55
-
-#line 55
-
-#line 55
-pusha bp
-push -4
-add
-loadf
-ret 4, 4, 6
-
-#line 58
-letraHipoteca:
-#func letraHipoteca
-#ret float
-#param capital:float
-#param meses:int
-#param interes:float
-#local mensual:float
-enter 4
-
-#line 62
-
-#line 62
-pusha bp
-push -4
-add
-
-#line 62
-
-#line 62
-
-#line 62
-pusha bp
-push 4
-add
-loadf
-
-#line 62
-pushf 12.0
-divf
-storef
-
-#line 63
-
-#line 63
-
-#line 63
-
-#line 63
-
-#line 63
-pusha bp
-push 10
-add
-loadf
-
-#line 63
-
-#line 63
-pusha bp
-push -4
-add
-loadf
-mulf
-
-#line 63
-
-#line 63
-pushf 100.0
-
-#line 63
-
-#line 63
-pushf 1.0
-
-#line 63
-
-#line 63
-
-#line 63
-pushf 1.0
-
-#line 63
-
-#line 63
-
-#line 63
-pusha bp
-push -4
-add
-loadf
-
-#line 63
-pushf 100.0
-divf
-addf
-
-#line 63
-
-#line 63
-push 0
-
-#line 63
-
-#line 63
-pusha bp
-push 8
-add
-loadi
-subi
-call potencia
-subf
-mulf
-divf
-ret 4, 4, 10
-
-#line 68
-calcularHipoteca:
-#func calcularHipoteca
-#ret VOID
-#local precioViv:float
-#local mesesHipoteca:int
-#local interes:float
-enter 10
-call PrintPrecioViv
-
-#line 73
-
-#line 73
-pusha bp
-push -4
-add
-inf
-storef
-call PrintMeses
-
-#line 75
-
-#line 75
-pusha bp
-push -6
-add
-ini
-storei
-call PrintInteres
-
-#line 77
-
-#line 77
-pusha bp
-push -10
-add
-inf
-storef
-call printMensaje
-
-#line 85
-
-#line 85
-
-#line 85
-
-#line 85
-pusha bp
-push -4
-add
-loadf
-
-#line 85
-
-#line 85
-pusha bp
-push -6
-add
-loadi
-
-#line 85
-
-#line 85
-pusha bp
-push -10
-add
-loadf
-call letraHipoteca
-outf
-
-#line 86
-
-#line 86
-pushb 32
-outb
-
-#line 87
-
-#line 87
+#line 15
 pushb 69
 outb
 
-#line 87
-pushb 117
+#line 15
+pushb 76
 outb
 
-#line 87
-pushb 114
+#line 15
+pushb 32
 outb
 
-#line 87
-pushb 111
+#line 15
+pushb 65
 outb
 
-#line 87
-pushb 115
+#line 15
+pushb 82
+outb
+
+#line 15
+pushb 82
+outb
+
+#line 15
+pushb 65
+outb
+
+#line 15
+pushb 89
+outb
+
+#line 15
+pushb 32
+outb
+
+#line 15
+pushb 65
+outb
+
+#line 15
+pushb 32
+outb
+
+#line 15
+pushb 79
+outb
+
+#line 15
+pushb 82
+outb
+
+#line 15
+pushb 68
+outb
+
+#line 15
+pushb 69
+outb
+
+#line 15
+pushb 78
+outb
+
+#line 15
+pushb 65
+outb
+
+#line 15
+pushb 82
+outb
+
+#line 15
+pushb 58
+outb
+
+#line 15
+pushb 32
 outb
 pushb 10
 outb
-ret 0, 10, 0
+ret 0, 0, 0
+
+#line 18
+mensaje2:
+#func mensaje2
+#ret VOID
+enter 0
+
+#line 20
+
+#line 20
+pushb 79
+outb
+
+#line 20
+pushb 114
+outb
+
+#line 20
+pushb 100
+outb
+
+#line 20
+pushb 101
+outb
+
+#line 20
+pushb 110
+outb
+
+#line 20
+pushb 97
+outb
+
+#line 20
+pushb 100
+outb
+
+#line 20
+pushb 111
+outb
+
+#line 20
+pushb 32
+outb
+
+#line 20
+pushb 112
+outb
+
+#line 20
+pushb 111
+outb
+
+#line 20
+pushb 114
+outb
+
+#line 20
+pushb 32
+outb
+
+#line 20
+pushb 101
+outb
+
+#line 20
+pushb 108
+outb
+
+#line 20
+pushb 32
+outb
+
+#line 20
+pushb 109
+outb
+
+#line 20
+pushb 233
+outb
+
+#line 20
+pushb 116
+outb
+
+#line 20
+pushb 111
+outb
+
+#line 20
+pushb 100
+outb
+
+#line 20
+pushb 111
+outb
+
+#line 20
+pushb 32
+outb
+
+#line 20
+pushb 100
+outb
+
+#line 20
+pushb 101
+outb
+
+#line 20
+pushb 32
+outb
+
+#line 20
+pushb 108
+outb
+
+#line 20
+pushb 97
+outb
+
+#line 20
+pushb 32
+outb
+
+#line 20
+pushb 66
+outb
+
+#line 20
+pushb 117
+outb
+
+#line 20
+pushb 114
+outb
+
+#line 20
+pushb 98
+outb
+
+#line 20
+pushb 117
+outb
+
+#line 20
+pushb 106
+outb
+
+#line 20
+pushb 97
+outb
+
+#line 20
+pushb 58
+outb
+
+#line 20
+pushb 32
+outb
+ret 0, 0, 0
+
+#line 23
+leer:
+#func leer
+#ret VOID
+#local i:int
+enter 2
+
+#line 34
+
+#line 28
+
+#line 28
+pusha bp
+push -2
+add
+
+#line 28
+push 0
+storei
+inicioLoop0:
+
+#line 29
+
+#line 29
+
+#line 29
+pusha bp
+push -2
+add
+loadi
+
+#line 29
+
+#line 29
+pusha 20
+loadi
+eqi
+jnz finLoop0
+
+#line 30
+
+#line 30
+pushb 80
+outb
+
+#line 30
+pushb 111
+outb
+
+#line 30
+pushb 115
+outb
+
+#line 30
+pushb 105
+outb
+
+#line 30
+pushb 99
+outb
+
+#line 30
+pushb 105
+outb
+
+#line 30
+pushb 243
+outb
+
+#line 30
+pushb 110
+outb
+
+#line 30
+pushb 32
+outb
+
+#line 30
+pushb 91
+outb
+
+#line 31
+
+#line 31
+
+#line 31
+pusha bp
+push -2
+add
+loadi
+outi
+
+#line 32
+
+#line 32
+pushb 93
+outb
+
+#line 32
+pushb 58
+outb
+
+#line 32
+pushb 32
+outb
+
+#line 33
+
+#line 33
+
+#line 33
+pusha 0
+push 2
+
+#line 33
+
+#line 33
+pusha bp
+push -2
+add
+loadi
+mul
+add
+ini
+storei
+
+#line 34
+
+#line 34
+pusha bp
+push -2
+add
+
+#line 34
+
+#line 34
+
+#line 34
+pusha bp
+push -2
+add
+loadi
+
+#line 34
+push 1
+addi
+storei
+jmp inicioLoop0
+finLoop0:
+ret 0, 2, 0
+
+#line 39
+pintar:
+#func pintar
+#ret VOID
+#local i:int
+enter 2
+
+#line 48
+
+#line 44
+
+#line 44
+pusha bp
+push -2
+add
+
+#line 44
+push 0
+storei
+inicioLoop1:
+
+#line 45
+
+#line 45
+
+#line 45
+pusha bp
+push -2
+add
+loadi
+
+#line 45
+
+#line 45
+pusha 20
+loadi
+eqi
+jnz finLoop1
+
+#line 46
+
+#line 46
+pushb 80
+outb
+
+#line 46
+pushb 111
+outb
+
+#line 46
+pushb 115
+outb
+
+#line 46
+pushb 105
+outb
+
+#line 46
+pushb 99
+outb
+
+#line 46
+pushb 105
+outb
+
+#line 46
+pushb 243
+outb
+
+#line 46
+pushb 110
+outb
+
+#line 46
+pushb 32
+outb
+
+#line 46
+pushb 91
+outb
+
+#line 46
+
+#line 46
+pusha bp
+push -2
+add
+loadi
+outi
+
+#line 46
+pushb 93
+outb
+
+#line 46
+pushb 58
+outb
+
+#line 46
+pushb 32
+outb
+
+#line 47
+
+#line 47
+
+#line 47
+pusha 0
+
+#line 47
+
+#line 47
+pusha bp
+push -2
+add
+loadi
+push 2
+mul
+add
+loadi
+outi
+pushb 10
+outb
+
+#line 48
+
+#line 48
+pusha bp
+push -2
+add
+
+#line 48
+
+#line 48
+
+#line 48
+pusha bp
+push -2
+add
+loadi
+
+#line 48
+push 1
+addi
+storei
+jmp inicioLoop1
+finLoop1:
+ret 0, 2, 0
+
+#line 55
+burbuja:
+#func burbuja
+#ret VOID
+#local aux:int
+#local i:int
+#local j:int
+enter 6
+
+#line 72
+
+#line 60
+
+#line 60
+pusha bp
+push -4
+add
+
+#line 60
+push 0
+storei
+inicioLoop2:
+
+#line 61
+
+#line 61
+
+#line 61
+pusha bp
+push -4
+add
+loadi
+
+#line 61
+
+#line 61
+pusha 20
+loadi
+eqi
+jnz finLoop2
+
+#line 70
+
+#line 63
+
+#line 63
+pusha bp
+push -6
+add
+
+#line 63
+push 0
+storei
+inicioLoop3:
+
+#line 64
+
+#line 64
+
+#line 64
+pusha bp
+push -6
+add
+loadi
+
+#line 64
+
+#line 64
+
+#line 64
+
+#line 64
+pusha 20
+loadi
+
+#line 64
+
+#line 64
+pusha bp
+push -4
+add
+loadi
+subi
+
+#line 64
+push 1
+subi
+eqi
+jnz finLoop3
+
+#line 68
+
+#line 65
+
+#line 65
+
+#line 65
+pusha 0
+
+#line 65
+
+#line 65
+pusha bp
+push -6
+add
+loadi
+push 2
+mul
+add
+loadi
+
+#line 65
+
+#line 65
+pusha 0
+
+#line 65
+
+#line 65
+
+#line 65
+pusha bp
+push -6
+add
+loadi
+
+#line 65
+push 1
+addi
+push 2
+mul
+add
+loadi
+gti
+jz else4
+
+#line 66
+
+#line 66
+pusha bp
+push -2
+add
+
+#line 66
+
+#line 66
+pusha 0
+
+#line 66
+
+#line 66
+pusha bp
+push -6
+add
+loadi
+push 2
+mul
+add
+loadi
+storei
+
+#line 67
+
+#line 67
+
+#line 67
+pusha 0
+push 2
+
+#line 67
+
+#line 67
+pusha bp
+push -6
+add
+loadi
+mul
+add
+
+#line 67
+
+#line 67
+pusha 0
+
+#line 67
+
+#line 67
+
+#line 67
+pusha bp
+push -6
+add
+loadi
+
+#line 67
+push 1
+addi
+push 2
+mul
+add
+loadi
+storei
+
+#line 68
+
+#line 68
+
+#line 68
+pusha 0
+push 2
+
+#line 68
+
+#line 68
+
+#line 68
+pusha bp
+push -6
+add
+loadi
+
+#line 68
+push 1
+addi
+mul
+add
+
+#line 68
+
+#line 68
+pusha bp
+push -2
+add
+loadi
+storei
+jmp finIf4
+else4:
+finIf4:
+
+#line 70
+
+#line 70
+pusha bp
+push -6
+add
+
+#line 70
+
+#line 70
+
+#line 70
+pusha bp
+push -6
+add
+loadi
+
+#line 70
+push 1
+addi
+storei
+jmp inicioLoop3
+finLoop3:
+
+#line 72
+
+#line 72
+pusha bp
+push -4
+add
+
+#line 72
+
+#line 72
+
+#line 72
+pusha bp
+push -4
+add
+loadi
+
+#line 72
+push 1
+addi
+storei
+jmp inicioLoop2
+finLoop2:
+ret 0, 6, 0
+
+#line 77
+inicio:
+#func inicio
+#ret VOID
+enter 0
+
+#line 80
+
+#line 80
+pusha 20
+
+#line 80
+push 10
+storei
+call mensaje1
+call leer
+call pintar
+call burbuja
+call mensaje2
+call pintar
+
+#line 95
+ret 0, 0, 0

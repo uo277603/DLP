@@ -803,7 +803,7 @@ public class GrammarParser extends Parser {
 			}
 			setState(173);
 			match(T__4);
-			((MetodoContext)_localctx).ast =  new Method((((MetodoContext)_localctx).IDENT!=null?((MetodoContext)_localctx).IDENT.getText():null), ((MetodoContext)_localctx).parametrosOpt.list, _localctx.returnType != null ? ((MetodoContext)_localctx).returnType.ast : new VoidType(), ((MetodoContext)_localctx).localDefOpt.list, ((MetodoContext)_localctx).ls);
+			((MetodoContext)_localctx).ast =  new Method((((MetodoContext)_localctx).IDENT!=null?((MetodoContext)_localctx).IDENT.getText():null), ((MetodoContext)_localctx).parametrosOpt.list, _localctx.returnType != null ? ((MetodoContext)_localctx).returnType.ast : new VoidType(), ((MetodoContext)_localctx).localDefOpt.list, ((MetodoContext)_localctx).ls); _localctx.ast.setPositions(_localctx.start);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1128,7 +1128,7 @@ public class GrammarParser extends Parser {
 				((SentenciaContext)_localctx).listaexpresionOpt = listaexpresionOpt();
 				setState(215);
 				match(T__3);
-				((SentenciaContext)_localctx).ast =  new Print((((SentenciaContext)_localctx).t!=null?((SentenciaContext)_localctx).t.getText():null), ((SentenciaContext)_localctx).listaexpresionOpt.list);
+				((SentenciaContext)_localctx).ast =  new Print((((SentenciaContext)_localctx).t!=null?((SentenciaContext)_localctx).t.getText():null), ((SentenciaContext)_localctx).listaexpresionOpt.list); _localctx.ast.setPositions(_localctx.start);
 				}
 				break;
 			case 2:
@@ -1238,7 +1238,7 @@ public class GrammarParser extends Parser {
 				((SentenciaContext)_localctx).exprOpt = exprOpt();
 				setState(261);
 				match(T__3);
-				((SentenciaContext)_localctx).ast =  new ReturnNode(((SentenciaContext)_localctx).exprOpt.ast);
+				((SentenciaContext)_localctx).ast =  new ReturnNode(((SentenciaContext)_localctx).exprOpt.ast); _localctx.ast.setPositions(_localctx.start);
 				}
 				break;
 			}

@@ -295,7 +295,7 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ExprUnariaLogica { String op; Expr expr; }
     public Object visit(ExprUnariaLogica exprUnariaLogica, Object param) {
-    line(exprUnariaLogica);
+        line(exprUnariaLogica);
         
         if (exprUnariaLogica.getOp().equals("not")) {
             exprUnariaLogica.getExpr().accept(this, Funcion.VALOR);

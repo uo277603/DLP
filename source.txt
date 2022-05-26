@@ -1,94 +1,101 @@
-//*
+class T004_ORDENACION; /* Nombre de la clase
+	
+global
+	vars
+		/* Variables globales y tuplas
+		arr : [10] INTEGER;	/* Original de los datos
+		numElem : INTEGER; /* Número de elementos del array se inicializa en inicio()
 
- Hipoteca.txt V1.1
+create
+	inicio;
 
-- Programa de ejemplo que muestra las características del lenguaje
-- La sintaxis tiene que ser obligatoriamente la que se muestra en este ejemplo
-*//
-
-class T001_HIPOTECA;
-		
-	global
-		/* No hay declaraciones aquí
-		
-	create calcularHipoteca; calcularHipoteca;
-		
-	/* Festures auxiliares impresión
-	feature PrintPrecioViv is
+/* Features mensajes y auxiliares
+	feature mensaje1 is
 		do
-			print 'P','r','e','c','i','o',' ','d','e',' ','l','a',' ','v','i','v','i','e','n','d','a',':',' ';
+			println 'C','A','R','G','A',' ','D','E','L',' ','A','R','R','A','Y',' ','A',' ','O','R','D','E','N','A','R',':',' ';
 	end
 
-	feature PrintMeses is
+	feature mensaje2 is
 		do
-			print 'M','e','s','e','s',' ','d','e',' ','l','a',' ','h','i','p','o','t','e','c','a',':',' ';
+			print 'O','r','d','e','n','a','d','o',' ','p','o','r',' ','e','l',' ','m','é','t','o','d','o',' ','d','e',' ','l','a',' ','B','u','r','b','u','j','a',':',' ';
 	end
 
-	feature PrintInteres is
-		do
-			print 'I','n','t','e','r','é','s',' ','d','e','l',' ','p','r','é','s','t','a','m','o',':',' ';
-		end
-
-	feature printMensaje is
-		do
-			print 'H','i','p','o','t','e','c','a',' ';
-	end
-
-	/* Features del cálculo
-	feature potencia(base: DOUBLE, exponente: INTEGER): DOUBLE is
+	feature leer is /* Lee 'arr' desde la consola.
 		local
-			total: DOUBLE;
+			i : INTEGER;
 		do
-			if exponente = 0 then
-				total := 1.0;
-			else if exponente < 0 then
-					total := 1.0 / potencia(base, 0 - exponente);
-				else
-					total := base;
-					from
-					until exponente = 0 loop
-						total := total * base;
-						exponente := exponente - 1;
-					end
-				end
+			from
+				i := 0;
+			until i = numElem loop
+				print 'P','o','s','i','c','i','ó','n',' ','[';
+				print i;
+				print ']',':',' ';
+				read arr [i];
+				i := i + 1;
 			end
-			return total;		
 	end
-		
-	feature letraHipoteca(capital: DOUBLE, meses: INTEGER, interes: DOUBLE): DOUBLE is
+
+
+	feature pintar is /* Pinta 'arr'.
 		local
-			mensual: DOUBLE;
+			i : INTEGER;
 		do
-			mensual := interes / 12.0;
-			return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - meses)));
-	end /* letraHipoteca
+			from
+				i := 0;
+			until i = numElem loop
+				print 'P','o','s','i','c','i','ó','n',' ','[',i,']',':',' ';
+				println arr [i];
+				i := i + 1;
+			end
+	end
+	
 
-	feature calcularHipoteca is
+/* Feature de ordenación
+
+	feature burbuja is
 		local
-			precioViv: DOUBLE;
-			mesesHipoteca: INTEGER;
-			interes: DOUBLE;
-		do			
-			PrintPrecioViv();
-			read (precioViv);
-			PrintMeses();
-			read (mesesHipoteca);
-			PrintInteres();
-			read (interes);
-			
-			/*	Con estos datos deberían salir (redondeando) 743 euros de letra al mes	
-			/* precioViv := 200000.0;
-			/* mesesHipoteca := 30 * 12;
-			/* interes := 2.04;	
+			aux, i, j : INTEGER;
+		do
+			from
+				i := 0;
+			until i = numElem loop
+				from
+					j := 0;
+				until j = numElem - i - 1 loop
+					if arr[j] > arr[j + 1] then
+						aux := arr[j];
+						arr[j] := arr[j + 1];
+						arr[j + 1] := aux;
+					end
+					j := j + 1;
+				end
+				i := i + 1;
+			end
+	end
 
-			printMensaje();
-			print (letraHipoteca(precioViv, mesesHipoteca, interes));
-			print ' ';
-			println 'E','u','r','o','s';	
-	end /* calcularHipoteca
-		
-end
+	/* Constructor
+	feature inicio is
+		do
+			/* Inicialización
+			numElem := 10;
+			
+			/* Leer el array 'arr'
+			mensaje1(); 
+			leer();
+			
+			/* Pintar el array 'arr' antes de ordenarlo
+			pintar();
+			
+			/* Ordenarlo por el método de la burbuja
+			burbuja();
+			
+			/* Pintar el array 'arr' después de ordenado
+			mensaje2();
+			pintar();
+			return;
+	end
+end /* T004_ORDENACION
 
 main
-	calcularHipoteca();
-end /* HIPOTECA
+	inicio();
+end
