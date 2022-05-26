@@ -5,6 +5,8 @@
 
 package semantic;
 
+import java.util.List;
+
 import ast.*;
 import main.*;
 import visitor.*;
@@ -257,6 +259,16 @@ public class TypeChecking extends DefaultVisitor {
         return null;
     }
 
+    private boolean checkParams(List<Expr> params1, List<Parameter> params2){
+        if(params1.size() != params2.size())
+            return false;
+        for(int i = 0; i < params1.size(); i++){
+            if(params1.get(i).getType().getClass() != params2.get(i).getType().getClass())
+                return false;
+        }
+        return true;
+    }
+
     // class MethodCallSentence { String name; List<Expr> args; }
     public Object visit(MethodCallSentence methodCallSentence, Object param) {
 
@@ -266,21 +278,35 @@ public class TypeChecking extends DefaultVisitor {
             for (Expr child : methodCallSentence.getArgs())
                 child.accept(this, param);
 
-        // methodCallSentence.definition.parameter.length == args.length
-        boolean sameArgs = methodCallSentence.getArgs().size() == methodCallSentence.getDefinition().getParameter()
-                .size();
-        predicado(sameArgs,
-                "El número de parámetos no coincide", methodCallSentence.getStart());
-        if (sameArgs) {
-            // methodCallSentence.definition.parameteri.type == argsi.type
-            boolean sameType = true;
-            for (int i = 0; i < methodCallSentence.getArgs().size(); i++) {
-                if (!mismoTipo(methodCallSentence.getArgs().get(i).getType(),
-                        methodCallSentence.getDefinition().getParameter().get(i).getType()))
-                    sameType = false;
+        List<Method> methods = methodCallSentence.getDefinitions();
+        Method correctMethod = null;
+        int count = 0;
+        for (Method m : methods) {
+            if (checkParams(methodCallSentence.getArgs(), m.getParameter())) {
+                correctMethod = m;
+                methodCallSentence.index = count;
             }
-            predicado(sameType, "El tipo de los parámetros no coincide", methodCallSentence.getStart());
+            count++;
         }
+        predicado(correctMethod != null,
+                "No existe la función " + methodCallSentence.getName() + " con esos parámetros", methodCallSentence);
+        // methodCallSentence.definition.parameter.length == args.length
+        // boolean sameArgs = methodCallSentence.getArgs().size() ==
+        // methodCallSentence.getDefinition().getParameter()
+        // .size();
+        /*
+         * if (sameArgs) {
+         * // methodCallSentence.definition.parameteri.type == argsi.type
+         * boolean sameType = true;
+         * for (int i = 0; i < methodCallSentence.getArgs().size(); i++) {
+         * if (!mismoTipo(methodCallSentence.getArgs().get(i).getType(),
+         * methodCallSentence.getDefinition().getParameter().get(i).getType()))
+         * sameType = false;
+         * }
+         * predicado(sameType, "El tipo de los parámetros no coincide",
+         * methodCallSentence.getStart());
+         * }
+         */
         return null;
     }
 
@@ -535,28 +561,31 @@ public class TypeChecking extends DefaultVisitor {
         if (methodCallExpr.getArgs() != null)
             for (Expr child : methodCallExpr.getArgs())
                 child.accept(this, param);
-        boolean sameArgs = methodCallExpr.getArgs().size() == methodCallExpr.getDefinition().getParameter().size();
-        // methodCallExpr.definition.parameter.length == args.length
-        predicado(sameArgs,
-                "El número de parámetos no coincide", methodCallExpr.getStart());
-        // methodCallExpr.defintion.retornable
-        predicado(methodCallExpr.getDefinition().isRetornable(),
-                "La función " + methodCallExpr.getName() + " no tiene tipo de retorno",
-                methodCallExpr.getStart());
 
-        if (sameArgs) {
-            boolean sameType = true;
-            for (int i = 0; i < methodCallExpr.getArgs().size(); i++) {
-                if (!mismoTipo(methodCallExpr.getArgs().get(i).getType(),
-                        methodCallExpr.getDefinition().getParameter().get(i).getType()))
-                    sameType = false;
+        List<Method> methods = methodCallExpr.getDefinitions();
+        Method correctMethod = null;
+        int count = 0;
+        for (Method m : methods) {
+            if (methodCallExpr.getArgs().equals(m.getParameter())) {
+                correctMethod = m;
+                methodCallExpr.index = count;
             }
-            // methodCallExpr.definition.parameteri.type == argsi.type
-            predicado(sameType, "El tipo de los parámetros no coincide", methodCallExpr.getStart());
+            count++;
+        }
+        predicado(correctMethod != null,
+                "No existe la función " + methodCallExpr.getName() + " con esos parámetros", methodCallExpr);
+
+        if (correctMethod != null) {
+            // methodCallExpr.defintion.retornable
+            predicado(correctMethod.isRetornable(),
+                    "La función " + correctMethod.getName() + " no tiene tipo de retorno",
+                    methodCallExpr.getStart());
         }
 
-        // methodCallExpr.type = methodCallExpr.definition.type
-        methodCallExpr.setType(methodCallExpr.getDefinition().getRetorno());
+        if (correctMethod != null) {
+            // methodCallExpr.type = methodCallExpr.definition.type
+            methodCallExpr.setType(correctMethod.getRetorno());
+        }
         return null;
     }
 

@@ -21,7 +21,7 @@ public class Identification extends DefaultVisitor {
     // VarDefinition>();
     private ContextMap<String, VarDefinition> tabSimbVar = new ContextMap<>();
     private Map<String, TupleDefinition> tabSimbTuple = new HashMap<>();
-    private Map<String, Method> tabSimbFeature = new HashMap<>();
+    private Map<String, List<Method>> tabSimbFeature = new HashMap<>();
     private List<String> constructorNames = new ArrayList<>();
 
     public Identification(ErrorManager errorManager) {
@@ -39,10 +39,10 @@ public class Identification extends DefaultVisitor {
 		if (program.getMethodcallsentence() != null)
 			program.getMethodcallsentence().accept(this, param);
 
-        Method main = tabSimbFeature.get(program.getMethodcallsentence().getName());
+        List<Method> main = tabSimbFeature.get(program.getMethodcallsentence().getName());
         if(main != null){
             // tabSimbFeature[methodcallsentence.name].isConstructor()
-            predicado(main.isConstructor(), "El método " + main.getName() + " definido en el main no es un constructor", program);
+            predicado(main.get(0).isConstructor(), "El método " + main.get(0).getName() + " definido en el main no es un constructor", program);
         }
 
 		return null;
@@ -64,18 +64,29 @@ public class Identification extends DefaultVisitor {
         List<String> names = classNode.getCreateMethod();
         for (String name : names) {
             // tabSimbFeature[namei] ≠ ∅
-            Method definition = tabSimbFeature.get(name);
-            predicado(definition != null, "Método no definido: " + name, classNode);
+            List<Method> definitions = tabSimbFeature.get(name);
+            predicado(definitions != null, "Método no definido: " + name, classNode);
             // constructorNames[createMethodi] == ∅
             predicado(!constructorNames.contains(name), "El método " + name + " ya ha sido definido como constructor", classNode);
             constructorNames.add(name);
             // ClassNode.createDefinitions += createMethodi
-            if(definition != null)
-                definition.setConstructor();
+            if(definitions != null)
+                for(Method m: definitions)
+                    m.setConstructor();
             classNode.setCreateDefinitions(name);
         }
 
         return null;
+    }
+
+    private boolean checkParams(List<Parameter> params1, List<Parameter> params2){
+        if(params1.size() != params2.size())
+            return false;
+        for(int i = 0; i < params1.size(); i++){
+            if(params1.get(i).getType().getClass() != params2.get(i).getType().getClass())
+                return false;
+        }
+        return true;
     }
 
     // class Method { String name; List<Parameter> parameter; Type retorno;
@@ -83,10 +94,26 @@ public class Identification extends DefaultVisitor {
     public Object visit(Method method, Object param) {
 
         // tabSimbFeature[name] == ∅
-        Method definition = tabSimbFeature.get(method.getName());
-        predicado(definition == null, "Método ya definido: " + method.getName(), method);
+        List<Method> definitions = tabSimbFeature.get(method.getName());
+        boolean isDefined = false;
+        if(definitions != null){       
+            for(Method m: definitions){
+                if(checkParams(method.getParameter(), m.getParameter())){
+                    isDefined = true;
+                    predicado(!isDefined, "El método " + m.getName() + " ya ha sido definido con esos parámetros", method);
+                    break;
+                }
+            }     
+        }else{
+            definitions = new ArrayList<Method>();
+        }
+        //predicado(definitions == null, "Método ya definido: " + method.getName(), method);
         // tabSimbFeature[name] = method
-        tabSimbFeature.put(method.getName(), method);
+        if(!isDefined){
+            definitions.add(method);
+            tabSimbFeature.put(method.getName(), definitions);
+        }
+        //tabSimbFeature.put(method.getName(), method);
 
         // tabSimbVar.set
         tabSimbVar.set();
@@ -132,10 +159,10 @@ public class Identification extends DefaultVisitor {
                 child.accept(this, param);
 
         // tabSimbFeature[name] ≠ ∅
-        Method definition = tabSimbFeature.get(methodCallSentence.getName());
-        predicado(definition != null, "Método no definido: " + methodCallSentence.getName(), methodCallSentence);
+        List<Method> definitions = tabSimbFeature.get(methodCallSentence.getName());
+        predicado(definitions != null, "Método no definido: " + methodCallSentence.getName(), methodCallSentence);
         // methodCallSentence.definition = tabSimbFeature[name]
-        methodCallSentence.setDefinition(definition);
+        methodCallSentence.setDefinition(definitions);
 
         return null;
     }
@@ -150,10 +177,10 @@ public class Identification extends DefaultVisitor {
                 child.accept(this, param);
 
         // tabSimbFeature[name] ≠ ∅
-        Method definition = tabSimbFeature.get(methodCallExpr.getName());
-        predicado(definition != null, "Método no definido: " + methodCallExpr.getName(), methodCallExpr);
+        List<Method> definitions = tabSimbFeature.get(methodCallExpr.getName());
+        predicado(definitions != null, "Método no definido: " + methodCallExpr.getName(), methodCallExpr);
         // MethodCallExpr.definition = tabSimbFeature[name]
-        methodCallExpr.setDefinition(definition);
+        methodCallExpr.setDefinition(definitions);
 
         return null;
     }

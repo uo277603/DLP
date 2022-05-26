@@ -59,13 +59,14 @@ public class MethodCallExpr extends AbstractExpr {
 
    // Modificaciones
 
-   private Method definition;
+   private List<Method> definitions;
+   public int index;
 
-   public Method getDefinition(){
-	   return definition;
+   public List<Method> getDefinitions(){
+	   return definitions;
    }
 
-   public void setDefinition(Method definition){
-		this.definition = definition;
+   public void setDefinition(List<Method> definitions){
+		this.definitions = definitions;
    }
 }

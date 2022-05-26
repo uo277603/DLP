@@ -6,6 +6,7 @@
 package codegeneration;
 
 import java.io.*;
+import java.util.*;
 import java.util.logging.MemoryHandler;
 import java.util.spi.ToolProvider;
 
@@ -20,6 +21,8 @@ public class CodeSelection extends DefaultVisitor {
     public enum Funcion {
         VALOR, DIRECCION
     }
+
+    private Map<String, Integer> methodCount = new HashMap<String, Integer>();
 
     private int count = 0;
 
@@ -58,9 +61,12 @@ public class CodeSelection extends DefaultVisitor {
     // class Method { String name; List<Parameter> parameter; Type retorno;
     // List<Definition> definition; List<Sentence> sentence; }
     public Object visit(Method method, Object param) {
+        int count = 0;
+        if(methodCount.get(method.getName()) != null)
+            count = methodCount.get(method.getName());
         line(method.getStart());
-        out(method.getName() + ":");
-        out("#func " + method.getName());
+        out(method.getName() + count +  ":");
+        out("#func " + method.getName() + count);
         out("#ret " + method.getRetorno().getName());
         for(Parameter p: method.getParameter()){
             out("#param " + p.getName() + ":" + p.getType().getName());
@@ -85,7 +91,7 @@ public class CodeSelection extends DefaultVisitor {
                     .reduce(0, (x, y) -> x + y);
             out("ret 0, " + localsSize + ", " + parameterSize);
         }
-
+        methodCount.put(method.getName(), ++count);
         return null;
     }
 
@@ -206,9 +212,9 @@ public class CodeSelection extends DefaultVisitor {
         if (methodCallSentence.getArgs() != null)
             for (Expr child : methodCallSentence.getArgs())
                 child.accept(this, Funcion.VALOR);
-        out("call " + methodCallSentence.getName());
-        if (methodCallSentence.getDefinition().getRetorno().getClass() != VoidType.class) {
-            out("pop" + methodCallSentence.getDefinition().getRetorno().getSuffix());
+        out("call " + methodCallSentence.getName() + methodCallSentence.index);
+        if (methodCallSentence.getDefinitions().get(methodCallSentence.index).getRetorno().getClass() != VoidType.class) {
+            out("pop" + methodCallSentence.getDefinitions().get(methodCallSentence.index).getRetorno().getSuffix());
         }
 
         return null;
@@ -415,7 +421,7 @@ public class CodeSelection extends DefaultVisitor {
         if (methodCallExpr.getArgs() != null)
             for (Expr child : methodCallExpr.getArgs())
                 child.accept(this, Funcion.VALOR);
-        out("call " + methodCallExpr.getName());
+        out("call " + methodCallExpr.getName() + methodCallExpr.index);
 
         return null;
     }
