@@ -366,8 +366,11 @@ public class CodeSelection extends DefaultVisitor {
     /*
     * Valor[[ExprBinariaLogica → left:expr op:String right:expr ]=
     *   #LINE {exprBinariaLogica}
-    *   Valor[[left]]
-    *   Valor[[right]]
+    *   Si left.type == CharType
+	*	    B2I
+	*   Valor[[right]]
+	*   Si right.type == CharType
+	*	    B2I
     *   Si op == ’>’ 
     *       GT<left.type>
     *   Sino si op == ’<’
@@ -383,16 +386,26 @@ public class CodeSelection extends DefaultVisitor {
     */
     public Object visit(ExprBinariaLogica exprBinariaLogica, Object param) {
         line(exprBinariaLogica);
-        if (exprBinariaLogica.getLeft() != null)
+        String suffix = exprBinariaLogica.getLeft().getType().getSuffix();
+        if (exprBinariaLogica.getLeft() != null){
             exprBinariaLogica.getLeft().accept(this, Funcion.VALOR);
+            if(exprBinariaLogica.getLeft().getType().getClass() == CharType.class){
+                out("b2i");
+                suffix = "i";
+            }
+        }
 
-        if (exprBinariaLogica.getRight() != null)
+        if (exprBinariaLogica.getRight() != null){
             exprBinariaLogica.getRight().accept(this, Funcion.VALOR);
+            if(exprBinariaLogica.getRight().getType().getClass() == CharType.class)
+                out("b2i");
+        }
         
         if(exprBinariaLogica.getOp().equals("and") || exprBinariaLogica.getOp().equals("or"))
             out(instrucciones.get(exprBinariaLogica.getOp()));
-        else
-            out(instrucciones.get(exprBinariaLogica.getOp()) + exprBinariaLogica.getLeft().getType().getSuffix());
+        else if(exprBinariaLogica.getType().getClass() != CharType.class){
+            out(instrucciones.get(exprBinariaLogica.getOp()) + suffix);
+        }
 
         return null;
     }
