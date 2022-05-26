@@ -78,7 +78,7 @@ public class VarDefinition extends AbstractDefinition {
 		if(getAmbito() == Ambito.LOCAL)
 			return (size - getName().indexOf(ident) - 1) * getType().getSize() + getAddress();
 		else
-			return getAddress() - (size - getName().indexOf(ident)) * getType().getSize();
+			return getAddress() + getName().indexOf(ident) * getType().getSize();
 	}
 
 }

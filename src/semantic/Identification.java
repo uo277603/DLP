@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Condition;
 
 import ast.*;
 import main.*;
@@ -38,8 +39,10 @@ public class Identification extends DefaultVisitor {
 			program.getMethodcallsentence().accept(this, param);
 
         Method main = tabSimbFeature.get(program.getMethodcallsentence().getName());
-        // tabSimbFeature[methodcallsentence.name].isConstructor()
-        predicado(main.isConstructor(), "El método " + main.getName() + " definido en el main no es un constructor", program);
+        if(main != null){
+            // tabSimbFeature[methodcallsentence.name].isConstructor()
+            predicado(main.isConstructor(), "El método " + main.getName() + " definido en el main no es un constructor", program);
+        }
 
 		return null;
 	}
@@ -92,6 +95,17 @@ public class Identification extends DefaultVisitor {
         // sentenciai.method = method
         for (Sentence child : method.getSentence()){
 		    child.setMethod(method);
+            if(child instanceof Conditional){
+                Conditional cond = (Conditional) child;
+                for(Sentence s: cond.getIftrue())
+                    s.setMethod(method);
+                for(Sentence s: cond.getIffalse())
+                    s.setMethod(method);
+            }else if(child instanceof Loop){
+                Loop loop = (Loop) child;
+                for(Sentence s: loop.getSentence())
+                    s.setMethod(method);
+            }
         }
 
         // Establecer el ámbito de los parámetros
@@ -156,7 +170,7 @@ public class Identification extends DefaultVisitor {
     public Object visit(StructType structType, Object param) {
         // tabSimbTuple[name] ≠ ∅
         TupleDefinition definition = tabSimbTuple.get(structType.getName());
-        predicado(definition != null, "Variable no definida: " + structType.getName(), structType);
+        predicado(definition != null, "Estructura no definida: " + structType.getName(), structType);
         // StructType.definition = tabSimbTuple[name]
         structType.setDefinition(definition);
         return null;
@@ -204,7 +218,6 @@ public class Identification extends DefaultVisitor {
 
     // class VarDefinition { List<String> name; Type type; }
     public Object visit(VarDefinition varDefinition, Object param) {
-
         // super.visit(node, param);
 
         if (varDefinition.getType() != null)

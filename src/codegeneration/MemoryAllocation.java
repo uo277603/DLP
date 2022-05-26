@@ -25,8 +25,9 @@ public class MemoryAllocation extends DefaultVisitor {
 			for (Definition child : classNode.getDefinition()) {
 				if (child instanceof VarDefinition) {
 					VarDefinition def = (VarDefinition) child;
+					
+					child.setAddress(acumAddress);		
 					acumAddress += child.getType().getSize() * def.getName().size();
-					child.setAddress(acumAddress);				
 				}
 				if(child instanceof TupleDefinition){
 					child.accept(this, param);
