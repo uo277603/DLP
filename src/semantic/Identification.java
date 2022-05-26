@@ -22,6 +22,7 @@ public class Identification extends DefaultVisitor {
     private ContextMap<String, VarDefinition> tabSimbVar = new ContextMap<>();
     private Map<String, TupleDefinition> tabSimbTuple = new HashMap<>();
     private Map<String, Method> tabSimbFeature = new HashMap<>();
+    private List<String> constructorNames = new ArrayList<>();
 
     public Identification(ErrorManager errorManager) {
         this.errorManager = errorManager;
@@ -61,11 +62,13 @@ public class Identification extends DefaultVisitor {
         // Antes de nada visitar todos los hijos para añadir a la tabla los métodos
         // que pueden ir en el constructor
         List<String> names = classNode.getCreateMethod();
-
         for (String name : names) {
-            // tabSimbFeature[name] ≠ ∅
+            // tabSimbFeature[namei] ≠ ∅
             Method definition = tabSimbFeature.get(name);
             predicado(definition != null, "Método no definido: " + name, classNode);
+            // constructorNames[createMethodi] == ∅
+            predicado(!constructorNames.contains(name), "El método " + name + " ya ha sido definido como constructor", classNode);
+            constructorNames.add(name);
             // ClassNode.createDefinitions += createMethodi
             if(definition != null)
                 definition.setConstructor();

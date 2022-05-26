@@ -1,127 +1,94 @@
-class T005_Fibonacci;
+//*
+
+ Hipoteca.txt V1.1
+
+- Programa de ejemplo que muestra las características del lenguaje
+- La sintaxis tiene que ser obligatoriamente la que se muestra en este ejemplo
+*//
+
+class T001_HIPOTECA;
+		
 	global
-		types
-			deftuple pairTuple as
-				integer : INTEGER;
-				character : CHARACTER;
+		/* No hay declaraciones aquí
+		
+	create calcularHipoteca; calcularHipoteca;
+		
+	/* Festures auxiliares impresión
+	feature PrintPrecioViv is
+		do
+			print 'P','r','e','c','i','o',' ','d','e',' ','l','a',' ','v','i','v','i','e','n','d','a',':',' ';
+	end
+
+	feature PrintMeses is
+		do
+			print 'M','e','s','e','s',' ','d','e',' ','l','a',' ','h','i','p','o','t','e','c','a',':',' ';
+	end
+
+	feature PrintInteres is
+		do
+			print 'I','n','t','e','r','é','s',' ','d','e','l',' ','p','r','é','s','t','a','m','o',':',' ';
+		end
+
+	feature printMensaje is
+		do
+			print 'H','i','p','o','t','e','c','a',' ';
+	end
+
+	/* Features del cálculo
+	feature potencia(base: DOUBLE, exponente: INTEGER): DOUBLE is
+		local
+			total: DOUBLE;
+		do
+			if exponente = 0 then
+				total := 1.0;
+			else if exponente < 0 then
+					total := 1.0 / potencia(base, 0 - exponente);
+				else
+					total := base;
+					from
+					until exponente = 0 loop
+						total := total * base;
+						exponente := exponente - 1;
+					end
+				end
 			end
-			deftuple ageTuple as
-				age : INTEGER;
-			end
+			return total;		
+	end
+		
+	feature letraHipoteca(capital: DOUBLE, meses: INTEGER, interes: DOUBLE): DOUBLE is
+		local
+			mensual: DOUBLE;
+		do
+			mensual := interes / 12.0;
+			return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - meses)));
+	end /* letraHipoteca
+
+	feature calcularHipoteca is
+		local
+			precioViv: DOUBLE;
+			mesesHipoteca: INTEGER;
+			interes: DOUBLE;
+		do			
+			PrintPrecioViv();
+			read (precioViv);
+			PrintMeses();
+			read (mesesHipoteca);
+			PrintInteres();
+			read (interes);
 			
-			deftuple acmeTuple as
-				 employees : [2] ageTuple;
-			end
-		vars
-			pair : pairTuple;
-			acme : [2] acmeTuple;
+			/*	Con estos datos deberían salir (redondeando) 743 euros de letra al mes	
+			/* precioViv := 200000.0;
+			/* mesesHipoteca := 30 * 12;
+			/* interes := 2.04;	
 
-			fibonacci : [8][3] INTEGER;
-
-	/*-------------------------------
-	
-	create
-		inicio;
-	
-	/*-------------------------------
-
-	feature p is do end
-
-	feature  f (r : DOUBLE, e : INTEGER) : INTEGER is
-		local
-			real : DOUBLE;
-			c : CHARACTER;
-			result : INTEGER;
-		do
-			real := r * 10.0;
-			c := '0';
-			if (e < 256) then
-				c := to<CHARACTER>(e);
-				result := to<INTEGER>(c);
-			else 
-				result := to<INTEGER>(real);
-			end
-			return result;
-	end
-
-	feature initialize is
-		local
-			i : INTEGER;
-		do
-			from
-				fibonacci[0][0] := 0;
-				fibonacci[0][1] := 1;
-				fibonacci[0][2] := 1;
-				i := 1;
-			until (i >= 8) loop
-				fibonacci[i][0] := fibonacci[i - 1][1];
-				fibonacci[i][1] := fibonacci[i - 1][2];
-				fibonacci[i][2] := fibonacci[i][0] + fibonacci[i][1];
-				i := i + 1;
-			end
-	end
-
-	/*-------------------------------
-
-	feature inicio is
-		local
-			i : INTEGER;
-			j : INTEGER;
-		do
-			p();
-			i := 0;
-			pair.character := '0';
-			pair.integer := to<INTEGER>('0');
-
-			/* Shows 48 (decimal value of '0')
-			println f(to<DOUBLE>(i), (to<INTEGER>(pair.character)));
-			f(1.3, 2); 
-
-			initialize();
-			from
-				i := 0;
-			until i >= 8 loop
-				/* Shows the Fib sequence, from 1 to 8 (34)
-				print '(', i + 1,')',' ';
-				print fibonacci[i][0];
-				print '+';
-				print fibonacci[i][1];
-				print '=';
-				println fibonacci[i][2];
-				i := i + 1;
-			end
-
-			acme[1].employees[1].age := 56;
-			/* Shows 56
-			println acme[1].employees[1].age;
-			from
-				i := 0;
-			until i >= 2 loop
-				from
-					j := 0;
-				until j >= 2 loop
-					acme[i].employees[j].age := i + j;
-					j := j+ 1;
-				end
-				i := i + 1;
-			end
-
-			from
-				i := 0;
-			until i >= 2 loop
-				from
-					j := 0;
-				until j >= 2 loop
-				/* Shows 0 1 1 2
-					print acme[i].employees[j].age;
-					print ' ';
-					j := j+ 1;
-				end
-				i := i + 1;
-			end
-	end
+			printMensaje();
+			print (letraHipoteca(precioViv, mesesHipoteca, interes));
+			print ' ';
+			println 'E','u','r','o','s';	
+	end /* calcularHipoteca
+		
 end
 
 main
-	inicio();
-end
+	calcularHipoteca();
+end /* HIPOTECA

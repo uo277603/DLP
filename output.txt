@@ -1,1150 +1,745 @@
 #source "source.txt"
-call inicio
+call calcularHipoteca
 halt
 
-#line 6
-#type pairTuple: {
-integer:int
-character:char
-}
-
-#line 9
-#type ageTuple: {
-age:int
-}
-
-#line 13
-#type acmeTuple: {
-employees:2 * ageTuple
-}
-
-#line 16
-#global pair:pairTuple
-
-#line 17
-#global acme:2 * acmeTuple
-
 #line 19
-#global fibonacci:8 * 3 * int
-p:
-#func p
+PrintPrecioViv:
+#func PrintPrecioViv
 #ret VOID
 enter 0
+
+#line 19
+
+#line 19
+pushb 80
+outb
+
+#line 19
+pushb 114
+outb
+
+#line 19
+pushb 101
+outb
+
+#line 19
+pushb 99
+outb
+
+#line 19
+pushb 105
+outb
+
+#line 19
+pushb 111
+outb
+
+#line 19
+pushb 32
+outb
+
+#line 19
+pushb 100
+outb
+
+#line 19
+pushb 101
+outb
+
+#line 19
+pushb 32
+outb
+
+#line 19
+pushb 108
+outb
+
+#line 19
+pushb 97
+outb
+
+#line 19
+pushb 32
+outb
+
+#line 19
+pushb 118
+outb
+
+#line 19
+pushb 105
+outb
+
+#line 19
+pushb 118
+outb
+
+#line 19
+pushb 105
+outb
+
+#line 19
+pushb 101
+outb
+
+#line 19
+pushb 110
+outb
+
+#line 19
+pushb 100
+outb
+
+#line 19
+pushb 97
+outb
+
+#line 19
+pushb 58
+outb
+
+#line 19
+pushb 32
+outb
 ret 0, 0, 0
 
-#line 30
-f:
-#func f
-#ret int
-#param r:float
-#param e:int
-#local real:float
-#local c:char
-#local result:int
-enter 7
+#line 24
+PrintMeses:
+#func PrintMeses
+#ret VOID
+enter 0
 
-#line 36
+#line 24
 
-#line 36
+#line 24
+pushb 77
+outb
+
+#line 24
+pushb 101
+outb
+
+#line 24
+pushb 115
+outb
+
+#line 24
+pushb 101
+outb
+
+#line 24
+pushb 115
+outb
+
+#line 24
+pushb 32
+outb
+
+#line 24
+pushb 100
+outb
+
+#line 24
+pushb 101
+outb
+
+#line 24
+pushb 32
+outb
+
+#line 24
+pushb 108
+outb
+
+#line 24
+pushb 97
+outb
+
+#line 24
+pushb 32
+outb
+
+#line 24
+pushb 104
+outb
+
+#line 24
+pushb 105
+outb
+
+#line 24
+pushb 112
+outb
+
+#line 24
+pushb 111
+outb
+
+#line 24
+pushb 116
+outb
+
+#line 24
+pushb 101
+outb
+
+#line 24
+pushb 99
+outb
+
+#line 24
+pushb 97
+outb
+
+#line 24
+pushb 58
+outb
+
+#line 24
+pushb 32
+outb
+ret 0, 0, 0
+
+#line 29
+PrintInteres:
+#func PrintInteres
+#ret VOID
+enter 0
+
+#line 29
+
+#line 29
+pushb 73
+outb
+
+#line 29
+pushb 110
+outb
+
+#line 29
+pushb 116
+outb
+
+#line 29
+pushb 101
+outb
+
+#line 29
+pushb 114
+outb
+
+#line 29
+pushb 233
+outb
+
+#line 29
+pushb 115
+outb
+
+#line 29
+pushb 32
+outb
+
+#line 29
+pushb 100
+outb
+
+#line 29
+pushb 101
+outb
+
+#line 29
+pushb 108
+outb
+
+#line 29
+pushb 32
+outb
+
+#line 29
+pushb 112
+outb
+
+#line 29
+pushb 114
+outb
+
+#line 29
+pushb 233
+outb
+
+#line 29
+pushb 115
+outb
+
+#line 29
+pushb 116
+outb
+
+#line 29
+pushb 97
+outb
+
+#line 29
+pushb 109
+outb
+
+#line 29
+pushb 111
+outb
+
+#line 29
+pushb 58
+outb
+
+#line 29
+pushb 32
+outb
+ret 0, 0, 0
+
+#line 34
+printMensaje:
+#func printMensaje
+#ret VOID
+enter 0
+
+#line 34
+
+#line 34
+pushb 72
+outb
+
+#line 34
+pushb 105
+outb
+
+#line 34
+pushb 112
+outb
+
+#line 34
+pushb 111
+outb
+
+#line 34
+pushb 116
+outb
+
+#line 34
+pushb 101
+outb
+
+#line 34
+pushb 99
+outb
+
+#line 34
+pushb 97
+outb
+
+#line 34
+pushb 32
+outb
+ret 0, 0, 0
+
+#line 38
+potencia:
+#func potencia
+#ret float
+#param base:float
+#param exponente:int
+#local total:float
+enter 4
+
+#line 51
+
+#line 42
+
+#line 42
+
+#line 42
+pusha bp
+push 4
+add
+loadi
+
+#line 42
+push 0
+eqi
+jz else0
+
+#line 43
+
+#line 43
 pusha bp
 push -4
 add
 
-#line 36
-
-#line 36
-
-#line 36
-pusha bp
-push 6
-add
-loadf
-
-#line 36
-pushf 10.0
-mulf
+#line 43
+pushf 1.0
 storef
-
-#line 37
-
-#line 37
-pusha bp
-push -5
-add
-
-#line 37
-pushb 48
-storeb
-
-#line 42
-
-#line 38
-
-#line 38
-
-#line 38
-pusha bp
-push 4
-add
-loadi
-
-#line 38
-push 256
-lti
-jz else0
-
-#line 39
-
-#line 39
-pusha bp
-push -5
-add
-
-#line 39
-
-#line 39
-
-#line 39
-pusha bp
-push 4
-add
-loadi
-i2b
-storeb
-
-#line 40
-
-#line 40
-pusha bp
-push -7
-add
-
-#line 40
-
-#line 40
-
-#line 40
-pusha bp
-push -5
-add
-loadb
-b2i
-storei
 jmp finIf0
 else0:
 
-#line 42
+#line 51
 
-#line 42
+#line 44
+
+#line 44
+
+#line 44
 pusha bp
-push -7
+push 4
+add
+loadi
+
+#line 44
+push 0
+lti
+jz else1
+
+#line 45
+
+#line 45
+pusha bp
+push -4
 add
 
-#line 42
+#line 45
 
-#line 42
+#line 45
+pushf 1.0
 
-#line 42
+#line 45
+
+#line 45
+
+#line 45
+pusha bp
+push 6
+add
+loadf
+
+#line 45
+
+#line 45
+push 0
+
+#line 45
+
+#line 45
+pusha bp
+push 4
+add
+loadi
+subi
+call potencia
+divf
+storef
+jmp finIf1
+else1:
+
+#line 47
+
+#line 47
+pusha bp
+push -4
+add
+
+#line 47
+
+#line 47
+pusha bp
+push 6
+add
+loadf
+storef
+
+#line 51
+inicioLoop2:
+
+#line 49
+
+#line 49
+
+#line 49
+pusha bp
+push 4
+add
+loadi
+
+#line 49
+push 0
+eqi
+jnz finLoop2
+
+#line 50
+
+#line 50
+pusha bp
+push -4
+add
+
+#line 50
+
+#line 50
+
+#line 50
 pusha bp
 push -4
 add
 loadf
-f2i
-storei
-finIf0:
 
-#line 44
+#line 50
 
-#line 44
-
-#line 44
+#line 50
 pusha bp
-push -7
-add
-loadi
-ret 2, 7, 6
-
-#line 49
-initialize:
-#func initialize
-#ret VOID
-#local i:int
-enter 2
-
-#line 60
-
-#line 52
-
-#line 52
-
-#line 52
-
-#line 52
-pusha 11
 push 6
-
-#line 52
-push 0
-mul
 add
-push 2
+loadf
+mulf
+storef
 
-#line 52
-push 0
-mul
-add
+#line 51
 
-#line 52
-push 0
-storei
-
-#line 53
-
-#line 53
-
-#line 53
-
-#line 53
-pusha 11
-push 6
-
-#line 53
-push 0
-mul
-add
-push 2
-
-#line 53
-push 1
-mul
-add
-
-#line 53
-push 1
-storei
-
-#line 54
-
-#line 54
-
-#line 54
-
-#line 54
-pusha 11
-push 6
-
-#line 54
-push 0
-mul
-add
-push 2
-
-#line 54
-push 2
-mul
-add
-
-#line 54
-push 1
-storei
-
-#line 55
-
-#line 55
+#line 51
 pusha bp
-push -2
+push 4
 add
 
-#line 55
-push 1
-storei
-inicioLoop1:
+#line 51
 
-#line 56
+#line 51
 
-#line 56
-
-#line 56
+#line 51
 pusha bp
-push -2
+push 4
 add
 loadi
 
-#line 56
-push 8
-gei
-jnz finLoop1
-
-#line 57
-
-#line 57
-
-#line 57
-
-#line 57
-pusha 11
-push 6
-
-#line 57
-
-#line 57
-pusha bp
-push -2
-add
-loadi
-mul
-add
-push 2
-
-#line 57
-push 0
-mul
-add
-
-#line 57
-
-#line 57
-
-#line 57
-pusha 11
-push 6
-
-#line 57
-
-#line 57
-
-#line 57
-pusha bp
-push -2
-add
-loadi
-
-#line 57
+#line 51
 push 1
 subi
-mul
-add
-
-#line 57
-push 1
-push 2
-mul
-add
-loadi
-storei
-
-#line 58
-
-#line 58
-
-#line 58
-
-#line 58
-pusha 11
-push 6
-
-#line 58
-
-#line 58
-pusha bp
-push -2
-add
-loadi
-mul
-add
-push 2
-
-#line 58
-push 1
-mul
-add
-
-#line 58
-
-#line 58
-
-#line 58
-pusha 11
-push 6
-
-#line 58
-
-#line 58
-
-#line 58
-pusha bp
-push -2
-add
-loadi
-
-#line 58
-push 1
-subi
-mul
-add
-
-#line 58
-push 2
-push 2
-mul
-add
-loadi
-storei
-
-#line 59
-
-#line 59
-
-#line 59
-
-#line 59
-pusha 11
-push 6
-
-#line 59
-
-#line 59
-pusha bp
-push -2
-add
-loadi
-mul
-add
-push 2
-
-#line 59
-push 2
-mul
-add
-
-#line 59
-
-#line 59
-
-#line 59
-
-#line 59
-pusha 11
-push 6
-
-#line 59
-
-#line 59
-pusha bp
-push -2
-add
-loadi
-mul
-add
-
-#line 59
-push 0
-push 2
-mul
-add
-loadi
-
-#line 59
-
-#line 59
-
-#line 59
-pusha 11
-push 6
-
-#line 59
-
-#line 59
-pusha bp
-push -2
-add
-loadi
-mul
-add
-
-#line 59
-push 1
-push 2
-mul
-add
-loadi
-addi
-storei
-
-#line 60
-
-#line 60
-pusha bp
-push -2
-add
-
-#line 60
-
-#line 60
-
-#line 60
-pusha bp
-push -2
-add
-loadi
-
-#line 60
-push 1
-addi
-storei
-jmp inicioLoop1
-finLoop1:
-ret 0, 2, 0
-
-#line 68
-inicio:
-#func inicio
-#ret VOID
-#local i:int
-#local j:int
-enter 4
-call p
-
-#line 72
-
-#line 72
-pusha bp
-push -2
-add
-
-#line 72
-push 0
-storei
-
-#line 73
-
-#line 73
-
-#line 73
-pusha 0
-push 2
-add
-
-#line 73
-pushb 48
-storeb
-
-#line 74
-
-#line 74
-
-#line 74
-pusha 0
-push 0
-add
-
-#line 74
-
-#line 74
-pushb 48
-b2i
-storei
-
-#line 77
-
-#line 77
-
-#line 77
-
-#line 77
-
-#line 77
-pusha bp
-push -2
-add
-loadi
-i2f
-
-#line 77
-
-#line 77
-
-#line 77
-pusha 0
-push 2
-add
-loadb
-b2i
-call f
-outi
-pushb 10
-outb
-
-#line 78
-pushf 1.3
-
-#line 78
-push 2
-call f
-popi
-call initialize
-
-#line 91
-
-#line 82
-
-#line 82
-pusha bp
-push -2
-add
-
-#line 82
-push 0
-storei
-inicioLoop2:
-
-#line 83
-
-#line 83
-
-#line 83
-pusha bp
-push -2
-add
-loadi
-
-#line 83
-push 8
-gei
-jnz finLoop2
-
-#line 85
-
-#line 85
-pushb 40
-outb
-
-#line 85
-
-#line 85
-
-#line 85
-pusha bp
-push -2
-add
-loadi
-
-#line 85
-push 1
-addi
-outi
-
-#line 85
-pushb 41
-outb
-
-#line 85
-pushb 32
-outb
-
-#line 86
-
-#line 86
-
-#line 86
-
-#line 86
-pusha 11
-push 6
-
-#line 86
-
-#line 86
-pusha bp
-push -2
-add
-loadi
-mul
-add
-
-#line 86
-push 0
-push 2
-mul
-add
-loadi
-outi
-
-#line 87
-
-#line 87
-pushb 43
-outb
-
-#line 88
-
-#line 88
-
-#line 88
-
-#line 88
-pusha 11
-push 6
-
-#line 88
-
-#line 88
-pusha bp
-push -2
-add
-loadi
-mul
-add
-
-#line 88
-push 1
-push 2
-mul
-add
-loadi
-outi
-
-#line 89
-
-#line 89
-pushb 61
-outb
-
-#line 90
-
-#line 90
-
-#line 90
-
-#line 90
-pusha 11
-push 6
-
-#line 90
-
-#line 90
-pusha bp
-push -2
-add
-loadi
-mul
-add
-
-#line 90
-push 2
-push 2
-mul
-add
-loadi
-outi
-pushb 10
-outb
-
-#line 91
-
-#line 91
-pusha bp
-push -2
-add
-
-#line 91
-
-#line 91
-
-#line 91
-pusha bp
-push -2
-add
-loadi
-
-#line 91
-push 1
-addi
 storei
 jmp inicioLoop2
 finLoop2:
+finIf1:
+finIf0:
 
-#line 94
+#line 55
 
-#line 94
+#line 55
 
-#line 94
+#line 55
+pusha bp
+push -4
+add
+loadf
+ret 4, 4, 6
 
-#line 94
+#line 58
+letraHipoteca:
+#func letraHipoteca
+#ret float
+#param capital:float
+#param meses:int
+#param interes:float
+#local mensual:float
+enter 4
 
-#line 94
+#line 62
 
-#line 94
-pusha 3
+#line 62
+pusha bp
+push -4
+add
+
+#line 62
+
+#line 62
+
+#line 62
+pusha bp
 push 4
-
-#line 94
-push 1
-mul
 add
+loadf
+
+#line 62
+pushf 12.0
+divf
+storef
+
+#line 63
+
+#line 63
+
+#line 63
+
+#line 63
+
+#line 63
+pusha bp
+push 10
+add
+loadf
+
+#line 63
+
+#line 63
+pusha bp
+push -4
+add
+loadf
+mulf
+
+#line 63
+
+#line 63
+pushf 100.0
+
+#line 63
+
+#line 63
+pushf 1.0
+
+#line 63
+
+#line 63
+
+#line 63
+pushf 1.0
+
+#line 63
+
+#line 63
+
+#line 63
+pusha bp
+push -4
+add
+loadf
+
+#line 63
+pushf 100.0
+divf
+addf
+
+#line 63
+
+#line 63
 push 0
-add
-push 2
 
-#line 94
-push 1
-mul
-add
-push 0
-add
+#line 63
 
-#line 94
-push 56
+#line 63
+pusha bp
+push 8
+add
+loadi
+subi
+call potencia
+subf
+mulf
+divf
+ret 4, 4, 10
+
+#line 68
+calcularHipoteca:
+#func calcularHipoteca
+#ret VOID
+#local precioViv:float
+#local mesesHipoteca:int
+#local interes:float
+enter 10
+call PrintPrecioViv
+
+#line 73
+
+#line 73
+pusha bp
+push -4
+add
+inf
+storef
+call PrintMeses
+
+#line 75
+
+#line 75
+pusha bp
+push -6
+add
+ini
 storei
+call PrintInteres
 
-#line 96
+#line 77
 
-#line 96
-
-#line 96
-
-#line 96
-
-#line 96
-
-#line 96
-pusha 3
-push 4
-
-#line 96
-push 1
-mul
-add
-push 0
-add
-push 2
-
-#line 96
-push 1
-mul
-add
-push 0
-add
-loadi
-outi
-pushb 10
-outb
-
-#line 106
-
-#line 98
-
-#line 98
+#line 77
 pusha bp
-push -2
+push -10
 add
+inf
+storef
+call printMensaje
 
-#line 98
-push 0
-storei
-inicioLoop3:
+#line 85
 
-#line 99
+#line 85
 
-#line 99
+#line 85
 
-#line 99
-pusha bp
-push -2
-add
-loadi
-
-#line 99
-push 2
-gei
-jnz finLoop3
-
-#line 104
-
-#line 101
-
-#line 101
+#line 85
 pusha bp
 push -4
 add
+loadf
 
-#line 101
-push 0
-storei
-inicioLoop4:
+#line 85
 
-#line 102
-
-#line 102
-
-#line 102
+#line 85
 pusha bp
-push -4
+push -6
 add
 loadi
 
-#line 102
-push 2
-gei
-jnz finLoop4
+#line 85
 
-#line 103
-
-#line 103
-
-#line 103
-
-#line 103
-
-#line 103
-
-#line 103
-pusha 3
-push 4
-
-#line 103
-
-#line 103
+#line 85
 pusha bp
-push -2
+push -10
 add
-loadi
-mul
-add
-push 0
-add
-push 2
+loadf
+call letraHipoteca
+outf
 
-#line 103
+#line 86
 
-#line 103
-pusha bp
-push -4
-add
-loadi
-mul
-add
-push 0
-add
-
-#line 103
-
-#line 103
-
-#line 103
-pusha bp
-push -2
-add
-loadi
-
-#line 103
-
-#line 103
-pusha bp
-push -4
-add
-loadi
-addi
-storei
-
-#line 104
-
-#line 104
-pusha bp
-push -4
-add
-
-#line 104
-
-#line 104
-
-#line 104
-pusha bp
-push -4
-add
-loadi
-
-#line 104
-push 1
-addi
-storei
-jmp inicioLoop4
-finLoop4:
-
-#line 106
-
-#line 106
-pusha bp
-push -2
-add
-
-#line 106
-
-#line 106
-
-#line 106
-pusha bp
-push -2
-add
-loadi
-
-#line 106
-push 1
-addi
-storei
-jmp inicioLoop3
-finLoop3:
-
-#line 120
-
-#line 110
-
-#line 110
-pusha bp
-push -2
-add
-
-#line 110
-push 0
-storei
-inicioLoop5:
-
-#line 111
-
-#line 111
-
-#line 111
-pusha bp
-push -2
-add
-loadi
-
-#line 111
-push 2
-gei
-jnz finLoop5
-
-#line 118
-
-#line 113
-
-#line 113
-pusha bp
-push -4
-add
-
-#line 113
-push 0
-storei
-inicioLoop6:
-
-#line 114
-
-#line 114
-
-#line 114
-pusha bp
-push -4
-add
-loadi
-
-#line 114
-push 2
-gei
-jnz finLoop6
-
-#line 116
-
-#line 116
-
-#line 116
-
-#line 116
-
-#line 116
-
-#line 116
-pusha 3
-push 4
-
-#line 116
-
-#line 116
-pusha bp
-push -2
-add
-loadi
-mul
-add
-push 0
-add
-push 2
-
-#line 116
-
-#line 116
-pusha bp
-push -4
-add
-loadi
-mul
-add
-push 0
-add
-loadi
-outi
-
-#line 117
-
-#line 117
+#line 86
 pushb 32
 outb
 
-#line 118
+#line 87
 
-#line 118
-pusha bp
-push -4
-add
+#line 87
+pushb 69
+outb
 
-#line 118
+#line 87
+pushb 117
+outb
 
-#line 118
+#line 87
+pushb 114
+outb
 
-#line 118
-pusha bp
-push -4
-add
-loadi
+#line 87
+pushb 111
+outb
 
-#line 118
-push 1
-addi
-storei
-jmp inicioLoop6
-finLoop6:
-
-#line 120
-
-#line 120
-pusha bp
-push -2
-add
-
-#line 120
-
-#line 120
-
-#line 120
-pusha bp
-push -2
-add
-loadi
-
-#line 120
-push 1
-addi
-storei
-jmp inicioLoop5
-finLoop5:
-ret 0, 4, 0
+#line 87
+pushb 115
+outb
+pushb 10
+outb
+ret 0, 10, 0
