@@ -76,6 +76,7 @@ sentencia returns[Sentence ast]
 	| asignacion {$ast = $asignacion.ast;}
 	| 'if' expr 'then' ls+=sentencia* elseOpt 'end' {$ast = new Conditional($expr.ast, $ls, $elseOpt.list);}
 	| fromOpt 'until' expr 'loop' ls+=sentencia* 'end' {$ast = new Loop($fromOpt.list, $expr.ast, $ls);}
+	| 'for' '(' init=sentencia ';' condicion=expr ';' increment=sentencia ')' '{' ls+=sentencia* '}' {$ast = new ForSentence($init.ast, $condicion.ast, $increment.ast, $ls);}
 	| IDENT '(' listaexpresionOpt ')' ';' {$ast = new MethodCallSentence($IDENT, $listaexpresionOpt.list);}
 	| 'return' exprOpt ';' {$ast = new ReturnNode($exprOpt.ast);}
 	;

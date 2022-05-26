@@ -86,6 +86,18 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class ForSentence { Sentence init;  Expr condition;  Sentence increment;  List<Sentence> sentence; }
+	public Object visit(ForSentence forSentence, Object param) {
+		if (forSentence.getInit() != null)
+			forSentence.getInit().accept(this, param);
+		if (forSentence.getCondition() != null)
+			forSentence.getCondition().accept(this, param);
+		if (forSentence.getIncrement() != null)
+			forSentence.getIncrement().accept(this, param);
+		visitChildren(forSentence.getSentence(), param);
+		return null;
+	}
+
 	//	class ReturnNode { Expr expr; }
 	public Object visit(ReturnNode returnNode, Object param) {
 		if (returnNode.getExpr() != null)

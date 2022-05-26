@@ -140,7 +140,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "name", "String", parameter.getName());
 		visit(indent + 1, "type", "Type", parameter.getType());
-		print(indent + 1, "address", "int", parameter.getDefinition().getAddress());
 		return null;
 	}
 
@@ -197,6 +196,19 @@ public class ASTPrinter extends DefaultVisitor {
 		visit(indent + 1, "init", "List<Sentence>", loop.getInit());
 		visit(indent + 1, "condition", "Expr", loop.getCondition());
 		visit(indent + 1, "sentence", "List<Sentence>", loop.getSentence());
+		return null;
+	}
+
+	//	class ForSentence { Sentence init;  Expr condition;  Sentence increment;  List<Sentence> sentence; }
+	public Object visit(ForSentence forSentence, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "ForSentence", forSentence, false);
+
+		visit(indent + 1, "init", "Sentence", forSentence.getInit());
+		visit(indent + 1, "condition", "Expr", forSentence.getCondition());
+		visit(indent + 1, "increment", "Sentence", forSentence.getIncrement());
+		visit(indent + 1, "sentence", "List<Sentence>", forSentence.getSentence());
 		return null;
 	}
 
@@ -287,7 +299,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		visit(indent + 1, "left", "Expr", arrayAcces.getLeft());
 		visit(indent + 1, "right", "Expr", arrayAcces.getRight());
-		print(indent + 1, "Tipo", "Type", arrayAcces.getType());
 		return null;
 	}
 
@@ -419,8 +430,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "name", "List<String>", varDefinition.getName());
 		visit(indent + 1, "type", "Type", varDefinition.getType());
-		print(indent + 1, "scope", "Ambito", varDefinition.getAmbito());
-		print(indent + 1, "address", "int", varDefinition.getAddress());
 		return null;
 	}
 

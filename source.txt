@@ -11,84 +11,20 @@ class T001_HIPOTECA;
 	global
 		/* No hay declaraciones aquí
 		
-	create calcularHipoteca; calcularHipoteca;
-		
-	/* Festures auxiliares impresión
-	feature PrintPrecioViv is
-		do
-			print 'P','r','e','c','i','o',' ','d','e',' ','l','a',' ','v','i','v','i','e','n','d','a',':',' ';
-	end
+	create inicio;
 
-	feature PrintMeses is
-		do
-			print 'M','e','s','e','s',' ','d','e',' ','l','a',' ','h','i','p','o','t','e','c','a',':',' ';
-	end
-
-	feature PrintInteres is
-		do
-			print 'I','n','t','e','r','é','s',' ','d','e','l',' ','p','r','é','s','t','a','m','o',':',' ';
-		end
-
-	feature printMensaje is
-		do
-			print 'H','i','p','o','t','e','c','a',' ';
-	end
-
-	/* Features del cálculo
-	feature potencia(base: DOUBLE, exponente: INTEGER): DOUBLE is
+	feature inicio is
 		local
-			total: DOUBLE;
+			i: INTEGER;
 		do
-			if exponente = 0 then
-				total := 1.0;
-			else if exponente < 0 then
-					total := 1.0 / potencia(base, 0 - exponente);
-				else
-					total := base;
-					from
-					until exponente = 0 loop
-						total := total * base;
-						exponente := exponente - 1;
-					end
-				end
-			end
-			return total;		
+			for(i := 0; ; i < 10; i := i + 1;){
+				println i;
+			}
 	end
 		
-	feature letraHipoteca(capital: DOUBLE, meses: INTEGER, interes: DOUBLE): DOUBLE is
-		local
-			mensual: DOUBLE;
-		do
-			mensual := interes / 12.0;
-			return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - meses)));
-	end /* letraHipoteca
-
-	feature calcularHipoteca is
-		local
-			precioViv: DOUBLE;
-			mesesHipoteca: INTEGER;
-			interes: DOUBLE;
-		do			
-			PrintPrecioViv();
-			read (precioViv);
-			PrintMeses();
-			read (mesesHipoteca);
-			PrintInteres();
-			read (interes);
-			
-			/*	Con estos datos deberían salir (redondeando) 743 euros de letra al mes	
-			/* precioViv := 200000.0;
-			/* mesesHipoteca := 30 * 12;
-			/* interes := 2.04;	
-
-			printMensaje();
-			print (letraHipoteca(precioViv, mesesHipoteca, interes));
-			print ' ';
-			println 'E','u','r','o','s';	
-	end /* calcularHipoteca
 		
 end
 
 main
-	calcularHipoteca();
+	inicio();
 end /* HIPOTECA

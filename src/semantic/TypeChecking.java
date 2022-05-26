@@ -231,6 +231,15 @@ public class TypeChecking extends DefaultVisitor {
         return null;
     }
 
+    //	class ForSentence { Sentence init;  Expr condition;  Sentence increment;  List<Sentence> sentence; }
+	public Object visit(ForSentence forSentence, Object param) {
+
+		super.visit(forSentence, param);
+        predicado(forSentence.getCondition().getType().getClass() == IntType.class, "La condición debe de ser de tipo entero",
+        forSentence);
+		return null;
+	}
+
     // class ReturnNode { Expr expr; }
     public Object visit(ReturnNode returnNode, Object param) {
 

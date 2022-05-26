@@ -16,6 +16,7 @@ public interface Visitor {
 	public Object visit(Assignment assignment, Object param);
 	public Object visit(Conditional conditional, Object param);
 	public Object visit(Loop loop, Object param);
+	public Object visit(ForSentence forSentence, Object param);
 	public Object visit(ReturnNode returnNode, Object param);
 	public Object visit(MethodCallSentence methodCallSentence, Object param);
 	public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param);

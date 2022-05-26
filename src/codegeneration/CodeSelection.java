@@ -183,6 +183,29 @@ public class CodeSelection extends DefaultVisitor {
         return null;
     }
 
+    //	class ForSentence { Sentence init;  Expr condition;  Sentence increment;  List<Sentence> sentence; }
+	public Object visit(ForSentence forSentence, Object param) {
+
+		// super.visit(node, param);
+        int n = count++;
+		if (forSentence.getInit() != null)
+			forSentence.getInit().accept(this, param);
+        out("inicioFor" + n + ":");
+		if (forSentence.getCondition() != null)
+			forSentence.getCondition().accept(this, Funcion.VALOR);
+        out("jz finFor" + n);	
+
+		if (forSentence.getSentence() != null)
+			for (Sentence child : forSentence.getSentence())
+				child.accept(this, param);
+        if (forSentence.getIncrement() != null)
+            forSentence.getIncrement().accept(this, param);
+        out("jmp inicioFor" + n);
+        out("finFor" + n + ":");
+
+		return null;
+	}
+
     // class ReturnNode { Expr expr; }
     public Object visit(ReturnNode returnNode, Object param) {
 

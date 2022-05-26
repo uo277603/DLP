@@ -13,6 +13,7 @@ read:sentence -> expr*;
 assignment:sentence -> left:expr right:expr;
 conditional:sentence -> condition:expr iftrue:sentence* iffalse:sentence*;
 loop:sentence -> init:sentence* condition:expr sentence*;
+forSentence:sentence -> init:sentence condition:expr increment:sentence sentence*;
 returnNode:sentence -> expr;
 methodCallSentence:sentence -> name:string args:expr* ;
 
