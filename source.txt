@@ -1,100 +1,126 @@
-class T004_ORDENACION; /* Nombre de la clase
+class T005_Fibonacci;
+	global
+		types
+			deftuple pairTuple as
+				integer : INTEGER;
+				character : CHARACTER;
+			end
+			deftuple ageTuple as
+				age : INTEGER;
+			end
+			
+			deftuple acmeTuple as
+				 employees : [2] ageTuple;
+			end
+		vars
+			pair : pairTuple;
+			acme : [2] acmeTuple;
+
+			fibonacci : [8][3] INTEGER;
+
+	/*-------------------------------
 	
-global
-	vars
-		/* Variables globales y tuplas
-		arr : [10] INTEGER;	/* Original de los datos
-		numElem : INTEGER; /* Número de elementos del array se inicializa en inicio()
+	create
+		inicio;
+	
+	/*-------------------------------
 
-create
-	inicio;
+	feature p is do end
 
-/* Features mensajes y auxiliares
-	feature mensaje1 is
+	feature  f (r : DOUBLE, e : INTEGER) : INTEGER is
+		local
+			real : DOUBLE;
+			c : CHARACTER;
+			result : INTEGER;
 		do
-			println 'C','A','R','G','A',' ','D','E','L',' ','A','R','R','A','Y',' ','A',' ','O','R','D','E','N','A','R',':',' ';
+			real := r * 10.0;
+			c := '0';
+			if (e < 256) then
+				c := to<CHARACTER>(e);
+				result := to<INTEGER>(c);
+			else 
+				result := to<INTEGER>(real);
+			end
+			return result;
 	end
 
-	feature mensaje2 is
-		do
-			print 'O','r','d','e','n','a','d','o',' ','p','o','r',' ','e','l',' ','m','é','t','o','d','o',' ','d','e',' ','l','a',' ','B','u','r','b','u','j','a',':',' ';
-	end
-
-	feature leer is /* Lee 'arr' desde la consola.
+	feature initialize is
 		local
 			i : INTEGER;
 		do
 			from
-				i := 0;
-			until i = numElem loop
-				print 'P','o','s','i','c','i','ó','n',' ','[';
-				print i;
-				print ']',':',' ';
-				read arr [i];
+				fibonacci[0][0] := 0;
+				fibonacci[0][1] := 1;
+				fibonacci[0][2] := 1;
+				i := 1;
+			until (i >= 8) loop
+				fibonacci[i][0] := fibonacci[i - 1][1];
+				fibonacci[i][1] := fibonacci[i - 1][2];
+				fibonacci[i][2] := fibonacci[i][0] + fibonacci[i][1];
 				i := i + 1;
 			end
 	end
 
+	/*-------------------------------
 
-	feature pintar is /* Pinta 'arr'.
+	feature inicio is
 		local
 			i : INTEGER;
+			j : INTEGER;
 		do
+			p();
+			i := 0;
+			pair.character := '0';
+			pair.integer := to<INTEGER>('0');
+
+			/* Shows 48 (decimal value of '0')
+			println f(to<DOUBLE>(i), (to<INTEGER>(pair.character)));
+			f(1.3, 2); 
+
+			initialize();
 			from
 				i := 0;
-			until i = numElem loop
-				print 'P','o','s','i','c','i','ó','n',' ','[',i,']',':',' ';
-				println arr [i];
+			until i >= 8 loop
+				/* Shows the Fib sequence, from 1 to 8 (34)
+				print '(', i + 1,')',' ';
+				print fibonacci[i][0];
+				print '+';
+				print fibonacci[i][1];
+				print '=';
+				println fibonacci[i][2];
 				i := i + 1;
 			end
-	end
-	
 
-/* Feature de ordenación
-
-	feature burbuja is
-		local
-			aux, i, j : INTEGER;
-		do
+			acme[1].employees[1].age := 56;
+			/* Shows 56
+			println acme[1].employees[1].age;
 			from
 				i := 0;
-			until i = numElem loop
+			until i >= 2 loop
 				from
 					j := 0;
-				until j = numElem - i - 1 loop
-					if arr[j] > arr[j + 1] then
-						aux := arr[j];
-						arr[j] := arr[j + 1];
-						arr[j + 1] := aux;
-					end
-					j := j + 1;
+				until j >= 2 loop
+					acme[i].employees[j].age := i + j;
+					j := j+ 1;
+				end
+				i := i + 1;
+			end
+
+			from
+				i := 0;
+			until i >= 2 loop
+				from
+					j := 0;
+				until j >= 2 loop
+				/* Shows 0 1 1 2
+					print acme[i].employees[j].age;
+					print ' ';
+					j := j+ 1;
 				end
 				i := i + 1;
 			end
 	end
-
-	/* Constructor
-	feature inicio is
-		do
-			/* Inicialización
-			numElem := 10;
-			
-			/* Leer el array 'arr'
-			mensaje1(); 
-			leer();
-			
-			/* Pintar el array 'arr' antes de ordenarlo
-			pintar();
-			
-			/* Ordenarlo por el método de la burbuja
-			burbuja();
-			
-			/* Pintar el array 'arr' después de ordenado
-			mensaje2();
-			pintar();
-			return;
-	end
-end /* T004_ORDENACION
+end
 
 main
 	inicio();
