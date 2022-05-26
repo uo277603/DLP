@@ -6,6 +6,7 @@
 package codegeneration;
 
 import java.io.*;
+import java.util.*;
 import java.util.logging.MemoryHandler;
 import java.util.spi.ToolProvider;
 
@@ -23,12 +24,32 @@ public class CodeSelection extends DefaultVisitor {
 
     private int count = 0;
 
+    private Map<String, String> instrucciones = new HashMap<String, String>();
+
     public CodeSelection(Writer writer, String sourceFile) {
         this.writer = new PrintWriter(writer);
         this.sourceFile = sourceFile;
+        instrucciones.put("+", "add");
+		instrucciones.put("-", "sub");
+		instrucciones.put("*", "mul");
+		instrucciones.put("/", "div");
+		instrucciones.put("and", "and");
+		instrucciones.put("or", "or");
+		instrucciones.put("<", "lt");
+		instrucciones.put(">", "gt");
+		instrucciones.put("=", "eq");
+		instrucciones.put("<>", "ne");
+		instrucciones.put(">=", "ge");
+		instrucciones.put("<=", "le");
     }
 
     // class Program { ClassNode classnode; MethodCallSentence methodcallsentence; }
+    /*
+    * run [[ Program → classnode:classNode methodcallsentence:methodCallSentence]] =
+    *   #SOURCE {sourceFile}
+    *   crea[[classnode]]
+    *   ejecuta[[methodcallsentence]]
+    */
     public Object visit(Program program, Object param) {
         out("#source \"" + sourceFile + "\"");
         if (program.getMethodcallsentence() != null)
@@ -42,6 +63,11 @@ public class CodeSelection extends DefaultVisitor {
 
     // class ClassNode { String name; List<Definition> definition; List<String>
     // createMethod; List<Method> method; }
+    /*
+    * run [[ ClassNode → name:String definition:definition* createMethod:String* method:method* ]] =
+    *   define[[definitioni]]
+    *   declara[[method]]
+    */
     public Object visit(ClassNode classNode, Object param) {
 
         if (classNode.getDefinition() != null)
@@ -57,6 +83,19 @@ public class CodeSelection extends DefaultVisitor {
 
     // class Method { String name; List<Parameter> parameter; Type retorno;
     // List<Definition> definition; List<Sentence> sentence; }
+    /*
+    * Run [[ Method → name:String parameter:parameter* retorno:type definition:definition* sentence:sentence* ]] =
+    *   #LINE {start.line}
+    *   {name}:
+    *   #FUNC {name}
+    *   #RET {retorno.name}
+    *   #PARAM parameteri
+    *   #LOCAL definitioni
+    *   ENTER { Σ definitioni.type.size }
+    *   ejecuta[[sentencei]]
+    *   si retorno == VoidType
+    *   RET 0, {Σ definitioni.type.size}, {Σ parameteri.definition.type.size}
+    */
     public Object visit(Method method, Object param) {
         line(method.getStart());
         out(method.getName() + ":");
@@ -90,6 +129,16 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class Print { String string; List<Expr> expr; }
+    /*
+    * ejecuta [[ Print → string:String expr:expr*]] = 
+    *   #LINE {end.line}
+    *   para cada exp en expr
+    *   valor[[exp]]
+    *   OUT<exp.tipo>
+    *   Si string == println
+    *   PUSHB 10
+    *   OUTB
+    */
     public Object visit(Print print, Object param) {
 
         line(print);
@@ -107,6 +156,14 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class Read { List<Expr> expr; }
+    /*
+    * ejecuta [[ Read → expr:expr* ]] = 
+    *   #LINE {end.line}
+    *   para cada exp en expr
+    *   dirección[[exp]]
+    *   IN<exp.type>
+    *   STORE<exp.type>
+    */
     public Object visit(Read read, Object param) {
 
         line(read);
@@ -122,6 +179,13 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class Assignment { Expr left; Expr right; }
+    /*
+    * ejecuta[[Assignment → left:expr right:expr]] = 
+    *   #LINE {end.line}
+    *   direccion[[left]]
+    *   valor[[right]]
+    *   STORE<left.type>
+    */
     public Object visit(Assignment assignment, Object param) {
 
         line(assignment.getStart());
@@ -138,6 +202,17 @@ public class CodeSelection extends DefaultVisitor {
 
     // class Conditional { Expr condition; List<Sentence> iftrue; List<Sentence>
     // iffalse; }
+    /*
+    * ejecuta[[Conditional → condition:expr iftrue:sentence* iffalse:sentence*]] =
+    *   #LINE {end.line}
+    *   valor[[condition]]
+    *   jz else{n}
+    *   ejecuta[[iftruei]]
+    *   jmp finIf{n}
+    *   else{n}:
+    *   ejecuta[[iffalsei]]
+    *   finif{n}:
+    */
     public Object visit(Conditional conditional, Object param) {
 
         line(conditional);
@@ -162,6 +237,17 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class Loop { List<Sentence> init; Expr condition; List<Sentence> sentence; }
+    /*
+    * Ejecuta[[Loop → init:sentence* condition:expr sentence:sentence*]] = 
+    *   #LINE {end.line}
+    *    Ejecuta[[initi]]
+    *   inicioLoop{n}:
+    *   valor[[condition]]
+    *   jnz finLoop{n}
+    *   ejecuta[[sentencei]]
+    *   jmp inicioLoop{n}
+    *   finLoop{n}:
+    */
     public Object visit(Loop loop, Object param) {
 
         line(loop);
@@ -184,6 +270,14 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class ReturnNode { Expr expr; }
+    /*
+    * Ejecuta[[ReturnNode → expr:expr ]] =
+    *   #LINE {end.line}
+    *   Si expr != null
+    *       Valor[[expr]]
+    *       RET {expr.type.size}, { Σ expr.method.definition.type.size},
+    *       { Σ expr.method.parameter.definition.type.size}
+    */
     public Object visit(ReturnNode returnNode, Object param) {
 
         line(returnNode);
@@ -202,6 +296,13 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class MethodCallSentence { String name; List<Expr> args; }
+    /*
+    * Ejecuta[[MethodCallSentence → name:String args:expr*]] = 
+    *   Valor[[argsi]]
+    *   CALL {name}
+    *   Si methodCallSentence.definition.type != VoidType
+    *       POP<methodCallSentence.method.retorno>
+    */
     public Object visit(MethodCallSentence methodCallSentence, Object param) {
         if (methodCallSentence.getArgs() != null)
             for (Expr child : methodCallSentence.getArgs())
@@ -215,6 +316,20 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class ExprBinariaAritmetica { Expr left; String op; Expr right; }
+    /*
+    * Valor[[ExprBinariaAritmetica → left:expr op:String right:expr]] =
+    *   #LINE {exprBinariaAritmetica}
+    *   Valor[[left]]
+    *   Valor[[right]]
+    *   Si op ==’+’ 
+    *       ADD<left.type>
+    *   Sino si op ==’-’
+    *       SUB<left.type>
+    *   Sino si op ==’*’ 
+    *       MUL<left.type>
+    *   Sino si op ==’/’ 
+    *       DIV<left.type>
+    */
     public Object visit(ExprBinariaAritmetica exprBinariaAritmetica, Object param) {
         line(exprBinariaAritmetica);
         if (exprBinariaAritmetica.getLeft() != null)
@@ -223,27 +338,19 @@ public class CodeSelection extends DefaultVisitor {
         if (exprBinariaAritmetica.getRight() != null)
             exprBinariaAritmetica.getRight().accept(this, Funcion.VALOR);
 
-        switch (exprBinariaAritmetica.getOp()) {
-            case "+":
-                out("add" + exprBinariaAritmetica.getLeft().getType().getSuffix());
-                break;
-            case "-":
-                out("sub" + exprBinariaAritmetica.getLeft().getType().getSuffix());
-                break;
-            case "*":
-                out("mul" + exprBinariaAritmetica.getLeft().getType().getSuffix());
-                break;
-            case "/":
-                out("div" + exprBinariaAritmetica.getLeft().getType().getSuffix());
-                break;
-            default:
-                break;
-        }
-
+        out(instrucciones.get(exprBinariaAritmetica.getOp()) + exprBinariaAritmetica.getLeft().getType().getSuffix());
         return null;
     }
 
     // class ExprUnariaAritmetica { String op; Expr expr; }
+    /*
+    * Valor[[ExprUnariaAritmetica → op:String expr:expr]]=
+    *   #LINE {exprUnariaAritmetica}
+    *   Si op == ‘-‘
+    *       Valor[[expr]]
+    *       PUSH<expr.type> -1
+    *       MUL<expr.type>
+    */
     public Object visit(ExprUnariaAritmetica exprUnariaAritmetica, Object param) {
         line(exprUnariaAritmetica);
         if (exprUnariaAritmetica.getOp().equals("-")) {
@@ -256,6 +363,24 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class ExprBinariaLogica { Expr left; String op; Expr right; }
+    /*
+    * Valor[[ExprBinariaLogica → left:expr op:String right:expr ]=
+    *   #LINE {exprBinariaLogica}
+    *   Valor[[left]]
+    *   Valor[[right]]
+    *   Si op == ’>’ 
+    *       GT<left.type>
+    *   Sino si op == ’<’
+    *       LT<left.type>
+    *   Sino si op == ’>=’ 
+    *       GE<left.type>
+    *   Sino si op == ’<=’ 
+    *       LE<left.type>
+    *   Sino si op == ’and’ 
+    *       AND
+    *   Sino si op == ’or’ 
+    *       OR
+    */
     public Object visit(ExprBinariaLogica exprBinariaLogica, Object param) {
         line(exprBinariaLogica);
         if (exprBinariaLogica.getLeft() != null)
@@ -263,37 +388,23 @@ public class CodeSelection extends DefaultVisitor {
 
         if (exprBinariaLogica.getRight() != null)
             exprBinariaLogica.getRight().accept(this, Funcion.VALOR);
-
-        switch (exprBinariaLogica.getOp()) {
-            case "=":
-                out("eq" + exprBinariaLogica.getLeft().getType().getSuffix());
-                break;
-            case ">":
-                out("gt" + exprBinariaLogica.getLeft().getType().getSuffix());
-                break;
-            case "<":
-                out("lt" + exprBinariaLogica.getLeft().getType().getSuffix());
-                break;
-            case ">=":
-                out("ge" + exprBinariaLogica.getLeft().getType().getSuffix());
-                break;
-            case "<=":
-                out("le" + exprBinariaLogica.getLeft().getType().getSuffix());
-                break;
-            case "and":
-                out("and");
-                break;
-            case "or":
-                out("or");
-                break;
-            default:
-                break;
-        }
+        
+        if(exprBinariaLogica.getOp().equals("and") || exprBinariaLogica.getOp().equals("or"))
+            out(instrucciones.get(exprBinariaLogica.getOp()));
+        else
+            out(instrucciones.get(exprBinariaLogica.getOp()) + exprBinariaLogica.getLeft().getType().getSuffix());
 
         return null;
     }
 
     // class ExprUnariaLogica { String op; Expr expr; }
+    /*
+    * Valor[[ExprUnariaLogica → op:String expr:expr]]=
+    *   #LINE {exprUnariaLogica}
+    *   Si op == ‘not’
+    *       Valor[[expr]]
+    *       NOT
+    */
     public Object visit(ExprUnariaLogica exprUnariaLogica, Object param) {
         line(exprUnariaLogica);
         
@@ -306,6 +417,19 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class Acces { Expr left; String op; String right; }
+    /*
+    * valor[[Access → left:expr op:String right:String]]=
+    *   #LINE {access}
+    *   direccion[[left]]
+    *   PUSH {left.type.definition.vardefinition[string].address}
+    *   ADD
+    *   LOAD<left.type.definition.vardefinition[string].type}
+    *
+    * direccion[[Access → left:expr op:String right:String]]=
+    *   dirección[[left]]
+    *   PUSHA {left.type.definition.vardefinition[string].address}
+    *   ADD
+    */
     public Object visit(Acces acces, Object param) {
         line(acces);
         acces.getLeft().accept(this, Funcion.DIRECCION);
@@ -327,6 +451,20 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class ArrayAcces { Expr left; Expr right; }
+    /*
+    * valor[[ArrayAccess → left:expr right:expr ]]=
+    *   #LINE {arrayAccess}
+    *   direccion[[left]]
+    *   valor[[right]]
+    *   PUSH {left.type.type.size}
+    *
+    * direccion[[ArrayAccess → left:expr right:expr]]=
+    *   dirección[[left]]
+    *   PUSH {left.type.type.size}
+    *   Valor[[right]]
+    *   MUL
+    *   ADD
+    */
     public Object visit(ArrayAcces arrayAcces, Object param) {
         line(arrayAcces);
         ArrayType tipo = (ArrayType) arrayAcces.getLeft().getType();
@@ -351,6 +489,12 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class Cast { Type typeToConvert; Expr expr; }
+    /*
+    * Valor[[Cast → typeToConvert:tipo expr:expr]] = 
+    *   #LINE {cast}
+    *   Valor[[expr]]
+    *   {expr.type.suffix}2{typeToConver.suffix}
+    */
     public Object visit(Cast cast, Object param) {
         line(cast);
         if (cast.getExpr() != null)
@@ -363,6 +507,10 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class LitEnt { String string; }
+    /*
+    * Valor[[LitEnt → string:String ]] =
+    *   PUSH {string}
+    */
     public Object visit(LitEnt litEnt, Object param) {
         line(litEnt);
         out("push " + litEnt.getString());
@@ -370,6 +518,10 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class LitReal { String string; }
+    /*
+    * Valor[[LitReal → string:String ]] =
+    *   PUSHF {string}
+    */
     public Object visit(LitReal litReal, Object param) {
         line(litReal);
         out("pushf " + litReal.getString());
@@ -377,6 +529,10 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class LitChar { String string; }
+    /*
+    * Valor[[LLitCharitReal → string:String ]] =
+    *   PUSHB {string}
+    */
     public Object visit(LitChar litChar, Object param) {
         line(litChar);
         if("'\\n'".equals(litChar.getString()))
@@ -387,6 +543,19 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class Variable { String string; }
+    /*
+    * Valor[[Variable → string:String ]] =
+    *   Dirección[[var]]
+    *   LOAD<variable.type>
+    *
+    * dirección[[Variable → string:String ]] = 
+    *   Si def.ambito != GLOBAL
+    *       PUSHA BP
+    *       PUSHA {def.address }
+    *       ADD
+    *   Sino
+    *       PUSHA {def.address}
+    */
     public Object visit(Variable variable, Object param) {
         line(variable);
         if (param.equals(Funcion.VALOR)) {
@@ -410,6 +579,12 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class MethodCallExpr { String name; List<Expr> args; }
+    /*
+    * Valor[[MethodCallExpr → name:String args:expr*]] =
+    *   #LINE {methodCallExpr}
+    *   Valor[argsi]]
+    *   CALL {name}
+    */
     public Object visit(MethodCallExpr methodCallExpr, Object param) {
         line(methodCallExpr);
         if (methodCallExpr.getArgs() != null)
@@ -421,6 +596,14 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class TupleDefinition { String name; List<VarDefinition> vardefinition; }
+    /*
+    * define[[ TupleDefinition  → name:String vardefinition:varDefinition*]] = 
+	*   #TYPE {name} : {
+	*   Para cada var en vardefinition
+	*   	Para cada s en var.name
+	*   		{s} : {MAPLType(type)}
+	*   }
+    */
     public Object visit(TupleDefinition tupleDefinition, Object param) {
         line(tupleDefinition);
         out("#type " + tupleDefinition.getName() + ": {");
@@ -432,6 +615,10 @@ public class CodeSelection extends DefaultVisitor {
     }
 
     // class VarDefinition { List<String> name; Type type; }
+    /*
+    * define [[VarDefinition:definition → name:String* type:type ]] =
+	*   #GLOBAL {namei}: {MAPLType(type)}
+    */
     public Object visit(VarDefinition varDefinition, Object param) {
         line(varDefinition);
         for (String s : varDefinition.getName()) {

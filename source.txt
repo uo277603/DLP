@@ -1,100 +1,96 @@
-class T004_ORDENACION; /* Nombre de la clase
+class T002_TABMUL; /* Calcula la tabla de multiplicar del 1 al 12 para el número indicado
 	
-global
-	vars
-		/* Variables globales y tuplas
-		arr : [10] INTEGER;	/* Original de los datos
-		numElem : INTEGER; /* Número de elementos del array se inicializa en inicio()
-
-create
-	inicio;
-
-/* Features mensajes y auxiliares
-	feature mensaje1 is
+	global
+		types
+			deftuple tabla as
+				num : [12] INTEGER;
+				sol : [12] INTEGER;
+			end
+		vars
+			tablaMul : tabla;
+	
+	create
+		inicio;
+		
+	/* Funciones auxiliares para imprimir
+	feature presentacion is
 		do
-			println 'C','A','R','G','A',' ','D','E','L',' ','A','R','R','A','Y',' ','A',' ','O','R','D','E','N','A','R',':',' ';
+			print 'T','A','B','L','A',' ','D','E',' ','M','U','L','T','I','P','L','I','C','A','R',' ','V','.','1','.','1';
 	end
-
-	feature mensaje2 is
+		
+	feature leerNum is
 		do
-			print 'O','r','d','e','n','a','d','o',' ','p','o','r',' ','e','l',' ','m','é','t','o','d','o',' ','d','e',' ','l','a',' ','B','u','r','b','u','j','a',':',' ';
+			print 'N','ú','m','e','r','o',':',' ';
 	end
-
-	feature leer is /* Lee 'arr' desde la consola.
+		
+	feature otraVez is
+		do
+			print '¿','O','t','r','a',' ','v','e','z','?',' ','(','S','/','N',')',':',' ';
+	end
+	
+	feature despedida is
+		do
+			print '¡','A','d','i','ó','s','!';
+	end
+		
+	/* Features principales
+	
+	/* Rellenar la tabla
+	feature crearTabla (numero : INTEGER) is
 		local
 			i : INTEGER;
 		do
 			from
-				i := 0;
-			until i = numElem loop
-				print 'P','o','s','i','c','i','ó','n',' ','[';
-				print i;
-				print ']',':',' ';
-				read arr [i];
-				i := i + 1;
-			end
-	end
-
-
-	feature pintar is /* Pinta 'arr'.
-		local
-			i : INTEGER;
-		do
-			from
-				i := 0;
-			until i = numElem loop
-				print 'P','o','s','i','c','i','ó','n',' ','[',i,']',':',' ';
-				println arr [i];
+				i := 1;
+			until i > 12 loop
+				tablaMul.num[i-1] := i;
+				tablaMul.sol[i-1] := i * numero;
 				i := i + 1;
 			end
 	end
 	
-
-/* Feature de ordenación
-
-	feature burbuja is
+	/* Imprimir la tabla
+	feature imprimirTabla (numero : INTEGER) is
 		local
-			aux, i, j : INTEGER;
+			i : INTEGER;
 		do
+			println 'T','a','b','l','a',' ','d','e','l',' ',numero;
 			from
 				i := 0;
-			until i = numElem loop
-				from
-					j := 0;
-				until j = numElem - i - 1 loop
-					if arr[j] > arr[j + 1] then
-						aux := arr[j];
-						arr[j] := arr[j + 1];
-						arr[j + 1] := aux;
-					end
-					j := j + 1;
-				end
+			until i = 12 loop
+				print tablaMul.num[i];
+				print ' ','x',' ';
+				print numero;
+				print ' ','=',' ';
+				println tablaMul.sol[i] ;
 				i := i + 1;
 			end
 	end
-
+		
 	/* Constructor
 	feature inicio is
+		local
+			a : CHARACTER;
+			ai, numero : INTEGER;
 		do
-			/* Inicialización
-			numElem := 10;
-			
-			/* Leer el array 'arr'
-			mensaje1(); 
-			leer();
-			
-			/* Pintar el array 'arr' antes de ordenarlo
-			pintar();
-			
-			/* Ordenarlo por el método de la burbuja
-			burbuja();
-			
-			/* Pintar el array 'arr' después de ordenado
-			mensaje2();
-			pintar();
-			return;
+			presentacion();
+			from
+			a := 'S';
+			ai := to<INTEGER>(a);
+			until ((ai = 78) or (ai = 110)) loop
+				leerNum();
+				read numero;
+				crearTabla(numero);
+				imprimirTabla(numero);
+				println;
+				otraVez();
+				read a;
+				ai := to<INTEGER>(a);
+			end
+			despedida();
 	end
-end /* T004_ORDENACION
+		
+end /* T002_TABMUL
 
 main
 	inicio();
